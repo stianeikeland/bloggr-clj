@@ -1,0 +1,43 @@
+---
+author: stianeikeland
+comments: true
+date: 2013-08-06 15:30:42+00:00
+layout: post
+slug: 10-gps
+title: $10 GPS
+wordpress_id: 236
+categories:
+- raspberrypi
+tags:
+- gps
+- gpsd
+- Linux
+- raspberry
+- raspberry-pi
+- raspberrypi
+- ublox
+---
+
+<figure style="float: right; margin-left: 15px;">
+    <a href="/images/2013-08-06-10-gps/pciegps.jpg"><img src="/images/2013-08-06-10-gps/pciegps.jpg"></a>
+</figure>
+
+On ebay you can find cheap [u-blox mini-pcie](http://www.ebay.com/sch/i.html?_odkw=ublox+gps&_sop=15&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR0.TRC0.Xpci-5s&_nkw=pci-5s&_sacat=0) gps units for around $10 including shipping. They are for internal use in laptops and similar (most likely hooking up to the usb bus over Mini PCIe), but it turns out that the pads on the backside expose connectivity options such as uart and usb data.
+
+I soldered on a pin header for ease of use, and also attached a cheap ceramic antenna using double sided tape.
+
+The UART pins will spew over standard [NMEA 183](https://en.wikipedia.org/wiki/NMEA_0183) data, so it should be easy to use with both computers and microcontrollers.
+
+<figure class="half">
+    <a href="/images/2013-08-06-10-gps/1.jpg"><img src="/images/2013-08-06-10-gps/1.jpg"></a>
+    <a href="/images/2013-08-06-10-gps/2.jpg"><img src="/images/2013-08-06-10-gps/2.jpg"></a>
+</figure>
+
+On the raspberry pi you can install the [gpsd](http://packages.debian.org/wheezy/gpsd) and [gpsd-clients](http://packages.debian.org/wheezy/gpsd-clients) packages. Connect the tx gps pin to GPIO 15 RXD on the pi (you only really need one way uart, unless you want to change settings on the gps). Also connect ground and vcc, the gps requires 3.3v and probably need more umphf than the 50mA max 3.3 pin on the pi can deliver. I connected power via a 5v pin and a 3.3v regulator. I do not know if the gps is 5v tolerant, but probably not.
+
+<figure>
+	<a href="/images/2013-08-06-10-gps/3.png"><img src="/images/2013-08-06-10-gps/3.png"></a>
+</figure>
+
+Launch the daemon ( gpsd -b /dev/ttyAMA0 ) and a client ( cgps ).. Remember to [disable](http://www.irrational.net/2012/04/19/using-the-raspberry-pis-serial-port/) the tty running on /dev/ttyAMA0 before you use the UART pins for something like this.
+

@@ -1,0 +1,41 @@
+---
+author: stianeikeland
+comments: true
+date: 2008-05-22 05:44:00+00:00
+layout: post
+slug: bergen-3d
+title: Bergen 3D
+wordpress_id: 32
+tags:
+- Linux
+- UiB
+---
+
+
+    
+
+I've spent some time working on a virtual 3d bergen as a part of INF251 (Computer Graphics) this semester. Basically what we did was to render the terrain based on a height map (a file containing a height value at every x,y position), modeled some buildings, added textures, spline based camera paths.. etc..  Mine was developed on linux and uses Glut, GLEW, GLM, DevIL, Vmath.. etc.. You can fly around in Bergen using FPS-style controls (WASD+RF/mouselook).  
+
+
+![](http://s3.tadkom.net/wp-content/uploads/2008/05/8-300x176.jpg)
+
+
+
+ 
+
+
+![](http://s3.tadkom.net/wp-content/uploads/2008/05/3-300x178.jpg)
+
+
+
+ 
+
+
+![](http://s3.tadkom.net/wp-content/uploads/2008/05/11-300x171.jpg)
+
+
+
+ See [my page](http://www.student.uib.no/~sei081/visualization/bergen3d/) over at the university for som larger screenshots and a movie..
+
+
+  
