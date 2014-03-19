@@ -1,19 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-07-25 21:44:54+00:00
-layout: post
-slug: openwrt-on-hama-mpr-a1-v2-2
-title: OpenWRT on Hama MPR-A1 (v2.2)
-wordpress_id: 198
-image:
-  feature: 2013-07-25-openwrt-on-hama-mpr-a1-v2-2/4.jpg
-tags:
-- hacking
-- mpr-a1
-- openwrt
-- router
----
+{ :slug "openwrt-on-hama-mpr-a1-v2-2"
+  :title "OpenWRT on Hama MPR-A1 (v2.2)"
+  :image "2013-07-25-openwrt-on-hama-mpr-a1-v2-2/4.jpg"
+  :tags #{:hacking :mpr-a1 :openwrt :router }}
+
+------
 
 <figure style="float: right; margin-left: 15px;">
   <img src="/images/2013-07-25-openwrt-on-hama-mpr-a1-v2-2/201204160226342556.jpg">

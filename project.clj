@@ -7,6 +7,6 @@
                  [stasis "1.0.0"]
                  [ring "1.2.2"]
                  [me.raynes/cegdown "0.1.1"]]
-
-  :ring {:handler bløggr.core/ring}
-  :profiles {:dev {:plugins [[lein-ring "0.8.10"]]}})
+  :ring {:handler bloggr.core/ring}
+  :profiles {:dev {:plugins [[lein-ring "0.8.10"]]
+                   :dependencies [[midje "1.5.1"]]}})
