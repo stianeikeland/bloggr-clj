@@ -15,6 +15,24 @@
 ------
 body content")
 
+
+(def source-code-with-lang
+"```bash
+ls -la
+echo $HEI
+```")
+
+(def rendered-with-lang "<pre><code class=\"bash\"><div class=\"highlight\"><pre>ls -la\n<span class=\"nb\">echo</span> <span class=\"nv\">$HEI</span>\n</pre></div>\n</code></pre>")
+
+(def source-code-without-lang
+"```
+ls -la
+echo $HEI
+```")
+
+(def rendered-without-lang "<pre><code>ls -la\necho $HEI\n</code></pre>")
+
+
 (def blogdate (t/from-time-zone (t/date-time 2007 8 28 1 59 36)
                                 (t/time-zone-for-offset 0)))
 
@@ -35,3 +53,29 @@ body content")
 (fact "filename-body-map turns a post into title => body map"
       (filename-body-map {:header {:slug "really-cool-post" :date blogdate} :body "post body"}) =>
       {"/2007/08/28/really-cool-post/index.html" "post body"})
+
+
+(fact "highlights source code with lang set"
+      (:body (-> {:body source-code-with-lang}
+                 (markdown)
+                 (enliveify)
+                 (highlight)
+                 (render))) => rendered-with-lang)
+
+(fact "skips highlighting code when lang not set"
+      (:body (-> {:body source-code-without-lang}
+                 (markdown)
+                 (enliveify)
+                 (highlight)
+                 (render))) => rendered-without-lang)
+
+(fact "enliveify turns post into enlive data"
+      (-> {:body "<div>brille</div>"}
+          enliveify :body first :content first) => "brille")
+
+(fact "render turns enlive post into html post"
+      (let [html "<div>brille</div>"]
+        (-> {:body html}
+            enliveify
+            render
+            :body) => html))
