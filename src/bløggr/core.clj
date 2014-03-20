@@ -9,9 +9,6 @@
 
 (def cegdown-ext [:fenced-code-blocks :autolinks])
 
-(defn get-posts []
-  (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$"))
-
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 
@@ -20,8 +17,8 @@
   [post]
   (let [x (str/split post #"\n------\n")]
        {:body (second x)
-       :header (let [header (read-string (first x))]
-                    (assoc header :date (parse-datestring (header :date))))}))
+        :header (let [header (read-string (first x))]
+                     (assoc header :date (parse-datestring (header :date))))}))
 
 (defn filename [title date]
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") date)
@@ -49,21 +46,22 @@
 (defn render [post]
   (assoc post :body (apply str (html/emit* (post :body)))))
 
-(def ring (stasis/serve-pages {"/index.html" (->> (get-posts)
-                                                  (vals)
-                                                  (map parse-post)
-                                                  (map markdown)
-                                                  (map enliveify)
-                                                  (map highlight)
-                                                  (map render)
-                                                  (first)
-                                                  (:body))}))
+(defn get-posts []
+  (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
+       (vals)
+       (map parse-post)
+       (map markdown)
+       (map enliveify)
+       (map highlight)
+       (map render)
+       (map filename-body-map)
+       (reduce merge)))
 
+(defn get-css []
+  (stasis/slurp-directory "resources/css/" #".*\.css"))
 
-;(def ring (->> (get-posts)
-;               (vals)
-;               (map parse-post)
-;               (map markdown)
-;               (reduce merge)
-;               (stasis/serve-pages)))
+(def ring (-> {:posts (get-posts)
+               :css (get-css)}
+              (stasis/merge-page-sources)
+              (stasis/serve-pages)))
 
