@@ -10,7 +10,7 @@
 (def cegdown-ext [:fenced-code-blocks :autolinks])
 
 (defn get-posts []
-  (stasis/slurp-directory "resources/posts/" #"test.*\.(md|markdown)$"))
+  (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$"))
 
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
