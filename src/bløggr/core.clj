@@ -9,6 +9,11 @@
 
 (def cegdown-ext [:fenced-code-blocks :autolinks])
 
+(html/deftemplate post-template "layouts/post.html" [header body]
+                  [:div#article-content] (html/html-content body)
+                  [:#article-title] (html/content (header :title)))
+
+
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 
@@ -46,16 +51,20 @@
 (defn render [post]
   (assoc post :body (apply str (html/emit* (post :body)))))
 
+(defn apply-post-layout [post]
+  (assoc post :body (apply str (post-template (post :header) (post :body)))))
+
 (defn get-posts []
-  (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
-       (vals)
-       (map parse-post)
-       (map markdown)
-       (map enliveify)
-       (map highlight)
-       (map render)
-       (map filename-body-map)
-       (reduce merge)))
+    (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
+         (vals)
+         (map parse-post)
+         (map markdown)
+         (map enliveify)
+         (map highlight)
+         (map render)
+         (map apply-post-layout)
+         (map filename-body-map)
+         (reduce merge)))
 
 (defn get-css []
   (stasis/slurp-directory "resources/css/" #".*\.css"))
