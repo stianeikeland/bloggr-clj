@@ -13,7 +13,6 @@
                   [:div#article-content] (html/html-content body)
                   [:#article-title] (html/content (header :title)))
 
-
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 
@@ -39,7 +38,8 @@
 (defn- highlight-node [n]
   (let [lang (:class (:attrs n))]
     (if (nil? lang) n
-        (assoc n :content (html/html-snippet (pygments/highlight (apply str (:content n))
+        (assoc n :content
+              (html/html-snippet (pygments/highlight (apply str (:content n))
                                                                  (keyword lang)
                                                                  :html))))))
 (defn highlight [post]
@@ -57,13 +57,13 @@
 (defn get-posts []
     (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
          (vals)
-         (map parse-post)
-         (map markdown)
-         (map enliveify)
-         (map highlight)
-         (map render)
-         (map apply-post-layout)
-         (map filename-body-map)
+         (map #(comp parse-post
+                     markdown
+                     enliveify
+                     highlight
+                     render
+                     apply-post-layout
+                     filename-body-map))
          (reduce merge)))
 
 (defn get-css []
