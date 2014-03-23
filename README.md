@@ -1,4 +1,4 @@
-# bløggr
+# bløggr [![Build Status](https://travis-ci.org/stianeikeland/bloggr-clj.svg?branch=master)](https://travis-ci.org/stianeikeland/bloggr-clj)
 
 Blog engine in clojure.
 
