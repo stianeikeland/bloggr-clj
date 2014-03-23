@@ -11,5 +11,6 @@
                  [enlive "1.1.5"]
                  [optimus "0.14.2"]]
   :ring {:handler bløggr.core/ring}
-  :profiles {:dev {:plugins [[lein-ring "0.8.10"]]
-                   :dependencies [[midje "1.5.1"]]}})
+  :profiles {:dev {:plugins [[lein-ring "0.8.10"]
+                             [lein-midje "3.1.3"]]
+                   :dependencies [[midje "1.6.3" :exclusions [org.clojure/clojure]]]}})
