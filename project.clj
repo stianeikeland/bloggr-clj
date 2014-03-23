@@ -8,7 +8,8 @@
                  [ring "1.2.2"]
                  [me.raynes/cegdown "0.1.1"]
                  [clygments "0.1.1"]
-                 [enlive "1.1.5"]]
+                 [enlive "1.1.5"]
+                 [optimus "0.14.2"]]
   :ring {:handler bløggr.core/ring}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]]
                    :dependencies [[midje "1.5.1"]]}})

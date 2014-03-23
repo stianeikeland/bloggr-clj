@@ -5,13 +5,29 @@
             [clj-time.format :as tf]
             [clj-time.core :as t]
             [net.cgrand.enlive-html :as html]
-            [clygments.core :as pygments]))
+            [clygments.core :as pygments]
+            [clojure.java.io :as io]
+            [optimus.prime :as optimus]
+            [optimus.assets :as assets]
+            [optimus.optimizations :as optimizations]
+            [optimus.strategies :as strategies]))
 
 (def cegdown-ext [:fenced-code-blocks :autolinks])
 
 (html/deftemplate post-template "layouts/post.html" [header body]
+                  [:head] (html/html-content (slurp "resources/partials/head.html"))
+                  [:div#scripts] (html/html-content (slurp "resources/partials/scripts.html"))
+                  [:div#navigation] (html/html-content (slurp "resources/partials/navigation.html"))
+                  [:div#browser-upgrade] (html/html-content (slurp "resources/partials/browser_upgrade.html"))
                   [:div#article-content] (html/html-content body)
-                  [:#article-title] (html/content (header :title)))
+                  [:#article-title] (html/content (header :title))
+                  [:div#author-bio] (html/html-content (slurp "resources/partials/author_bio.html"))
+                  [:footer#footer-content] (html/html-content (slurp "resources/partials/footer.html"))
+                  [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
+                  [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
+                  [:div#feature-image] (if (nil? (header :image))
+                                           nil
+                                           #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
 
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
@@ -57,7 +73,7 @@
 (defn get-posts []
     (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
          (vals)
-         (map #(comp parse-post
+         (map #(-> % parse-post
                      markdown
                      enliveify
                      highlight
@@ -66,11 +82,19 @@
                      filename-body-map))
          (reduce merge)))
 
+
 (defn get-css []
   (stasis/slurp-directory "resources/css/" #".*\.css"))
 
-(def ring (-> {:posts (get-posts)
-               :css (get-css)}
-              (stasis/merge-page-sources)
-              (stasis/serve-pages)))
+(defn get-page-sources []
+  (hash-map :posts (get-posts) :css (get-css)))
 
+(defn get-assets []
+  (reduce merge (map #(assoc % :path (str "/images" (% :path))) (assets/load-assets "images" [#".*"]))
+                (map #(assoc % :path (str "/fonts" (% :path))) (assets/load-assets "fonts" [#".*"]))))
+
+
+(def ring (-> (get-page-sources)
+              (stasis/merge-page-sources)
+              (stasis/serve-pages)
+              (optimus/wrap get-assets optimizations/none strategies/serve-live-assets)))

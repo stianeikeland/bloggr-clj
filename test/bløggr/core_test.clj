@@ -15,27 +15,13 @@
 ------
 body content")
 
-
-(def source-code-with-lang
-"```bash
-ls -la
-echo $HEI
-```")
-
+(def source-code-with-lang "```bash\nls -la\necho $HEI\n```")
 (def rendered-with-lang "<pre><code class=\"bash\"><div class=\"highlight\"><pre>ls -la\n<span class=\"nb\">echo</span> <span class=\"nv\">$HEI</span>\n</pre></div>\n</code></pre>")
-
-(def source-code-without-lang
-"```
-ls -la
-echo $HEI
-```")
-
+(def source-code-without-lang "```\nls -la\necho $HEI\n```")
 (def rendered-without-lang "<pre><code>ls -la\necho $HEI\n</code></pre>")
-
 
 (def blogdate (t/from-time-zone (t/date-time 2007 8 28 1 59 36)
                                 (t/time-zone-for-offset 0)))
-
 
 (fact "parse-datestring parses string to date"
       (parse-datestring "2007-08-28 01:59:36+00:00") => blogdate)
@@ -79,3 +65,12 @@ echo $HEI
             enliveify
             render
             :body) => html))
+
+(fact "apply-post-layout should apply post template to post"
+      (let [content (:body
+                     (apply-post-layout {:body "this is the body"
+                                         :header {:title "post title"
+                                                  :date blogdate}}))]
+        content => (contains "this is the body")
+        content => (contains "<h1 id=\"article-title\">post title</h1>")
+        content => (contains "<time datetime=\"2007-08-28T01:59:36Z\" id=\"post-timestamp\">Tue, 28 Aug 2007 01:59</time>")))
