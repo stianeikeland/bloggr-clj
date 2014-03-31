@@ -1,18 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2011-03-20 14:40:00+00:00
-layout: post
-slug: msp430-coffeetimer
-title: MSP430 Coffeetimer
-wordpress_id: 11
-tags:
-- coffee
-- electronics
-- microcontroller
-- msp430
-- programming
----
+{ :slug "msp430-coffeetimer"
+  :title "MSP430 Coffeetimer"
+  :date "2011-03-20 14:40:00+00:00"
+  :tags #{:electronics :msp430}}
+
+------
 
 The [MSP430](http://en.wikipedia.org/wiki/TI_MSP430) is a familty of cheap microcontrollers from Texas Instruments featuring ultra low power usage. TI offers a devkit with everything you need to get started (USB-based development board and 2 microcontrollers from the value line) called the [MSP430 Launchpad](http://processors.wiki.ti.com/index.php/MSP430_LaunchPad_(MSP-EXP430G2)?DCMP=launchpad&HQS=Other+OT+launchpadwiki). The killer - it's dead cheap - $4.30 for two microcontrollers and the launchpad including shipping (fedex!). You can also probably manage to get a few MCUs for free as samples. TI is probably selling the kit at a loss really trying to get into the hobbyist market, which is primarily dominated by the [Arduino](http://arduino.cc/) (and to a lesser degree Atmel in general and Microchip Pic). I was very impressed by the power usage, a guy managed to run them for [10 weeks](http://kennethfinnegan.blogspot.com/2010/09/msp430-low-power-experiment.html) as a clock on a couple of capacitors (granted - 10F caps).
 

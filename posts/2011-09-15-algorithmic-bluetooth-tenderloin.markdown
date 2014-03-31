@@ -1,18 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2011-09-15 15:25:00+00:00
-layout: post
-slug: algorithmic-bluetooth-tenderloin
-title: Algorithmic bluetooth tenderloin
-wordpress_id: 9
-tags:
-- bluetooth
-- sous
-- sousvide
-- tenderloin
-- vide
----
+{ :slug "algorithmic-bluetooth-tenderloin"
+  :title "Algorithmic bluetooth tenderloin"
+  :date "2011-09-15 15:25:00+00:00"
+  :tags #{:sousvide :electronics :food}}
+
+------
 
 <figure>
 	<img src="/images/2011-09-15-algorithmic-bluetooth-tenderloin/k7im7189-up.jpg" alt="">

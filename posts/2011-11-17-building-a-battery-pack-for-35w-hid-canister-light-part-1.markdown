@@ -1,12 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2011-11-17 15:19:36+00:00
-layout: post
-slug: building-a-battery-pack-for-35w-hid-canister-light-part-1
-title: Building a battery pack for 35W HID canister light - part 1
-wordpress_id: 8
----
+{ :slug "building-a-battery-pack-for-35w-hid-canister-light-part-1"
+  :title "Building a battery pack for 35W HID canister light - part 1"
+  :date "2011-11-17 15:19:36+00:00"
+  :tags #{:electronics}}
+
+------
 
 I had a bit of luck recently and got a 35W HID canister light from a friend for a good price. His was broken and he had already bought a new one, so I had a go at it. The lamp and driver curcuit seemed to be working, but the battery pack was dead. Anyway, building a battery pack should be a doable build, so I bought it from him.
 

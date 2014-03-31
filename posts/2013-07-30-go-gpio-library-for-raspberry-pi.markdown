@@ -1,24 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-07-30 18:23:28+00:00
-layout: post
-slug: go-gpio-library-for-raspberry-pi
-title: Go GPIO library for Raspberry Pi
-wordpress_id: 219
-categories:
-- raspberrypi
-tags:
-- go
-- go-lang
-- gopher
-- gophers
-- pi
-- programming
-- raspberry
-- raspberrypi
-- rpi
----
+{ :slug "go-gpio-library-for-raspberry-pi"
+  :title "Go GPIO library for Raspberry Pi"
+  :date "2013-07-30 18:23:28+00:00"
+  :tags #{:go :golang :raspberrypi :programming}}
+
+------
 
 <!-- ![Gopher](http://stianeikeland.files.wordpress.com/2013/07/gopher.png?w=300) -->
 

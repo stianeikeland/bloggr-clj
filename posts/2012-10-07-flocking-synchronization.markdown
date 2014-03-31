@@ -1,20 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-10-07 13:10:33+00:00
-layout: post
-slug: flocking-synchronization
-title: Flocking / Synchronization
-image:
-  feature: 2012-10-07-flocking-synchronization/feature.jpg
-wordpress_id: 130
-tags:
-- boids
-- flock
-- flocking
-- programming
-- swarm
----
+{ :slug "flocking-synchronization"
+  :title "Flocking / Synchronization"
+  :date "2012-10-07 13:10:33+00:00"
+  :tags #{:flocking :boids}}
+
+------
 
 There are a few behaviors in nature that seems really advanced, impressive and organic, that actually can be simulated on a computer using only a few simple rules. One of them is flocking - the "formation"-flying of birds or movement of schools of fish. There's an old algorithm/simulation by Craig Reynolds called Boids (often used in screensavers and even used for modeling the flying bats in batman) that explains this pretty well. Make a few objects that react to their neighborhood according to the following three simple rules:
 

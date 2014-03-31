@@ -1,22 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-08-06 15:30:42+00:00
-layout: post
-slug: 10-gps
-title: $10 GPS
-wordpress_id: 236
-categories:
-- raspberrypi
-tags:
-- gps
-- gpsd
-- Linux
-- raspberry
-- raspberry-pi
-- raspberrypi
-- ublox
----
+{ :slug "10-gps"
+  :title "$10 GPS"
+  :date "2013-08-06 15:30:42+00:00"
+  :tags #{:gps :linux :raspberry :raspberrypi}}
+
+------
 
 <figure style="float: right; margin-left: 15px;">
     <a href="/images/2013-08-06-10-gps/pciegps.jpg"><img src="/images/2013-08-06-10-gps/pciegps.jpg"></a>

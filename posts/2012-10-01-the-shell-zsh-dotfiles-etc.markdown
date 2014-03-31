@@ -1,12 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-10-01 22:24:53+00:00
-layout: post
-slug: the-shell-zsh-dotfiles-etc
-title: The Shell - zsh, dotfiles, etc.
-wordpress_id: 124
----
+{ :slug "the-shell-zsh-dotfiles-etc"
+  :title "The Shell - zsh, dotfiles, etc."
+  :date "2012-10-01 22:24:53+00:00"
+  :tags #{:shell :zsh}}
+
+------
 
 I decided to go for zsh again (instead of bash) as a default shell not that long ago. I've used it on and off before, it's really powerful, but takes a lot of configuration to get access to all the nice features it offers. Whenever i reinstalled or changed computers I usually just returned to the de-facto bash shell.
 

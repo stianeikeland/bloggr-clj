@@ -1,15 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-09-09 01:32:00+00:00
-layout: post
-slug: pioneer-sr-link-control
-title: Pioneer SR-Link control
-wordpress_id: 94
-tags:
-- electronics
-- raspberry-pi
----
+{ :slug "pioneer-sr-link-control"
+  :title "Pioneer SR-Link control"
+  :date "2012-09-09 01:32:00+00:00"
+  :tags #{:electronics :raspberrypi}}
+
+------
 
 I have a decent (but aging) surround receiver connected to my HTPC - a Pioneer VSX-2016av. Because of it's age it really doesn't have any good ways to control it from a PC (USB or even serial).
 

@@ -1,22 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-10-20 14:49:47+00:00
-layout: post
-slug: building-a-home-automation-system-power-control-part-3
-title: Building a home automation system – Power control (Part 3)
-wordpress_id: 138
-categories:
-- homeautomation
-tags:
-- coffeescript
-- home automation hardware
-- homeautomation
-- nodejs
-- rfxcom
-- rfxtrx
-- rfxtrx433
----
+{ :slug "building-a-home-automation-system-power-control-part-3"
+  :title "Building a home automation system – Power control (Part 3)"
+  :date "2012-10-20 14:49:47+00:00"
+  :tags #{:homeautomation :rfxcom}}
+
+------
 
 Just got myself a RFXtrx433 USB transceiver from [RFXcom](http://www.rfxcom.com/transceivers.htm). It's a tiny box which allows you the communicate with a wide range of home automation hardware that uses the 433 MHz band, check out the impressive list of supported hardware on their website. There is one store in Norway that sell these, and guess what, it's in Strandgaten here in Bergen (walking distance) - [http://www.smarthus.info/](http://www.smarthus.info/)
 

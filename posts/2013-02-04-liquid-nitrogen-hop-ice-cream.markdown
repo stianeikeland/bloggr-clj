@@ -1,22 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-02-04 19:24:10+00:00
-layout: post
-slug: liquid-nitrogen-hop-ice-cream
-title: Liquid Nitrogen Hop Ice Cream
-wordpress_id: 171
-categories:
-- food
-post_format:
-- Video
-tags:
-- beer
-- food
-- hop
-- ice cream
-- liquid nitrogen
----
+{ :slug "liquid-nitrogen-hop-ice-cream"
+  :title "Liquid Nitrogen Hop Ice Cream"
+  :date "2013-02-04 19:24:10+00:00"
+  :tags #{:food :liquid-nitrogen}}
+
+------
 
 Made hop ice cream with some friends this weekend, using [cascade hop](http://en.wikipedia.org/wiki/Cascade_hop). Left hop pellets in milk overnight, filtered out the remains, made ice cream batter the usual way, and then added liquid nitrogen while whisking vigorously.
 

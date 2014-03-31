@@ -1,12 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-06-10 17:03:45+00:00
-layout: post
-slug: shellcode
-title: Decoding shellcode
-wordpress_id: 184
----
+{ :slug "shellcode"
+  :title "Decoding shellcode"
+  :date "2013-06-10 17:03:45+00:00"
+  :tags #{:shellcode :asm}}
+
+------
 
 Nasjonal Sikkerhetsmyndighet (NSM) recently put up a few security challenges on their page as part of a hiring, and was linked to by one of the major norwegian tabloids - [VG](http://www.vg.no/nyheter/innenriks/artikkel.php?artid=10117134).
 

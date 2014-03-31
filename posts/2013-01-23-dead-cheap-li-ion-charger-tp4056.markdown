@@ -1,17 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-01-23 21:12:25+00:00
-layout: post
-slug: dead-cheap-li-ion-charger-tp4056
-title: Dead cheap li-ion charger - TP4056
-wordpress_id: 161
-tags:
-- '18650'
-- charger
-- electronics
-- li-ion
----
+{ :slug "dead-cheap-li-ion-charger-tp4056"
+  :title "Dead cheap li-ion charger - TP4056"
+  :date "2013-01-23 21:12:25+00:00"
+  :tags #{:electronics :18650}}
+
+------
 
 [![Image](/images/2013-01-23-dead-cheap-li-ion-charger-tp4056/k7im9556.jpg)](/images/2013-01-23-dead-cheap-li-ion-charger-tp4056/k7im9556.jpg)
 

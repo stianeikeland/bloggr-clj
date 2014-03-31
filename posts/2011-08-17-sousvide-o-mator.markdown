@@ -1,23 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2011-08-17 14:27:00+00:00
-layout: post
-slug: sousvide-o-mator
-title: SousVide-O-Mator
-wordpress_id: 10
-tags:
-- arduino
-- atmel
-- cooking
-- electronics
-- food
-- geek
-- nerd
-- sous
-- sousvide
-- vide
----
+{ :slug "sousvide-o-mator"
+  :title "SousVide-O-Mator"
+  :date "2011-08-17 14:27:00+00:00"
+  :tags #{:electronics :food :sousvide :arduino}}
+
+------
 
 <figure>
   <img src="/images/2011-08-17-sousvide-o-mator/k7im7155.jpg" alt="">

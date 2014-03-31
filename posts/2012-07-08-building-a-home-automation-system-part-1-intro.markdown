@@ -1,20 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-07-08 21:17:09+00:00
-layout: post
-slug: building-a-home-automation-system-part-1-intro
-title: Building a home automation system - Part 1 (intro)
-wordpress_id: 7
-categories:
-- homeautomation
-tags:
-- automation
-- home
-- homeautomation
-- internet of things
-- jeenode
----
+{ :slug "building-a-home-automation-system-part-1-intro"
+  :title "Building a home automation system - Part 1 (intro)"
+  :date "2012-07-08 21:17:09+00:00"
+  :tags #{:homeautomation :jeenode}}
+
+------
 
 Ever since i bought my own apartment 1.5 years ago I've been thinking about adding a bit of home automation. Given an API to sensors, lighting, heating and other electronic devices there are so many smart things you could do.
 

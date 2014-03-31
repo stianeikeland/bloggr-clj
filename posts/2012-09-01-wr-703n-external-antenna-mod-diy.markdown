@@ -1,18 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-09-01 11:54:06+00:00
-layout: post
-slug: wr-703n-external-antenna-mod-diy
-title: WR-703N External Antenna Mod (DIY)
-wordpress_id: 6
-tags:
-- diy
-- electronics
-- openwrt
-- wifi
-- wr703n
----
+{ :slug "wr-703n-external-antenna-mod-diy"
+  :title "WR-703N External Antenna Mod (DIY)"
+  :date "2012-09-01 11:54:06+00:00"
+  :tags #{:electronics}}
+
+------
 
 **UPDATE: Don't do this mod, there are better techniques. Example: Solder directly to PCB antenna, or trying the J4 bridge mod as described here: [better-wr703n-antenna-mod](/2012/09/15/better-wr703n-antenna-mod/)**
 

@@ -1,12 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2013-12-10 20:24:25+00:00
-layout: post
-slug: preview-app-pdf-file-size
-title: Preview.app PDF file size
-wordpress_id: 249
----
+{ :slug "preview-app-pdf-file-size"
+  :title "Preview.app PDF file size"
+  :date "2013-12-10 20:24:25+00:00" 
+  :tags #{:osx}}
+
+------
 
 You get a 11 Mb PDF from a (non-configurable) scanner and need to email/upload it to someone. You open it in Preview.app on osx, export, select the Reduce File Size quartz filter. Open the exported PDF.. and it looks like complete crap, not even remotely readable - thanks you so much Apple for the overzealous reduction filter. Here is a custom one you can add to /System/Library/Filters and get actually readable and decently small PDFs, save it as Shrink.qfilter or similar.
 

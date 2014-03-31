@@ -1,23 +1,9 @@
----
-author: stianeikeland
-comments: true
-date: 2012-09-24 16:31:33+00:00
-layout: post
-slug: building-a-home-automation-system-the-broker-and-sensors-part-2
-title: Building a home automation system - The broker and sensors (Part 2)
-wordpress_id: 106
-categories:
-- homeautomation
-tags:
-- coffee-script
-- electronics
-- homeautomation
-- jeenode
-- nodejs
-- pioneer
-- rfm12b
-- sr
----
+{ :slug "building-a-home-automation-system-the-broker-and-sensors-part-2"
+  :title "Building a home automation system - The broker and sensors (Part 2)"
+  :date "2012-09-24 16:31:33+00:00"
+  :tags #{:homeautomation :jeenode :electronics}}
+
+------
 
 Every now and then (when I have time..) I do a [bit of work](https://github.com/stianeikeland/homeautomation) on what's going to become my home automation system. At the moment it's pretty basic, it's simply events going over a message broker that small stubs of code react to. Most of it runs on my [raspberry pi](http://en.wikipedia.org/wiki/Raspberry_pi) and a few jeenodes (atmega328 + hoperf rfm12b radio) as wireless sensors.
 
