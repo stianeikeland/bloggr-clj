@@ -10,8 +10,11 @@
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 
+(defn update-body [f post]
+  (assoc post :body (f (post :body))))
+
 (defn markdown [post]
-  (assoc post :body (md/to-html (post :body) cegdown-ext)))
+  (update-body #(md/to-html % cegdown-ext) post))
 
 (defn- highlight-node [n]
   (let [lang (:class (:attrs n))]
@@ -21,10 +24,9 @@
                                                                  (keyword lang)
                                                                  :html))))))
 (defn highlight [post]
-  (assoc post :body (html/at (post :body) [:pre :code] highlight-node)))
+  (update-body #(html/at % [:pre :code] highlight-node) post))
 
-(defn enliveify [post]
-  (assoc post :body (html/html-snippet (post :body))))
+(def enliveify (partial update-body html/html-snippet))
 
 (defn render [post]
-  (assoc post :body (apply str (html/emit* (post :body)))))
+  (update-body #(apply str (html/emit* %)) post))
