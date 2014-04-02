@@ -41,7 +41,7 @@
 
 
 (defn get-posts []
-    (->> (stasis/slurp-directory "posts/" #"test.*\.(md|markdown)$")
+    (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
          (vals)
          (map #(-> % parse-post
                      markdown
