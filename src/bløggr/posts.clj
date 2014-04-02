@@ -32,6 +32,10 @@
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") date)
        title "/index.html"))
 
+(defn post-lead [post len]
+  (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
+    (apply str (concat (take len (str/trim post-text)) "…"))))
+
 (defn filename-body-map [post]
   {(filename (get-in post [:header :slug])
              (get-in post [:header :date])) (post :body)})
