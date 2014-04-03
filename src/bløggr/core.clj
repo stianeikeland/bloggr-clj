@@ -1,26 +1,16 @@
 (ns bløggr.core
   (:require [bløggr.common :refer :all]
             [bløggr.posts :refer :all]
+            [bløggr.assets :refer :all]
             [stasis.core :as stasis]
-            [clojure.string :as str]
             [optimus.prime :as optimus]
             [optimus.assets :as assets]
             [optimus.optimizations :as optimizations]
             [optimus.strategies :as strategies]))
 
-(defn get-css []
-  (stasis/slurp-directory "resources/css/" #".*\.css"))
-
 (defn get-page-sources []
   (hash-map :posts (get-posts)
             :css (get-css)))
-
-(defn load-assets [path]
-  (assets/load-assets path [#".*"]))
-
-(defn get-assets []
-  (reduce merge (map #(assoc % :path (str "/images" (% :path))) (load-assets "images"))
-                (map #(assoc % :path (str "/fonts" (% :path))) (load-assets "fonts"))))
 
 (def ring (-> (get-page-sources)
               (stasis/merge-page-sources)
