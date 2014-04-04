@@ -9,7 +9,7 @@
 
 ![Gopher](/images/2013-07-30-go-gpio-library-for-raspberry-pi/gopher.png)
 
-Been playing a bit with [Go](https://en.wikipedia.org/wiki/Go_(programming_language)) (-lang) lately, it seems like a fun little language. Very minimalistic and clean, yet quite powerful - you can do so many things with the simple constructs they provide (especially the goroutines, channels and type-system). Sadly, it looks like it's pretty slow in benchmarks compared to the other natural alternatives - but it's still early.
+Been playing a bit with [Go-lang](http://golang.org/) lately, it seems like a fun little language. Very minimalistic and clean, yet quite powerful - you can do so many things with the simple constructs they provide (especially the goroutines, channels and type-system). Sadly, it looks like it's pretty slow in benchmarks compared to the other natural alternatives - but it's still early.
 
 <!-- [![animated](http://stianeikeland.files.wordpress.com/2013/07/animated.gif)](http://stianeikeland.files.wordpress.com/2013/07/animated.gif) -->
 
