@@ -5,6 +5,8 @@
             [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]))
 
+(def lead-length 500)
+
 (html/deftemplate post-template "layouts/post.html" [header body]
                   [:head] (html/html-content (slurp "resources/partials/head.html"))
                   [:div#scripts] (html/html-content (slurp "resources/partials/scripts.html"))
@@ -32,17 +34,25 @@
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") date)
        title "/index.html"))
 
+(defn post-filename [post]
+  (filename (get-in post [:header :slug])
+            (get-in post [:header :date])))
+
 (defn post-lead [post len]
   (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
     (apply str (concat (take len (str/trim post-text)) "…"))))
 
+(defn add-post-lead [post]
+  (assoc post :lead (post-lead post lead-length)))
+
 (defn filename-body-map [post]
-  {(filename (get-in post [:header :slug])
-             (get-in post [:header :date])) (post :body)})
+  {(post-filename post) (post :body)})
 
 (defn apply-post-layout [post]
   (assoc post :body (apply str (post-template (post :header) (post :body)))))
 
+(defn posts-by-date [posts]
+  (sort #(compare (-> %2 :header :date) (-> %1 :header :date)) posts))
 
 (defn get-posts []
     (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
@@ -52,6 +62,6 @@
                      enliveify
                      highlight
                      render
-                     apply-post-layout
-                     filename-body-map))
-         (reduce merge)))
+                     add-post-lead
+                     apply-post-layout))))
+

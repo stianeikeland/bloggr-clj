@@ -38,3 +38,6 @@
             enliveify
             render
             :body) => html))
+
+(fact "strip-comments strips comments from html"
+  (strip-comments "Hello <!-- Bah -->World!") => "Hello World!")

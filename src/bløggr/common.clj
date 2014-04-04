@@ -30,3 +30,9 @@
 
 (defn render [post]
   (update-body #(apply str (html/emit* %)) post))
+
+(defn strip-comments [body]
+  (html/sniptest body [html/comment-node] nil))
+
+(defn post-strip-comments [post]
+  (update-body strip-comments post))
