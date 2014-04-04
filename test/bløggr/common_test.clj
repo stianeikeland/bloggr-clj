@@ -12,32 +12,32 @@
                                 (t/time-zone-for-offset 0)))
 
 (fact "parse-datestring parses string to date"
-      (parse-datestring "2007-08-28 01:59:36+00:00") => blogdate)
+  (parse-datestring "2007-08-28 01:59:36+00:00") => blogdate)
 
 (fact "highlights source code with lang set"
-      (:body (-> {:body source-code-with-lang}
-                 (markdown)
-                 (enliveify)
-                 (highlight)
-                 (render))) => rendered-with-lang)
+  (:body (-> {:body source-code-with-lang}
+             (markdown)
+             (enliveify)
+             (highlight)
+             (render))) => rendered-with-lang)
 
 (fact "skips highlighting code when lang not set"
-      (:body (-> {:body source-code-without-lang}
-                 (markdown)
-                 (enliveify)
-                 (highlight)
-                 (render))) => rendered-without-lang)
+  (:body (-> {:body source-code-without-lang}
+             (markdown)
+             (enliveify)
+             (highlight)
+             (render))) => rendered-without-lang)
 
 (fact "enliveify turns post into enlive data"
-      (-> {:body "<div>brille</div>"}
-          enliveify :body first :content first) => "brille")
+  (-> {:body "<div>brille</div>"}
+      enliveify :body first :content first) => "brille")
 
 (fact "render turns enlive post into html post"
-      (let [html "<div>brille</div>"]
-        (-> {:body html}
-            enliveify
-            render
-            :body) => html))
+  (let [html "<div>brille</div>"]
+    (-> {:body html}
+        enliveify
+        render
+        :body) => html))
 
 (fact "strip-comments strips comments from html"
   (strip-comments "Hello <!-- Bah -->World!") => "Hello World!")
