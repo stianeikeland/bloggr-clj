@@ -1,0 +1,3 @@
+{:site-title "cat /dev/urandom"
+ :base-url "http://blagg.tadkom.net/"
+ :author "Stian Eikeland"}

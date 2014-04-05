@@ -11,6 +11,7 @@
             [optimus.export]))
 
 (def export-dir "dist")
+(def site-settings (read-string (slurp "settings.edn")))
 
 (defn get-page-sources []
   (stasis/merge-page-sources
