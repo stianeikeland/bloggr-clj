@@ -29,5 +29,5 @@
 (fact "index-post-template adds links to post"
   (apply str (index-post-template (first test-posts))) => (contains "href=\"/the/post/url\"")
   (provided
-    (p/post-filename anything) => "/the/post/url"))
+    (p/post-relative-url anything) => "/the/post/url"))
 

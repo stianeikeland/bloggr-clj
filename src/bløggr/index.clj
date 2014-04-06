@@ -6,7 +6,7 @@
 (html/deftemplate index-post-template "partials/index_post.html" [post]
   [:span#title] (html/content (-> post :header :title))
   [:p#lead] (html/content (post :lead))
-  [:a#link] (html/set-attr :href (p/post-filename post))
+  [:a#link] (html/set-attr :href (p/post-relative-url post))
   [:a#link] (html/set-attr :title (-> post :header :title)))
 
 (html/deftemplate index-template "layouts/index.html" [posts]
