@@ -38,9 +38,17 @@
   (filename (get-in post [:header :slug])
             (get-in post [:header :date])))
 
+(defn post-relative-url [post]
+  (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
+       (get-in post [:header :slug])
+       "/"))
+
 (defn post-lead [post len]
   (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
     (apply str (concat (take len (str/trim post-text)) "…"))))
+
+(defn rss-content [post]
+  (assoc post :rss-content (post :body)))
 
 (defn add-post-lead [post]
   (assoc post :lead (post-lead post lead-length)))
@@ -63,5 +71,6 @@
                      highlight
                      render
                      add-post-lead
+                     rss-content
                      apply-post-layout))))
 

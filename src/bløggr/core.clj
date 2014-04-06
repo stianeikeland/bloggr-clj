@@ -3,6 +3,7 @@
             [bløggr.posts :refer :all]
             [bløggr.index :refer :all]
             [bløggr.assets :refer :all]
+            [bløggr.rss :refer :all]
             [stasis.core :as stasis]
             [optimus.prime :as optimus]
             [optimus.assets :as assets]
@@ -20,7 +21,8 @@
                :posts (reduce merge (map filename-body-map posts))
                :index {"/index.html" (->> posts
                                           (posts-by-date)
-                                          (get-index))}))))
+                                          (get-index))}
+               :rss {"/feed.xml" (get-rss site-settings posts)}))))
 
 (def ring (-> (get-page-sources)
               (stasis/serve-pages)

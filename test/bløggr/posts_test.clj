@@ -52,3 +52,6 @@ body content")
   (let [a {:header {:date 0}}
         b {:header {:date 1}}]
     (posts-by-date [a b]) => [b a]))
+
+(fact "post-filename creates post path"
+  (post-filename {:header {:slug "slug" :date blogdate}}) => "/2007/08/28/slug/index.html")

@@ -9,7 +9,8 @@
                  [me.raynes/cegdown "0.1.1"]
                  [clygments "0.1.1"]
                  [enlive "1.1.5"]
-                 [optimus "0.14.2"]]
+                 [optimus "0.14.2"]
+                 [clj-rss "0.1.3"]]
   :ring {:handler bløggr.core/ring}
   :aliases {"export" ["run" "-m" "bløggr.core/export"]}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]
