@@ -46,7 +46,7 @@ body content")
 
 (fact "post-lead extracts first x text characters of html-post"
   (post-lead {:body "<p>lorum lorum ipsum <a href='index.html'>ipsum</a></p>"} 20) =>
-  "lorum lorum ipsum ip…")
+  "lorum lorum ipsum ip...")
 
 (fact "posts-by-date sorts posts by date"
   (let [a {:header {:date 0}}

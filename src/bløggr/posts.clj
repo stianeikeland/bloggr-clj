@@ -12,6 +12,7 @@
                   [:div#scripts] (html/html-content (slurp "resources/partials/scripts.html"))
                   [:div#navigation] (html/html-content (slurp "resources/partials/navigation.html"))
                   [:div#browser-upgrade] (html/html-content (slurp "resources/partials/browser_upgrade.html"))
+                  [:div#disqus] (html/html-content (slurp "resources/partials/disqus.html"))
                   [:div#article-content] (html/html-content body)
                   [:#article-title] (html/content (header :title))
                   [:div#author-bio] (html/html-content (slurp "resources/partials/author_bio.html"))
@@ -45,7 +46,7 @@
 
 (defn post-lead [post len]
   (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
-    (apply str (concat (take len (str/trim post-text)) "…"))))
+    (apply str (concat (take len (str/trim post-text)) "..."))))
 
 (defn rss-content [post]
   (assoc post :rss-content (post :body)))
