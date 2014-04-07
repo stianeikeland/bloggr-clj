@@ -1,0 +1,24 @@
+{ :slug "pentax-k-m-k2000"
+  :title "Pentax k-m / k2000"
+  :date "2009-05-10 01:52:00+00:00"
+  :tags #{:photography}}
+
+------
+
+Sorry Havard, you can just skip this one, it doesn't feature any arrows showing which direction electrons travel :p
+
+![Pentax](http://s3.tadkom.net/wp-content/uploads/2009/05/imgp1924-5.jpg)
+
+ I bought a new DSLR body not long ago, a pentax k-m. It's a rather cheap 10MP entry-level dslr, going for as low as 3600 NOK new here in Norway - I gave around 2800 NOK for it in the UK. So, what can this "toy"-camera do? Most of what the bigger brothers k10d/k20d can do actually. Here are a few of my own experiences with it..  Pentax k-m with da 21mm limited on flickr (cdehaan):
+
+![Pentax](http://farm4.static.flickr.com/3196/3038874874_d3e8a5471c_m.jpg)
+
+ What have they stripped from it's much larger bigger brothers - k10d/k20d: Weather sealing ([you can't bring it with you into the shower like the k10d](http://www.youtube.com/watch?v=-zooPXbWJis)), size, weight, top lcd, selectable focus point (and the red dot focus indicator in the view-finder), front wheel, Tav and bulb mode, cable trigger, and probably a few other non-important things. Quite a few of these could easily have been left on and still kept the cost down if you ask me, especially things that are mostly in software.  Even though the camera is quite light, it still feels very solid - not as solid as the armored and sealed k10d (which probably could crush someones skull without getting a scratch), but much more solid than other cameras in the same class. The grip is also smaller, but I don't find this a problem, especially with lighter lenses. I even manage to wield something like a DA*16-50, anything larger than this though is a bit uncomfortable and looks comical. This camera thrives on smaller primes, something like pentax' limited series (pancakes) would rock. Normally I keep my FA50/1.4 on it.  So, how is it in use..? quite good actually! Even though it lacks some features, I don't really miss them much - maybe with the exception of the front wheel (especially when shooting manually). The autofocus is quite fast for a pentax (probably the fastest of the family) and doesn't hunt as much as my k10d. What I do miss though is the screen - it could just be a feeling - but I like the LCD on my k10d better than the k-m's. It just doesn't seem as good in daylight.  Ok, so what's the image quality like? From iso 100-800 it's quite good, and goes a bit downhill at 1600-3200. A sample taken at iso 200 can be seen below, this is using a DA* 16-50/2.8 lens. It might not be fair to display samples taken with a lens that costs twice as much as the camera itself, but I think it really shows that if you have a limited budget it's better to put your cash on the optics than on the camera - unless you really need all the extra buttons and frills that comes with a more high-end house. Besides, a limited lens / prime will probably give you even more sharpness than this at a lower price.
+
+![Snap](http://s3.tadkom.net/wp-content/uploads/2009/05/imgp1469-2.jpg)
+
+ 1:1 crop of the above image:
+
+![Snapcrop](http://s3.tadkom.net/wp-content/uploads/2009/05/imgp1469-3.jpg)
+
+ Other cool points about about the k-m.. it features in-house shake reduction, you barely even get a lens with IS/VR from other brands for the same amount of money as this camera. It uses the k-mount, which means that you use k-mount lenses going back as far as the 1970s - and get shake reduction for them. Even older lenses (M42) can be used with an adapter. Battery-life is surprisingly good, it uses normal AA-cells, and the batteries that came with the camera lasted me many weeks (3-4) and well over 1000 shots. It has some sort of dynamic range function, which seems to give better details in the shadows, I haven't really used this much, and no-one really seems to know what it actually does. It has a dust-removal system (shakes the sensor) and also a system for dust detection. It supports SDM, for lenses with built in focus-motor. Menu system is quite good, and if you are a beginner - a help button explains everything for you. This help button can be reconfigured to other things if you don't need it. All buttons (except flash-up and af/mf) can be operated using the right-hand while holding it.  If it wasn't for rather low high-iso performance and the crippled 5-point (non selectable) focus system, I think this camera would completely wipe the floor with the competitors in the same price class (it still does on many points). They are all very good, so it's only small differences that count. The K-m has some really good sides, but they shouldn't have crippled it as much as they did if they wanted it to be the best entry-level camera on as many fronts as possible.  But, of course, to quote sveinmb, "it sucks goatballs" - because it doesn't say nikon or canon anywhere on the body :p

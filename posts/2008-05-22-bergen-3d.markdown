@@ -1,0 +1,23 @@
+{ :slug "bergen-3d"
+  :title "Bergen-3d"
+  :date "2008-05-22 05:44:00+00:00"
+  :tags #{:visualization}}
+
+------
+
+<figure>
+  <a href="http://s3.tadkom.net/wp-content/uploads/2008/05/8-300x176.jpg"><img src="http://s3.tadkom.net/wp-content/uploads/2008/05/8-300x176.jpg" alt=""></a>
+</figure>
+
+<figure>
+  <a href="http://s3.tadkom.net/wp-content/uploads/2008/05/3-300x178.jpg"><img src="http://s3.tadkom.net/wp-content/uploads/2008/05/3-300x178.jpg" alt=""></a>
+</figure>
+
+<figure>
+  <a href="http://s3.tadkom.net/wp-content/uploads/2008/05/11-300x171.jpg"><img src="http://s3.tadkom.net/wp-content/uploads/2008/05/11-300x171.jpg" alt=""></a>
+</figure>
+
+I've spent some time working on a virtual 3d bergen as a part of INF251 (Computer Graphics) this semester. Basically what we did was to render the terrain based on a height map (a file containing a height value at every x,y position), modeled some buildings, added textures, spline based camera paths.. etc..  Mine was developed on linux and uses Glut, GLEW, GLM, DevIL, Vmath.. etc.. You can fly around in Bergen using FPS-style controls (WASD+RF/mouselook).
+
+<iframe src="//player.vimeo.com/video/10717909" width="560" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/10717909">Bergen 3D</a> from <a href="http://vimeo.com/eikeland">Stian Eikeland</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+

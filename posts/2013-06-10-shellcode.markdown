@@ -25,7 +25,7 @@ In intel x86 asm opcode 0x31 is a xor, so just based on the first bytes there's 
 
 Run it through a disassembler to verify, ndisasm - nasm's disassembler works great.
 
-~~~
+~~~ nasm
 ; ndisasm -b 32 shellcode
 00000000  31DB              xor ebx,ebx
 00000002  F7E3              mul ebx
@@ -54,7 +54,7 @@ Short little program. There's a couple of int 0x80 in there, which usually is a 
 
 Breaking the code down you find:
 
-~~~
+~~~ nasm
 00000000  31DB              xor ebx,ebx
 00000002  F7E3              mul ebx
 

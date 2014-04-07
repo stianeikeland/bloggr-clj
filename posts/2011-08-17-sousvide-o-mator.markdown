@@ -31,7 +31,7 @@ Water bath with heater is easy enough, there are tons of items out there that do
 
 That's the easy part, the hard part is regulating the heater to accurately hit a specific temperature. A simple thermostat won't do, because of the long dead time in such a system - you end up with a cycle overshooting and undershooting the target temperature - this is a job for a real PID controller (**proportional-integral-derivative controller**).
 
-![](/images/2011-08-17-sousvide-o-mator/pid-formula.png)
+![pid formula](/images/2011-08-17-sousvide-o-mator/pid-formula.png)
 
 A PID-controller monitors a system and tries to bring it to a specific state by providing a output value. For example, monitors the temperature of a water bath and tries to bring it to exactly 60 degrees celcius by regulating a heater. The forumula consists of three terms, first the gain - how hard to press the pedel to accelerate to a certain speed based on the current speed. The second part is an integral, looking back, how fast where we changing when we applied this much pressure to the pedal in the past.. Third term is a derivative trying to predict the future, when do I need to stop accelerating to be able to make the next turn.
 
@@ -66,8 +66,7 @@ In total I think it cost me around $30 to build it (not including the pump and r
 
 The source code is available at Bitbucket, please feel free to use it for whatever you want: [https://bitbucket.org/seikeland/sousvide/overview](https://bitbucket.org/seikeland/sousvide/overview)
 
-[![](/images/2011-08-17-sousvide-o-mator/sousvide-schema.png)](https://bitbucket.org/seikeland/sousvide/src/9824aa7a5dda/schematics.png#)
-
+[![sousvide schema](/images/2011-08-17-sousvide-o-mator/sousvide-schema.png)](https://bitbucket.org/seikeland/sousvide/src/9824aa7a5dda/schematics.png#)
 Note that the schematic doesn't include power curcuit and programming headers.
 
 I've built the controller into a simple case (w/ metal backplate) I found on ebay. If you have a powerful heater you should concider adding a heatsink to the SSR, they can get hot when switching large currents. With the metal-backplating, my 350W rice cooker never even make the SSR go above room temperature. See pictures of the case and setup below:

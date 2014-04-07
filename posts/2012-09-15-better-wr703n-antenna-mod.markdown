@@ -5,6 +5,8 @@
 
 ------
 
+**EDIT:** I recommend looking at this method: [https://app.box.com/s/cispknq8b9zgog8k5vxn](https://app.box.com/s/cispknq8b9zgog8k5vxn).
+
 I blogged about a WR703N antenna mod [earlier](/wr-703n-external-antenna-mod-diy), I found some hints about a better way of doing it on the [openwrt forum](https://forum.openwrt.org/viewtopic.php?pid=173729#p173729). There's a (0 ohm) shunt resistor in the antenna path - labeled J1. I undid the changes I did earlier, unsoldered the J1 resistor.
 
 With the board oriented with the wired lan to the left, I then soldered the core of the antenna wire to the RIGHT pad of the now removed J1 resistor. There is a big empty pad "north" of J1, where the antenna shield can be soldered.

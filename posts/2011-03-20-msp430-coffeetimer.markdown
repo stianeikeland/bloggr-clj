@@ -5,24 +5,27 @@
 
 ------
 
-The [MSP430](http://en.wikipedia.org/wiki/TI_MSP430) is a familty of cheap microcontrollers from Texas Instruments featuring ultra low power usage. TI offers a devkit with everything you need to get started (USB-based development board and 2 microcontrollers from the value line) called the [MSP430 Launchpad](http://processors.wiki.ti.com/index.php/MSP430_LaunchPad_(MSP-EXP430G2)?DCMP=launchpad&HQS=Other+OT+launchpadwiki). The killer - it's dead cheap - $4.30 for two microcontrollers and the launchpad including shipping (fedex!). You can also probably manage to get a few MCUs for free as samples. TI is probably selling the kit at a loss really trying to get into the hobbyist market, which is primarily dominated by the [Arduino](http://arduino.cc/) (and to a lesser degree Atmel in general and Microchip Pic). I was very impressed by the power usage, a guy managed to run them for [10 weeks](http://kennethfinnegan.blogspot.com/2010/09/msp430-low-power-experiment.html) as a clock on a couple of capacitors (granted - 10F caps).
+The [MSP430](http://en.wikipedia.org/wiki/TI_MSP430) is a familty of cheap microcontrollers from Texas Instruments featuring ultra low power usage. TI offers a devkit with everything you need to get started (USB-based development board and 2 microcontrollers from the value line) called the MSP430 Launchpad. The killer - it's dead cheap - $4.30 for two microcontrollers and the launchpad including shipping (fedex!). You can also probably manage to get a few MCUs for free as samples. TI is probably selling the kit at a loss really trying to get into the hobbyist market, which is primarily dominated by the [Arduino](http://arduino.cc/) (and to a lesser degree Atmel in general and Microchip Pic). I was very impressed by the power usage, a guy managed to run them for [10 weeks](http://kennethfinnegan.blogspot.com/2010/09/msp430-low-power-experiment.html) as a clock on a couple of capacitors (granted - 10F caps).
 
-
-![Msp430_launchpad_1](http://stianeikeland.files.wordpress.com/2011/03/msp430_launchpad_1.jpg?w=300)
-![Launchpad](http://stianeikeland.files.wordpress.com/2011/03/launchpad.jpeg?w=230)
-
+<figure class='half'>
+  <a href="/images/msp430/msp430.jpg"><img src="/images/msp430/msp430.jpg" alt=""></a>
+  <a href="/images/msp430/launchpad.jpg"><img src="/images/msp430/launchpad.jpg" alt=""></a>
+</figure>
 
 
 I have a 1 hour safety timer connected to my coffee maker (one of those devices that tick down and cut the power after one hour). Being a really cheap device from a low cost "wallmart" like shop I guess it was no surprise when it broke. It doesn't tick down anymore, seems like the motor burned out - it's mostly mechanical with a disc rotating one revolution and then cut the power by physically hitting a switch. I liked having the extra safety this device provided - and wanted a new one. Figured it was a good chance to learn some MSP430 programming. Turning the coffee maker on and off using a relay would be pretty simple, but I really don't want to fuck with 220V mains and leave it without supervision (which probably also voids my home insurance).
 
 I have a few radio controlled Nexa power switches (which are CE certified), so I hooked up one of the MSP430 microcontrollers from the launchpad kit to a remote with a few transistors. Programmed the microcontroller to sleep and wait for a interrupt from small push button, on interrupt it turns on the coffee maker (via the remote - connected with two transistors) and starts a timer. The timer blinks a led every now and then before turning off the coffee maker one hour+ later. Put the whole thing in a small ikea plastic container with 2 AA-batteries, which should last severals years if the MSP430 is as power efficient as they say.
 
+<figure class='half'>
+  <a href="/images/msp430/1.jpg"><img src="/images/msp430/1.jpg" alt=""></a>
+  <a href="/images/msp430/2.jpg"><img src="/images/msp430/2.jpg" alt=""></a>
+</figure>
 
-[![Photo_mars_20_3_32_47_pm](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_32_47_pm.jpg?w=300)](http://getfile4.posterous.com/getfile/files.posterous.com/temp-2011-03-20/kIIrtlAooggCdeoedzeAtmbsivCHbCpocElneEzpdmiuDeqcibuhwzfBAIar/Photo_mars_20_3_32_47_PM.jpg.scaled1000.jpg)
-[![Photo_mars_20_3_32_58_pm](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_32_58_pm.jpg?w=300)](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_32_58_pm.jpg?w=300)
-[![Photo_mars_20_3_33_10_pm](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_33_10_pm.jpg?w=300)](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_33_10_pm.jpg?w=300)
-[![Photo_mars_20_3_35_18_pm](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_35_18_pm.jpg?w=300)](http://stianeikeland.files.wordpress.com/2011/03/photo_mars_20_3_35_18_pm.jpg?w=300)
-
+<figure class='half'>
+  <a href="/images/msp430/3.jpg"><img src="/images/msp430/3.jpg" alt=""></a>
+  <a href="/images/msp430/4.jpg"><img src="/images/msp430/4.jpg" alt=""></a>
+</figure>
 
 There's a few gotchas when programming the MSP430s, for example the watchdog timer.. The MCU features a watchdog that resets the device after a short time (VERY annoying..), unless you disable the timer - it's on by default. Other than that it was more or less straight forward. You can either use the supplied eclipse-based code composer from texas instruments (proprietary and windows only) - or the open source [msp430-gcc](http://mspgcc.sourceforge.net/) toolchain (runs on both linux and mac).. Code written in the code composer will probably not compile using msp430-gcc, there seems to be different syntax for defining interrupts - and intrinsic functions often have different names and functions depending on which compiler you use. I've tried both, the TI software nicely integrates a debugger that can step through lines and instructions in the IDE as they are running on the chip - Spy-Bi-Wire (pretty awesome feature for a $4.30 pricetag). For the open source toolchain you can use mspdebug to open a network port where you can connect using gdb.. providing you with more or less the same features, but it's way more cumbersome to use gdb than a IDE-integrated debugger.. But then again, I don't often use a debugger (even for normal software - my method of debugging often involves throwing prints everywhere), so I guess having to not run the proprietary IDE in a virtual machine is worth the loss of the IDE integrated debugger.
 
@@ -32,7 +35,7 @@ In conclusion, I don't think TI will make that big of an impact on the hobbyist 
 
 Posting the coffee timer code as a future reference, maybe some of the boilerplate code can be useful for others as well.
 
-{% highlight c %}
+~~~ c
 /*
 * Coffetimer (safetytimer)
 *
@@ -159,5 +162,5 @@ __interrupt void timera0_isr(void)
         LPM1_EXIT;
     }
 }
+~~~
 
-{% endhighlight %}
