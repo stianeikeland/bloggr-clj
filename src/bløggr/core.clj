@@ -22,7 +22,7 @@
                :index {"/index.html" (->> posts
                                           (posts-by-date)
                                           (get-index))}
-               :rss {"/feed.xml" (get-rss site-settings posts)}))))
+               :rss {"/rss.xml" (get-rss site-settings posts)}))))
 
 (def ring (-> (get-page-sources)
               (stasis/serve-pages)
