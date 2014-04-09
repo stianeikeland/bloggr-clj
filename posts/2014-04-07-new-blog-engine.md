@@ -22,7 +22,7 @@ a few times, looking a bit at [jekyll](http://jekyllrb.com/) and
 similar generators.
 
 A few months ago Magnar Sveen released
-[Statis](https://github.com/magnars/stasis). A minimalistic Clojure library for
+[Stasis](https://github.com/magnars/stasis). A minimalistic Clojure library for
 generating static pages. I tried it out and decided, hey, this is
 pretty cool, I can use this, and probably also learn a bit of Clojure
 in the process (been doing Clojure on and off for the last year or
@@ -38,7 +38,7 @@ The code is over at Github if you're interested:
 
 ### Loading, serving and exporting ###
 
-I'm using [Statis](https://github.com/magnars/stasis) for loading
+I'm using [Stasis](https://github.com/magnars/stasis) for loading
 assets (posts written in markdown) and exporting final pages. It also
 hooks into [Ring](https://github.com/ring-clojure/ring) (the main
 web-application library for clojure), allowing you to easily serve pages locally while testing.
@@ -111,7 +111,7 @@ For templating I were stuck between
 simply because I had a design I wanted to use that was already in
 HTML and also wanted to massage data using clojure data structures
 instead of a custom DSL. I have to say, Enlive isn't the easiest to get
-your head around (at least it wasn't for me), but David Nolan has a
+your head around (at least it wasn't for me), but David Nolen has a
 decent [tutorial](https://github.com/swannodette/enlive-tutorial/)
 over on github.
 
@@ -157,7 +157,7 @@ this summer. Previously I've only gone to free conferences, such as
 that had the resources to send me (or my collegues). This year I was
 really lucky and won a NDC-ticket, looking forward to that :)
 Euroclojure is pretty cheap, and in Poland as well, so heavily considering it.
-Would be awesome to hear a talk from Hickey and Nolan live, and the propolsals
+Would be awesome to hear a talk from Hickey and Nolen live, and the propolsals
 inbox from other speakers is looking promising! Also looking at
 Strangeloop, that would be totally awesome, but flight to a
 US-conference is pretty expensive.
