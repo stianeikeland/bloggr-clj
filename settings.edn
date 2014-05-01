@@ -1,4 +1,4 @@
-{:site-title "cat /dev/urandom"
+{:site-title "Twice the Mega Power"
  :site-description "Personal blog of Stian Eikeland"
- :base-url "http://blagg.tadkom.net"
+ :base-url "http://blog.eikeland.se"
  :author "Stian Eikeland"}
