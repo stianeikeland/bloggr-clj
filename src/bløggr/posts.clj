@@ -19,6 +19,7 @@
                   [:footer#footer-content] (html/html-content (slurp "resources/partials/footer.html"))
                   [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
                   [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
+                  [:title] (html/content (header :title))
                   [:div#feature-image] (if (nil? (header :image))
                                            nil
                                            #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
