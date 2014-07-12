@@ -6,8 +6,22 @@
             [net.cgrand.enlive-html :as html]))
 
 (def lead-length 500)
+(def twitter-card-length 190)
 
-(html/deftemplate post-template "layouts/post.html" [header body]
+(defn twitter-card-template
+  "Create twitter cards in document head"
+  [{header :header description :twitter-lead}]
+  (html/html [:meta {:name "twitter:card"
+                     :content (if (:image header) "summary_large_image" "summary")}]
+             [:meta {:name "twitter:site" :content "@stianeikeland"}]
+             [:meta {:name "twitter:title" :content (:title header)}]
+             [:meta {:name "twitter:description" :content description}]
+             [:meta {:name "twitter:creator" :content "@stianeikeland"}]
+             (when (:image header)
+               [:meta {:name "twitter:image:src"
+                       :content (str "http://blog.eikeland.se" (:image header))}])))
+
+(html/deftemplate post-template "layouts/post.html" [{header :header body :body :as post}]
                   [:head] (html/html-content (slurp "resources/partials/head.html"))
                   [:div#scripts] (html/html-content (slurp "resources/partials/scripts.html"))
                   [:div#navigation] (html/html-content (slurp "resources/partials/navigation.html"))
@@ -20,6 +34,7 @@
                   [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
                   [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
                   [:title] (html/content (header :title))
+                  [:head] (html/append (twitter-card-template post))
                   [:div#feature-image] (if (nil? (header :image))
                                            nil
                                            #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
@@ -55,11 +70,14 @@
 (defn add-post-lead [post]
   (assoc post :lead (post-lead post lead-length)))
 
+(defn add-twitter-lead [post]
+  (assoc post :twitter-lead (post-lead post twitter-card-length)))
+
 (defn filename-body-map [post]
   {(post-filename post) (post :body)})
 
 (defn apply-post-layout [post]
-  (assoc post :body (apply str (post-template (post :header) (post :body)))))
+  (assoc post :body (apply str (post-template post))))
 
 (defn posts-by-date [posts]
   (sort #(compare (-> %2 :header :date) (-> %1 :header :date)) posts))
@@ -73,6 +91,6 @@
                      highlight
                      render
                      add-post-lead
+                     add-twitter-lead
                      rss-content
                      apply-post-layout))))
-
