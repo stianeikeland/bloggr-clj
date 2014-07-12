@@ -35,22 +35,21 @@ We can model this in clojure (and in go-lang) using go-blocks from core.async.
 
 ~~~ clojure
 (ns primesieve.core
-  (:require [clojure.core.async :as async :refer [go-loop chan >! <! <!! close! filter<]]
-            [clojure.core.async.lab :refer [spool]]))
+  (:require [clojure.core.async :as async :refer [go-loop chan >! <! <!! close! filter< to-chan]]))
 ~~~
 
 Start by setting up the namespace, we're going to need a few things from
-core.async, and will also use the spool function from core.async.lab
-(experimental) as convenience.
+core.async.
 
 ~~~ clojure
 (defn gen [upper-limit]
-  (spool (range 2 upper-limit)))
+  (to-chan (range 2 upper-limit)))
 ~~~
 
-Now create the generating seed process. `spool` is sugar for creating a
-channel, return the channel and then continue add all numbers between 2 and
-`upper-limit` to the channel in a microthread (go-block).
+Now create the generating seed process. `to-chan` is sugar for creating a
+channel, return the channel and then continue add all items from a collection
+to the channel. In this case the collection is a lazy sequence of numbers between 2 and
+`upper-limit`. It's all run in a microthread (go-block).
 
 ~~~ clojure
 (defn sieve-filter [in prime]
@@ -120,9 +119,6 @@ maybe it would be faster. Let's try adding a 512 value buffer between them.
 
 ~~~ clojure
 (def bufsize 512)
-
-(defn gen [upper-limit]
-  (spool (range 2 upper-limit) (chan bufsize)))
 
 (defn sieve-filter [in prime]
   (filter< #(pos? (rem % prime)) in (chan bufsize)))
