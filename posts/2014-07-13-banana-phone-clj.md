@@ -8,7 +8,7 @@
 
 Clojure is a Functional First language, and I usually get by simply by passing
 around native datastructures such as maps, lists and vectors. Other than doing
-some simple Java interop I haven't really deep into the Object-Oriented features
+some simple Java interop I haven't really dug deep into the Object-Oriented features
 of Clojure until now. But, just because a language is FF doesn't mean that it's
 OO is weak sauce.
 
@@ -37,8 +37,8 @@ Imagine that we have a namespace called `fruits`, in this ns we have a Protocol
 defined - called `Fruit` - anything that satisfied being a fruit needs
 two methods - a function to peel the fruit, and a function to describe the
 fruit. You can think of Protocols as being something pretty close to
-"interfaces" in OO languages such as Java and C#. (They're actually more related
-to Traits).
+"interfaces" in OO languages such as Java and C#. (This whole setup works pretty
+much as traits).
 
 We also describe a record, a `Banana`. Think of this as a class, the banana
 accepts two values - a degree saying how bent the banana is, and a bool saying
@@ -219,6 +219,9 @@ anonymously. Observe:
 ;; => "Calling 80020123 anonymously.."
 ~~~
 
-An anonymous implementation of the `Phone` protocol. Try doing that in C# /
-Java! (Håvard tells me you can do it in F#). Maybe there's something to the saying that "Clojure is a better Java than
-Java" after all?
+An anonymous implementation of the `Phone` protocol. Try doing that in C#
+(Håvard tells me you can do it in F#). I thought this wasn't possible in Java,
+but apparently my limited J-knowledge had me fooled (Thanks Magnus) - so this
+bonus feature isn't as impressive as I thought :) (reify can do multiple
+interfaces in one go though, but I guess that's not something I'll use very
+often)
