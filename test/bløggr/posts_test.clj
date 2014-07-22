@@ -19,8 +19,8 @@ body content")
 (def blogdate (t/from-time-zone (t/date-time 2007 8 28 1 59 36)
                                 (t/time-zone-for-offset 0)))
 
-(fact "filename-body-map turns a post into title => body map"
-  (filename-body-map {:header {:slug "really-cool-post" :date blogdate} :body "post body"}) =>
+(fact "post->path-map turns a post into title => body map"
+  (post->path-map {:header {:slug "really-cool-post" :date blogdate} :body "post body"}) =>
   {"/2007/08/28/really-cool-post/index.html" "post body"})
 
 (fact "parse-post extracts header from blog post"
