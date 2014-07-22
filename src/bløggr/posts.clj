@@ -8,18 +8,18 @@
 (def lead-length 500)
 (def twitter-card-length 190)
 
-(defn twitter-card-template
   "Create twitter cards in document head"
   [{header :header description :twitter-lead}]
-  (html/html [:meta {:name "twitter:card"
-                     :content (if (:image header) "summary_large_image" "summary")}]
-             [:meta {:name "twitter:site" :content "@stianeikeland"}]
-             [:meta {:name "twitter:title" :content (:title header)}]
-             [:meta {:name "twitter:description" :content description}]
-             [:meta {:name "twitter:creator" :content "@stianeikeland"}]
-             (when (:image header)
-               [:meta {:name "twitter:image:src"
-                       :content (str "http://blog.eikeland.se" (:image header))}])))
+  (let [img (:image header)
+        card {:card (if img "summary_large_image" "summary")
+              :site "@stianeikeland"
+              :title (:title header)
+              :description description
+              :creator "@stianeikeland"
+              :image:src (when img (str "http://blog.eikeland.se" img))}
+        twitter-card (for [[k v] card]
+                       [:meta {:name (str "twitter:" (name k)) :content v}])]
+    (apply html/html twitter-card)))
 
 (html/deftemplate post-template "layouts/post.html" [{header :header body :body :as post}]
                   [:head] (html/html-content (slurp "resources/partials/head.html"))
