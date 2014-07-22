@@ -27,6 +27,3 @@
         rss-posts (map (partial rss-post settings)
                        (take 10 (p/posts-by-date posts)))]
     (apply cljrss/channel-xml (cons header rss-posts))))
-
-
-
