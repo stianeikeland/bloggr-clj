@@ -1,13 +1,19 @@
 (ns bløggr.index
   (:require [bløggr.common :refer :all]
             [bløggr.posts :as p]
+            [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]))
 
-(html/deftemplate index-post-template "partials/index_post.html" [post]
-  [:span#title] (html/content (-> post :header :title))
-  [:p#lead] (html/content (post :lead))
+(defn format-post-date [date]
+  (tf/unparse (tf/formatter "MMMM dd, yyyy.") date))
+
+(html/deftemplate index-post-template "partials/index_post.html"
+  [{:keys [header lead] :as post}]
+  [:span#title] (html/content (:title header))
+  [:p#date] (html/content (format-post-date (:date header)))
+  [:p#lead] (html/content lead)
   [:a#link] (html/set-attr :href (p/post-relative-url post))
-  [:a#link] (html/set-attr :title (-> post :header :title)))
+  [:a#link] (html/set-attr :title (:title header)))
 
 (html/deftemplate index-template "layouts/index.html" [posts]
   [:head] (html/html-content (slurp "resources/partials/head.html"))
@@ -20,4 +26,3 @@
 
 (defn get-index [posts]
   (apply str (index-template posts)))
-
