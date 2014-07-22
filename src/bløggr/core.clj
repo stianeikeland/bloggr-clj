@@ -13,7 +13,6 @@
 (def site-settings (read-string (slurp "settings.edn")))
 
 (defn get-pages []
-  (require 'bløggr.posts :reload)
   (stasis/merge-page-sources
    (let [posts (get-posts)
          path-mapped-posts (reduce merge (map post->path-map posts))
@@ -26,7 +25,12 @@
       :rss {"/rss.xml" rss}
       :index {"/index.html" index}})))
 
-(def ring (-> (stasis/serve-pages get-pages)
+(defn get-pages-reload []
+  (require 'bløggr.posts :reload)
+  (require 'bløggr.index :reload)
+  (get-pages))
+
+(def ring (-> (stasis/serve-pages get-pages-reload)
               (optimus/wrap get-assets optimizations/none strategies/serve-live-assets)))
 
 (defn export []
