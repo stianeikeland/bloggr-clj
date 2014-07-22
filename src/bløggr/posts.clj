@@ -73,7 +73,7 @@
 (defn add-twitter-lead [post]
   (assoc post :twitter-lead (post-lead post twitter-card-length)))
 
-(defn filename-body-map [post]
+(defn post->path-map [post]
   {(post-filename post) (post :body)})
 
 (defn apply-post-layout [post]
