@@ -8,6 +8,7 @@
 (def lead-length 500)
 (def twitter-card-length 190)
 
+(defn- twitter-card-template
   "Create twitter cards in document head"
   [{header :header description :twitter-lead}]
   (let [img (:image header)
