@@ -85,12 +85,12 @@
 (defn get-posts []
     (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
          (vals)
-         (map #(-> % parse-post
-                     markdown
-                     enliveify
-                     highlight
-                     render
-                     add-post-lead
-                     add-twitter-lead
-                     rss-content
-                     apply-post-layout))))
+         (map (comp apply-post-layout
+                    rss-content
+                    add-twitter-lead
+                    add-post-lead
+                    render
+                    highlight
+                    enliveify
+                    markdown
+                    parse-post))))
