@@ -3,6 +3,7 @@
             [bløggr.index :refer [get-index]]
             [bløggr.posts :refer [get-posts post->path-map posts-by-date]]
             [bløggr.rss :refer [get-rss]]
+            [bløggr.sitemap :refer [get-sitemap]]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
@@ -17,13 +18,15 @@
    (let [posts (get-posts)
          path-mapped-posts (reduce merge (map post->path-map posts))
          rss (get-rss site-settings posts)
+         sitemap (get-sitemap site-settings (cons "/" (keys path-mapped-posts)))
          index (->> posts
                     (posts-by-date)
                     (get-index))]
      {:posts path-mapped-posts
       :css (get-css)
       :rss {"/rss.xml" rss}
-      :index {"/index.html" index}})))
+      :index {"/index.html" index}
+      :sitemap {"/sitemap.xml" sitemap}})))
 
 (defn get-pages-reload []
   (require 'bløggr.posts :reload)
