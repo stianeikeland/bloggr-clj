@@ -4,6 +4,8 @@ Blog engine in clojure.
 
 Based on: stasis, cegdown, enlive, clygments
 
+[ ![Codeship Status for stianeikeland/bloggr-clj](https://www.codeship.io/projects/7b4f0f20-f3c6-0131-703c-46df43419009/status?branch=master)](https://www.codeship.io/projects/27959)
+
 ## Usage
 
 ```
