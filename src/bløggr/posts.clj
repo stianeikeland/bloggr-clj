@@ -22,23 +22,38 @@
                        [:meta {:name (str "twitter:" (name k)) :content v}])]
     (apply html/html twitter-card)))
 
-(html/deftemplate post-template "layouts/post.html" [{header :header body :body :as post}]
-                  [:head] (html/html-content (slurp "resources/partials/head.html"))
-                  [:div#scripts] (html/html-content (slurp "resources/partials/scripts.html"))
-                  [:div#navigation] (html/html-content (slurp "resources/partials/navigation.html"))
-                  [:div#browser-upgrade] (html/html-content (slurp "resources/partials/browser_upgrade.html"))
-                  [:div#disqus] (html/html-content (slurp "resources/partials/disqus.html"))
-                  [:div#article-content] (html/html-content body)
-                  [:#article-title] (html/content (header :title))
-                  [:div#author-bio] (html/html-content (slurp "resources/partials/author_bio.html"))
-                  [:footer#footer-content] (html/html-content (slurp "resources/partials/footer.html"))
-                  [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
-                  [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
-                  [:title] (html/content (header :title))
-                  [:head] (html/append (twitter-card-template post))
-                  [:div#feature-image] (if (nil? (header :image))
-                                           nil
-                                           #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
+(defn- html-partial [filename]
+  (html/html-content (slurp filename)))
+
+(defn post-relative-url [post]
+  (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
+       (get-in post [:header :slug])
+       "/"))
+
+(defn post-absolute-url [post]
+  (str "http://blog.eikeland.se" (post-relative-url post)))
+
+(html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
+  [:head] (html-partial "resources/partials/head.html")
+  [:div#scripts] (html-partial "resources/partials/scripts.html")
+  [:div#navigation] (html-partial "resources/partials/navigation.html")
+  [:div#browser-upgrade] (html-partial "resources/partials/browser_upgrade.html")
+  [:div#disqus] (html/html-content (-> (slurp "resources/partials/disqus.html")
+                                       (clojure.string/replace "#DISQUSID#"
+                                                               (post-relative-url post))
+                                       (clojure.string/replace "#DISQUSURL#"
+                                                               (post-absolute-url post))))
+  [:div#article-content] (html/html-content body)
+  [:#article-title] (html/content (header :title))
+  [:div#author-bio] (html-partial "resources/partials/author_bio.html")
+  [:footer#footer-content] (html-partial "resources/partials/footer.html")
+  [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
+  [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
+  [:title] (html/content (header :title))
+  [:head] (html/append (twitter-card-template post))
+  [:div#feature-image] (if (nil? (header :image))
+                         nil
+                         #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
 
 (defn parse-post
   "Parse a blog post into header map and body string. Convert string date to DateTime"
@@ -55,11 +70,6 @@
 (defn post-filename [post]
   (filename (get-in post [:header :slug])
             (get-in post [:header :date])))
-
-(defn post-relative-url [post]
-  (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
-       (get-in post [:header :slug])
-       "/"))
 
 (defn post-lead [post len]
   (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
