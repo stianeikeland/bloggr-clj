@@ -10,5 +10,6 @@
   (assets/load-assets path [#".*"]))
 
 (defn get-assets []
-  (reduce merge (map #(assoc % :path (str "/images" (% :path))) (load-assets "images"))
-                (map #(assoc % :path (str "/fonts" (% :path))) (load-assets "fonts"))))
+  (concat (map #(assoc % :path (str "/js" (% :path))) (load-assets "js"))
+          (map #(assoc % :path (str "/images" (% :path))) (load-assets "images"))
+          (map #(assoc % :path (str "/fonts" (% :path))) (load-assets "fonts"))))
