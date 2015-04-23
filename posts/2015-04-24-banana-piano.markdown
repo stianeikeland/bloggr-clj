@@ -20,9 +20,12 @@ this could be a great basis for a banana-piano.
 
 [overtone]: http://overtone.github.io
 
+> Fun fact: a full piano requires about 11 kg bananas - at $3 per kg that's
+> still way cheaper (and lighter) than a Steinway.
+
 There's a couple of ways we can make bananas act as tangents, one of them is to
 use the bananas as capacitive touch sensors. Using a nice little hack it's
-possible to do this using regular digital pins on microcontroller. The hack is
+possible to do this using regular digital pins on a microcontroller. The hack is
 (afaik) originally from Mario Becker, Fraunhofer IGD, 2007 (website dead). Check
 out the article on capacitive sensors over at [arduino.cc][capsense].
 
@@ -127,8 +130,8 @@ void handlePort(int index) {
 void loop() {
   for (int i = 0; i < 8; i++) {
     handlePort(i);
-    delay(10); // cheap-ass debounce..
   }
+  delay(30); // cheap-ass debounce..
 }
 
 ~~~
@@ -136,7 +139,7 @@ void loop() {
 Your computer must be grounded for this to work reliably, and it also helps to
 add a ground plane under the bananas (see video).
 
-When we touch a banana, the microcontroller will transmit a character from 0 to
+When touching a banana, the microcontroller will transmit a character from 0 to
 7, we can then receive this value in clojure using a serial-port library, turn
 it into an int, map the value to a scale to get a note. And play this using an
 instrument - in this case - the excellent sampled piano available in Overtone.
@@ -163,5 +166,6 @@ instrument - in this case - the excellent sampled piano available in Overtone.
 (serial/on-byte port banana-touch)
 ~~~
 
-Now enjoy and experiment with scales and different instruments. Maybe I'll make a
-broccoli theremin next time my niece visits. :)
+Now enjoy and experiment with scales and different instruments in Overtone -
+your efforts will not be fruitless. Maybe I'll make a broccoli theremin next
+time my niece visits. :)
