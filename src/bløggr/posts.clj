@@ -31,7 +31,24 @@
        "/"))
 
 (defn post-absolute-url [post]
-  (str "http://blog.eikeland.se" (post-relative-url post)))
+  (str "https://blog.eikeland.se" (post-relative-url post)))
+
+(defn- open-graph
+  [{header :header description :twitter-lead :as post}]
+  (let [img (:image header)
+        graph-data {:title (:title header)
+                    :type "article"
+                    :locale "en_US"
+                    :site_name "eikeland.se"
+                    :description description
+                    :image (when img (str "http://blog.eikeland.se" img))
+                    :url (post-absolute-url post)
+                    :video (:video header)}
+        graph (for [[k v] graph-data]
+                [:meta {:property (str "og:" (name k)) :content v}])]
+
+    (apply html/html graph)))
+
 
 (html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
   [:head] (html-partial "resources/partials/head.html")
@@ -51,6 +68,7 @@
   [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
   [:title] (html/content (header :title))
   [:head] (html/append (twitter-card-template post))
+  [:head] (html/append (open-graph post))
   [:div#feature-image] (if (nil? (header :image))
                          nil
                          #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
