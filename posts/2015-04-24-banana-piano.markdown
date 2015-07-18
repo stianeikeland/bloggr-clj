@@ -170,3 +170,24 @@ instrument - in this case - the excellent sampled piano available in Overtone.
 Now enjoy and experiment with scales and different instruments in Overtone -
 your efforts will not be fruitless. Maybe I'll make a broccoli theremin next
 time my niece visits. :)
+
+## Update:
+
+Since a few people have asked, here's a wiring diagram. It's super easy, only
+wires and no extra components. The ground plane (alu foil) is optional. If
+you're having problems in very noisy environments you can put a 1nF capacitor in
+line with the banana. I used an [arduino nano][ardnano], but any atmega328 based arduino
+can be used (nano, uno, etc). (And probably all others with minor
+modifications). Any wires you can connect to a banana and an arduino works. My
+arduino had male headers, I used 4p dupont female-female cables, which i broke
+out to 1p male-male for each individual banana. These come in all shapes,
+genders and lengths on ebay for very little money.
+
+Clojure libraries used: `[serial-port "1.1.2"]` and `[overtone "0.9.1"]`
+
+<figure>
+<a href="/images/banana/wiring.png"><img src="/images/banana/wiring.png"></a>
+<figcaption>Wiring setup for arduino nano.</figcaption>
+</figure>
+
+[ardnano]: http://www.arduino.cc/en/Main/ArduinoBoardNano
