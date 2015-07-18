@@ -72,9 +72,9 @@ Transducers got one nice trick up their sleeve, they have a really nice composab
 (def square (map #(* % %)))
 
 ;; Composing multiple transducers
-(def add-2-keep-odd-square (comp add-2
-                                 keep-odd
-                                 square))
+(def add-2-keep-odd-squared (comp add-2
+                                  keep-odd
+                                  square))
 
 (sequence add-2-keep-odd-squared (range 1 100))
 ;; => (9 25 49 81 121 169 225 289 361 441 529 625 729 841 961 1089 ....
