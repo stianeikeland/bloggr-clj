@@ -41,11 +41,12 @@
                     :locale "en_US"
                     :site_name "eikeland.se"
                     :description description
-                    :image (when img (str "http://blog.eikeland.se" img))
+                    :image (when img (str "https://blog.eikeland.se" img))
                     :url (post-absolute-url post)
                     :video (:video header)}
         graph (for [[k v] graph-data]
-                [:meta {:property (str "og:" (name k)) :content v}])]
+                (when v
+                  [:meta {:property (str "og:" (name k)) :content v}]))]
 
     (apply html/html graph)))
 
