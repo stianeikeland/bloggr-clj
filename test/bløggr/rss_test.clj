@@ -17,16 +17,16 @@
 
 (fact "get-rss renders xml with site details"
   (let [rss (get-rss settings [])]
-    rss => (contains "<title>\nabc\n</title>")
-    rss => (contains "<link>\nhttp://url.com\n</link>")
-    rss => (contains "<description>\ndef\n</description>")))
+    rss => (contains "<title>abc</title>")
+    rss => (contains "<link>http://url.com</link>")
+    rss => (contains "<description>def</description>")))
 
 (fact "get-rss renders xml with posts"
   (let [rss (get-rss settings posts)]
-    rss => (contains "<title>\nPost A title\n</title>")
-    rss => (contains "<description>\nPost A content\n</description>")
+    rss => (contains "<title>Post A title</title>")
+    rss => (contains "<description>Post A content</description>")
     rss => (contains "<pubDate>")
-    rss => (contains "<link>\nhttp://url.com/2000/01/02/post_a_title/\n</link>")))
+    rss => (contains "<link>http://url.com/2000/01/02/post_a_title/</link>")))
 
 (fact "get-rss should change relative image paths to absolute paths"
   (get-rss settings [(assoc (first posts) :rss-content "<img src=\"/images/blah.jpg\">")]) =>

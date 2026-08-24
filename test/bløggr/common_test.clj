@@ -4,9 +4,9 @@
             [clj-time.core :as t]))
 
 (def source-code-with-lang "```bash\nls -la\necho $HEI\n```")
-(def rendered-with-lang "<pre><code class=\"bash\"><div class=\"highlight\"><pre>ls -la\n<span class=\"nb\">echo</span> <span class=\"nv\">$HEI</span>\n</pre></div>\n</code></pre>")
+(def rendered-with-lang "<pre><code class=\"bash\"><div class=\"highlight\"><pre><span></span>ls -la\n<span class=\"nb\">echo</span> <span class=\"nv\">$HEI</span>\n</pre></div>\n</code></pre>\n")
 (def source-code-without-lang "```\nls -la\necho $HEI\n```")
-(def rendered-without-lang "<pre><code>ls -la\necho $HEI\n</code></pre>")
+(def rendered-without-lang "<pre><code>ls -la\necho $HEI\n</code></pre>\n")
 
 (def blogdate (t/from-time-zone (t/date-time 2007 8 28 1 59 36)
                                 (t/time-zone-for-offset 0)))

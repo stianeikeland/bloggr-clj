@@ -3,17 +3,20 @@
   :url "http://eikeland.se/"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [stasis "1.0.0"]
-                 [ring "1.2.2"]
-                 [me.raynes/cegdown "0.1.1"]
-                 [clygments "0.1.1"]
-                 [enlive "1.1.5"]
-                 [optimus "0.14.2"]
-                 [clj-rss "0.1.3"]
-                 [org.clojure/data.xml "0.0.7"]]
-  :ring {:handler bløggr.core/ring}
+  :dependencies [[org.clojure/clojure "1.11.4"]
+                 [stasis "2023.11.21"]
+                 [ring "1.15.5"]
+                 [ring/ring-codec "1.3.0"]
+                 [com.vladsch.flexmark/flexmark-all "0.64.8"]
+                 [clygments "2.0.2"]
+                 [enlive "1.1.6"]
+                 [optimus "2026.05.27"]
+                 [clj-rss "0.4.0"]
+                 [clj-time "0.15.2"]
+                 [org.clojure/data.xml "0.0.8"]]
+  :ring {:handler bløggr.core/ring
+         :open-browser? false}
   :aliases {"export" ["run" "-m" "bløggr.core/export"]}
-  :profiles {:dev {:plugins [[lein-ring "0.8.10"]
-                             [lein-midje "3.1.3"]]
-                   :dependencies [[midje "1.6.3" :exclusions [org.clojure/clojure]]]}})
+  :profiles {:dev {:plugins [[lein-ring "0.12.6"]
+                             [lein-midje "3.2.2"]]
+                   :dependencies [[midje "1.10.10" :exclusions [org.clojure/clojure]]]}})

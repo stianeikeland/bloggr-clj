@@ -41,7 +41,7 @@ body content")
                                               :date blogdate}}))]
     content => (contains "this is the body")
     content => (contains "<h1 id=\"article-title\">post title</h1>")
-    content => (contains "<time datetime=\"2007-08-28T01:59:36Z\" id=\"post-timestamp\">Tue, 28 Aug 2007 01:59</time>")))
+    content => (contains "<time id=\"post-timestamp\" datetime=\"2007-08-28T01:59:36Z\">Tue, 28 Aug 2007 01:59</time>")))
 
 
 (fact "post-lead extracts first x text characters of html-post"

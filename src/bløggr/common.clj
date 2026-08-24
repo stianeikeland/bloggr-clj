@@ -1,11 +1,22 @@
 (ns bløggr.common
-  (:require [me.raynes.cegdown :as md]
-            [clj-time.format :as tf]
+  (:require [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]
             [clygments.core :as pygments]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io])
+  (:import [com.vladsch.flexmark.parser Parser]
+           [com.vladsch.flexmark.html HtmlRenderer]
+           [com.vladsch.flexmark.util.data MutableDataSet]
+           [com.vladsch.flexmark.ext.autolink AutolinkExtension]
+           [com.vladsch.flexmark.ext.tables TablesExtension]))
 
-(def cegdown-ext [:fenced-code-blocks :autolinks])
+(defn md->html [text]
+  (let [options (doto (MutableDataSet.)
+                  (.set Parser/EXTENSIONS [(AutolinkExtension/create)
+                                           (TablesExtension/create)])
+                  (.set HtmlRenderer/FENCED_CODE_LANGUAGE_CLASS_PREFIX ""))
+        parser (.build (Parser/builder options))
+        renderer (.build (HtmlRenderer/builder options))]
+    (.render renderer (.parse parser text))))
 
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
@@ -14,7 +25,7 @@
   (assoc post :body (f (post :body))))
 
 (defn markdown [post]
-  (update-body #(md/to-html % cegdown-ext) post))
+  (update-body md->html post))
 
 (defn- highlight-node [n]
   (let [lang (:class (:attrs n))]

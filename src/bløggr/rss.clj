@@ -4,11 +4,14 @@
             [clj-time.core :as time]
             [clj-time.coerce :as tc]))
 
+(defn- to-instant [date]
+  (java.time.Instant/ofEpochMilli (tc/to-long date)))
+
 (defn- rss-header [settings]
   {:title (settings :site-title)
    :link (settings :base-url)
    :description (settings :site-description)
-   :lastBuildDate (tc/to-date (time/now))})
+   :lastBuildDate (to-instant (time/now))})
 
 (defn- fix-relative-image-urls [baseurl content]
   (clojure.string/replace content
@@ -19,7 +22,7 @@
   {:title (get-in post [:header :title])
    :description (fix-relative-image-urls (settings :base-url) (post :rss-content))
    :link (str (settings :base-url) (p/post-relative-url post))
-   :pubDate (tc/to-date (get-in post [:header :date]))
+    :pubDate (to-instant (get-in post [:header :date]))
    :guid [{:isPermaLink false} (p/post-relative-url post)]})
 
 (defn get-rss [settings posts]
