@@ -4,6 +4,7 @@
             [bløggr.posts :refer [get-posts post->path-map posts-by-date]]
             [bløggr.rss :refer [get-rss]]
             [bløggr.sitemap :refer [get-sitemap]]
+            [clojure.java.io :as io]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
@@ -33,7 +34,19 @@
   (require 'bløggr.index :reload)
   (get-pages))
 
-(def ring (-> (stasis/serve-pages get-pages-reload)
+(defn- sources-signature []
+  (transduce (comp (mapcat #(file-seq (io/file %)))
+                   (map #(.lastModified ^java.io.File %)))
+             max 0 ["posts/" "resources/" "src/" "settings.edn"]))
+
+(def page-cache (atom {}))
+
+(defn get-pages-cached []
+  (let [sig (sources-signature)]
+    (or (get @page-cache sig)
+        (get (reset! page-cache {sig (get-pages-reload)}) sig))))
+
+(def ring (-> (stasis/serve-pages get-pages-cached)
               (optimus/wrap get-assets optimizations/none strategies/serve-live-assets)))
 
 (defn export []
