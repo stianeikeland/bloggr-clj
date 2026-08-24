@@ -1,7 +1,7 @@
 (ns bløggr.common
-  (:require [clj-time.format :as tf]
+  (:require [bløggr.pygmentize :as pygmentize]
+            [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]
-            [clygments.core :as pygments]
             [clojure.java.io :as io])
   (:import [com.vladsch.flexmark.parser Parser]
            [com.vladsch.flexmark.html HtmlRenderer]
@@ -40,15 +40,20 @@
 (defn markdown [post]
   (update-body md->html post))
 
+(defn- node-text [n]
+  (if (string? n)
+    n
+    (apply str (map node-text (:content n)))))
+
 (defn- highlight-node [n]
-  (let [lang (:class (:attrs n))]
-    (if (nil? lang) n
-        (assoc n :content
-              (html/html-snippet (pygments/highlight (apply str (:content n))
-                                                                 (keyword lang)
-                                                                 :html))))))
+  (if-let [lang (some-> n :content first :attrs :class)]
+    (if-let [out (pygmentize/highlight (node-text n) lang)]
+      (vec (html/html-snippet out))
+      n)
+    n))
+
 (defn highlight [post]
-  (update-body #(html/at % [:pre :code] highlight-node) post))
+  (update-body #(html/at % [:pre] highlight-node) post))
 
 (def enliveify (partial update-body html/html-snippet))
 

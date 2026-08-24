@@ -1,10 +1,12 @@
 (ns bløggr.assets
-  (:require [stasis.core :as stasis]
+  (:require [bløggr.pygmentize :as pygmentize]
+            [stasis.core :as stasis]
             [clojure.string :as str]
             [optimus.assets :as assets]))
 
 (defn get-css []
-  (stasis/slurp-directory "resources/css/" #".*\.css"))
+  (merge (stasis/slurp-directory "resources/css/" #".*\.css")
+         {"/pygments.css" (pygmentize/stylesheet)}))
 
 (defn load-assets [path]
   (assets/load-assets path [#".*"]))

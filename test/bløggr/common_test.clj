@@ -4,7 +4,7 @@
             [clj-time.core :as t]))
 
 (def source-code-with-lang "```bash\nls -la\necho $HEI\n```")
-(def rendered-with-lang "<pre><code class=\"bash\"><div class=\"highlight\"><pre><span></span>ls -la\n<span class=\"nb\">echo</span> <span class=\"nv\">$HEI</span>\n</pre></div>\n</code></pre>\n")
+(def rendered-with-lang "<div class=\"highlight\"><pre><span></span>ls<span class=\"w\"> </span>-la\n<span class=\"nb\">echo</span><span class=\"w\"> </span><span class=\"nv\">$HEI</span>\n</pre></div>\n")
 (def source-code-without-lang "```\nls -la\necho $HEI\n```")
 (def rendered-without-lang "<pre><code>ls -la\necho $HEI\n</code></pre>\n")
 
