@@ -9,8 +9,10 @@ Based on: stasis, cegdown, enlive, clygments
 ## Usage
 
 ```
-lein ring server
+lein dev            # optional port: lein dev 3001
 ```
+
+Or from the REPL: `(require 'dev)` then `(dev/start)`, `(dev/stop)`, `(dev/restart)`.
 
 ## License
 

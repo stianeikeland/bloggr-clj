@@ -14,9 +14,8 @@
                  [clj-rss "0.4.0"]
                  [clj-time "0.15.2"]
                  [org.clojure/data.xml "0.0.8"]]
-  :ring {:handler bløggr.core/ring
-         :open-browser? false}
-  :aliases {"export" ["run" "-m" "bløggr.core/export"]}
-  :profiles {:dev {:plugins [[lein-ring "0.12.6"]
-                             [lein-midje "3.2.2"]]
+  :aliases {"export" ["run" "-m" "bløggr.core/export"]
+            "dev" ["run" "-m" "dev"]}
+  :profiles {:dev {:source-paths ["dev"]
+                   :plugins [[lein-midje "3.2.2"]]
                    :dependencies [[midje "1.10.10" :exclusions [org.clojure/clojure]]]}})
