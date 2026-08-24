@@ -18,6 +18,19 @@
         renderer (.build (HtmlRenderer/builder options))]
     (.render renderer (.parse parser text))))
 
+(def ^:private slurp-cache (atom {}))
+
+(defn cached-slurp
+  "Slurp a file, re-reading it only when its modification time changes."
+  [filename]
+  (let [lm (.lastModified (io/file filename))
+        [cached-lm content] (get @slurp-cache filename)]
+    (if (and cached-lm (= cached-lm lm))
+      content
+      (let [content (slurp filename)]
+        (swap! slurp-cache assoc filename [lm content])
+        content))))
+
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 

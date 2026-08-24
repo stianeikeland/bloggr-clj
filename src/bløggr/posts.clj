@@ -23,7 +23,7 @@
     (apply html/html twitter-card)))
 
 (defn- html-partial [filename]
-  (html/html-content (slurp filename)))
+  (html/html-content (cached-slurp filename)))
 
 (defn post-relative-url [post]
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
@@ -56,7 +56,7 @@
   [:div#scripts] (html-partial "resources/partials/scripts.html")
   [:div#navigation] (html-partial "resources/partials/navigation.html")
   [:div#browser-upgrade] (html-partial "resources/partials/browser_upgrade.html")
-  [:div#disqus] (html/html-content (-> (slurp "resources/partials/disqus.html")
+  [:div#disqus] (html/html-content (-> (cached-slurp "resources/partials/disqus.html")
                                        (clojure.string/replace "#DISQUSID#"
                                                                (post-relative-url post))
                                        (clojure.string/replace "#DISQUSURL#"
