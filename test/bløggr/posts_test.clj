@@ -44,9 +44,21 @@ body content")
     content => (contains "<time id=\"post-timestamp\" datetime=\"2007-08-28T01:59:36Z\">Tue, 28 Aug 2007 01:59</time>")))
 
 
-(fact "post-lead extracts first x text characters of html-post"
+(fact "post-lead truncates at word boundary with ellipsis"
   (post-lead {:body "<p>lorum lorum ipsum <a href='index.html'>ipsum</a></p>"} 20) =>
-  "lorum lorum ipsum ip...")
+  "lorum lorum ipsum…")
+
+(fact "post-lead leaves short text unchanged without ellipsis"
+  (post-lead {:body "<p>short text</p>"} 20) =>
+  "short text")
+
+(fact "post-lead hard-cuts when there is no word boundary"
+  (post-lead {:body "<p>abcdefghijklmnopqrstuvwxyz</p>"} 20) =>
+  "abcdefghijklmnopqrs…")
+
+(fact "post-lead does not split surrogate pairs"
+  (post-lead {:body "<p>😆😆😆😆😆😆😆😆😆😆😆</p>"} 20) =>
+  "😆😆😆😆😆😆😆😆😆…")
 
 (fact "posts-by-date sorts posts by date"
   (let [a {:header {:date 0}}

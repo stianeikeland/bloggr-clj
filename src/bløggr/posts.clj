@@ -91,18 +91,36 @@
   (filename (get-in post [:header :slug])
             (get-in post [:header :date])))
 
+(defn- truncate-at-word
+  "Truncate s to at most len chars, cutting at a word boundary and
+  appending an ellipsis only when text was actually cut."
+  [s len]
+  (let [s (str/trim s)]
+    (if (<= (count s) len)
+      s
+      (let [cut (if (and (> len 1) (Character/isHighSurrogate (.charAt s (- len 2))))
+                  (- len 2)
+                  (dec len))
+            head (subs s 0 cut)
+            space (str/last-index-of head " ")]
+        (if space
+          (str (str/trimr (subs head 0 space)) "…")
+          (str head "…"))))))
+
+(defn- post-text [post]
+  (apply str (html/texts (html/html-snippet (post :body)))))
+
 (defn post-lead [post len]
-  (let [post-text (apply str (html/texts (html/html-snippet (post :body))))]
-    (apply str (concat (take len (str/trim post-text)) "..."))))
+  (truncate-at-word (post-text post) len))
 
 (defn rss-content [post]
   (assoc post :rss-content (post :body)))
 
-(defn add-post-lead [post]
-  (assoc post :lead (post-lead post lead-length)))
-
-(defn add-twitter-lead [post]
-  (assoc post :twitter-lead (post-lead post twitter-card-length)))
+(defn- add-leads [post]
+  (let [text (post-text post)]
+    (assoc post
+           :lead (truncate-at-word text lead-length)
+           :twitter-lead (truncate-at-word text twitter-card-length))))
 
 (defn post->path-map [post]
   {(post-filename post) (post :body)})
@@ -118,8 +136,7 @@
          (vals)
          (map (comp apply-post-layout
                     rss-content
-                    add-twitter-lead
-                    add-post-lead
+                    add-leads
                     render
                     highlight
                     enliveify
