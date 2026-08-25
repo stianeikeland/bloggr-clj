@@ -1,9 +1,10 @@
 (ns bløggr.core
   (:require [bløggr.assets :refer [get-assets get-css]]
             [bløggr.index :refer [get-index]]
-            [bløggr.posts :refer [get-posts post->path-map posts-by-date]]
+            [bløggr.posts :refer [get-posts post->path-map post-filename posts-by-date]]
             [bløggr.rss :refer [get-rss]]
             [bløggr.sitemap :refer [get-sitemap]]
+            [clj-time.core :as time]
             [clojure.edn :as edn]
             [clojure.java.io :as io]
             [optimus.export]
@@ -20,7 +21,10 @@
     (let [posts (get-posts)
           path-mapped-posts (reduce merge (map post->path-map posts))
           rss (get-rss site-settings posts)
-          sitemap (get-sitemap site-settings (cons "/" (keys path-mapped-posts)))
+          sitemap (get-sitemap site-settings
+                               (into {"/" (time/now)}
+                                     (map (juxt post-filename #(get-in % [:header :date]))
+                                          posts)))
           index (->> posts
                      (posts-by-date)
                      (get-index))]
