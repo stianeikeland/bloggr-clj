@@ -1,0 +1,31 @@
+#!/bin/bash
+set -euo pipefail
+
+version="1.3.0"
+sha256="d28819902f23fa36b4696bc580d8728287f8199efc6aa400ef9951c587eee9da"
+base_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+jar="$base_dir/target/zprint-filter-$version"
+url="https://github.com/kkinnear/zprint/releases/download/$version/zprint-filter-$version"
+config="$(cat "$base_dir/.zprintrc" 2>/dev/null || true)"
+
+if [ ! -f "$jar" ]; then
+  tmp="$(mktemp)"
+  trap 'rm -f "$tmp"' EXIT
+  echo "Downloading zprint-filter $version..." >&2
+  curl -fsSL -o "$tmp" "$url"
+  echo "$sha256  $tmp" | sha256sum -c - >/dev/null
+  mv "$tmp" "$jar"
+  trap - EXIT
+fi
+
+echo "$sha256  $jar" | sha256sum -c - >/dev/null || {
+  echo "zprint jar checksum mismatch: $jar" >&2
+  rm -f "$jar"
+  exit 1
+}
+
+if [ -n "$config" ] && { [ $# -eq 0 ] || [ "${1:0:1}" != "{" ]; }; then
+  set -- "$config" "$@"
+fi
+
+exec java -jar "$jar" "$@"

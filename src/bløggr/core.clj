@@ -17,18 +17,18 @@
 
 (defn get-pages []
   (stasis/merge-page-sources
-   (let [posts (get-posts)
-         path-mapped-posts (reduce merge (map post->path-map posts))
-         rss (get-rss site-settings posts)
-         sitemap (get-sitemap site-settings (cons "/" (keys path-mapped-posts)))
-         index (->> posts
-                    (posts-by-date)
-                    (get-index))]
-     {:posts path-mapped-posts
-      :css (get-css)
-      :rss {"/rss.xml" rss}
-      :index {"/index.html" index}
-      :sitemap {"/sitemap.xml" sitemap}})))
+    (let [posts (get-posts)
+          path-mapped-posts (reduce merge (map post->path-map posts))
+          rss (get-rss site-settings posts)
+          sitemap (get-sitemap site-settings (cons "/" (keys path-mapped-posts)))
+          index (->> posts
+                     (posts-by-date)
+                     (get-index))]
+      {:posts path-mapped-posts
+       :css (get-css)
+       :rss {"/rss.xml" rss}
+       :index {"/index.html" index}
+       :sitemap {"/sitemap.xml" sitemap}})))
 
 (defn get-pages-reload []
   (require 'bløggr.posts :reload)

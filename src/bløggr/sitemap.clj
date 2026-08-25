@@ -18,11 +18,11 @@
 
 (defn- url [{base :base-url} path]
   (xml/element
-   :url {}
-   (xml/element :loc {} (trim-index-html (str base path)))
-   (xml/element :lastmod {} (get-current-iso-8601-date))
-   (xml/element :changefreq {} "daily")))
+    :url {}
+    (xml/element :loc {} (trim-index-html (str base path)))
+    (xml/element :lastmod {} (get-current-iso-8601-date))
+    (xml/element :changefreq {} "daily")))
 
 (defn get-sitemap [settings paths]
   (xml/emit-str (xml/element :urlset urlset
-                             (map (partial url settings) paths))))
+                  (map (partial url settings) paths))))

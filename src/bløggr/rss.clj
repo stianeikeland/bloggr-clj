@@ -22,7 +22,7 @@
   {:title (get-in post [:header :title])
    :description (fix-relative-image-urls (settings :base-url) (post :rss-content))
    :link (str (settings :base-url) (p/post-relative-url post))
-    :pubDate (to-instant (get-in post [:header :date]))
+   :pubDate (to-instant (get-in post [:header :date]))
    :guid [{:isPermaLink false} (p/post-relative-url post)]})
 
 (defn get-rss [settings posts]

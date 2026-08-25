@@ -1,10 +1,10 @@
 (ns bløggr.posts
   (:require [bløggr.common :refer :all]
-             [stasis.core :as stasis]
-             [clojure.edn :as edn]
-             [clojure.string :as str]
-            [clj-time.format :as tf]
-            [net.cgrand.enlive-html :as html]))
+    [stasis.core :as stasis]
+    [clojure.edn :as edn]
+    [clojure.string :as str]
+    [clj-time.format :as tf]
+    [net.cgrand.enlive-html :as html]))
 
 (def lead-length 500)
 (def twitter-card-length 190)
@@ -132,13 +132,13 @@
   (sort #(compare (-> %2 :header :date) (-> %1 :header :date)) posts))
 
 (defn get-posts []
-    (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
-         (vals)
-         (map (comp apply-post-layout
-                    rss-content
-                    add-leads
-                    render
-                    highlight
-                    enliveify
-                    markdown
-                    parse-post))))
+  (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
+       (vals)
+       (map (comp apply-post-layout
+                  rss-content
+                  add-leads
+                  render
+                  highlight
+                  enliveify
+                  markdown
+                  parse-post))))

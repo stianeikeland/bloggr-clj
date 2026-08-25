@@ -36,9 +36,9 @@ body content")
 
 (fact "apply-post-layout should apply post template to post"
   (let [content (:body
-                 (apply-post-layout {:body "this is the body"
-                                     :header {:title "post title"
-                                              :date blogdate}}))]
+                  (apply-post-layout {:body "this is the body"
+                                      :header {:title "post title"
+                                               :date blogdate}}))]
     content => (contains "this is the body")
     content => (contains "<h1 id=\"article-title\">post title</h1>")
     content => (contains "<time id=\"post-timestamp\" datetime=\"2007-08-28T01:59:36Z\">Tue, 28 Aug 2007 01:59</time>")))
