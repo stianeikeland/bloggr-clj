@@ -4,6 +4,7 @@
             [bløggr.posts :refer [get-posts post->path-map posts-by-date]]
             [bløggr.rss :refer [get-rss]]
             [bløggr.sitemap :refer [get-sitemap]]
+            [clojure.edn :as edn]
             [clojure.java.io :as io]
             [optimus.export]
             [optimus.optimizations :as optimizations]
@@ -12,7 +13,7 @@
             [stasis.core :as stasis]))
 
 (def export-dir "dist")
-(def site-settings (read-string (slurp "settings.edn")))
+(def site-settings (edn/read-string (slurp "settings.edn")))
 
 (defn get-pages []
   (stasis/merge-page-sources

@@ -1,7 +1,8 @@
 (ns bløggr.posts
   (:require [bløggr.common :refer :all]
-            [stasis.core :as stasis]
-            [clojure.string :as str]
+             [stasis.core :as stasis]
+             [clojure.edn :as edn]
+             [clojure.string :as str]
             [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]))
 
@@ -79,7 +80,7 @@
   [post]
   (let [x (str/split post #"\n------\n")]
        {:body (second x)
-        :header (let [header (read-string (first x))]
+        :header (let [header (edn/read-string (first x))]
                      (assoc header :date (parse-datestring (header :date))))}))
 
 (defn filename [title date]
