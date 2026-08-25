@@ -17,7 +17,7 @@
               :title (:title header)
               :description description
               :creator "@stianeikeland"
-              :image:src (when img (str "http://blog.eikeland.se" img))}
+              :image:src (when img (str "https://blog.eikeland.se" img))}
         twitter-card (for [[k v] card]
                        [:meta {:name (str "twitter:" (name k)) :content v}])]
     (apply html/html twitter-card)))

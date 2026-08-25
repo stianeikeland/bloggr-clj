@@ -1,4 +1,4 @@
 {:site-title "Twice the Mega Power"
  :site-description "Personal blog of Stian Eikeland"
- :base-url "http://blog.eikeland.se"
+ :base-url "https://blog.eikeland.se"
  :author "Stian Eikeland"}
