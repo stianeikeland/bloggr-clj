@@ -1560,9 +1560,17 @@ body {
   margin-bottom: 0;
 }
 .article-author-side p,
-.article-author-bottom p {
+.article-author-bottom p,
+.article-author-side ul.bio-facts,
+.article-author-bottom ul.bio-facts {
   font-size: 80%;
   font-style: italic;
+}
+.article-author-side ul.bio-facts,
+.article-author-bottom ul.bio-facts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 .article-author-side a,
 .article-author-bottom a,
@@ -1617,6 +1625,7 @@ body {
   .article-author-side h3,
   .article-author-side .bio-photo,
   .article-author-side p,
+  .article-author-side ul.bio-facts,
   .article-author-side .author-social {
     display: block;
     max-width: 125px;
@@ -1626,7 +1635,8 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  .article-author-side p {
+  .article-author-side p,
+  .article-author-side ul.bio-facts {
     margin-bottom: 20px;
   }
   .article-author-side .author-social {
@@ -1637,12 +1647,9 @@ body {
   .article-author-side h3,
   .article-author-side .bio-photo,
   .article-author-side p,
+  .article-author-side ul.bio-facts,
   .article-author-side .author-social {
     max-width: 150px;
-  }
-  .article-author-side img.bio-photo {
-    margin-left: 25px;
-    margin-right: 25px;
   }
 }
 @media only screen and (min-width: 86.375em) {
@@ -1673,12 +1680,9 @@ body {
   .article-author-bottom h3,
   .article-author-bottom .bio-photo,
   .article-author-bottom p,
+  .article-author-bottom ul.bio-facts,
   .article-author-bottom .author-social {
     max-width: 150px;
-  }
-  .article-author-bottom img.bio-photo {
-    margin-left: 25px;
-    margin-right: 25px;
   }
 }
 .article-wrap p > a,
