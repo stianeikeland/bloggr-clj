@@ -7,6 +7,13 @@
 
 ------
 
+**Update**: The coffee alarm system no longer work like described below. The
+non-coffee-club office neighbors moved out, so we changed from a manual to an
+automatic system. We've reprogrammed a wifi power plug to notify the system when
+the coffee maker is turned on. The good old button described below is still
+operational, but now listens for events over MQTT and does the LED light
+dance when a new pot is brewing.
+
 We have a Slack integrated coffee notification service at work. It's basically
 just a few lines of Clojure w/ PostgreSQL (for brew logs and stats), notifying
 our Slack channel whenever someone put on a brew. It recently got upgraded with
