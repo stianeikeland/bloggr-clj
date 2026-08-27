@@ -5,7 +5,7 @@
             [net.cgrand.enlive-html :as html]))
 
 (defn format-post-date [date]
-  (tf/unparse (tf/formatter "MMMM dd, yyyy.") date))
+  (-> "MMMM dd, yyyy." tf/formatter (tf/with-locale java.util.Locale/ENGLISH) (tf/unparse date)))
 
 (html/deftemplate index-post-template "partials/index_post.html"
   [{:keys [header lead] :as post}]

@@ -67,7 +67,7 @@
   [:div#author-bio] (html-partial "resources/partials/author_bio.html")
   [:footer#footer-content] (html-partial "resources/partials/footer.html")
   [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
-  [:time#post-timestamp] (html/content (tf/unparse (tf/formatter "EEE, dd MMM yyyy HH:mm") (header :date)))
+  [:time#post-timestamp] (html/content (tf/unparse (tf/with-locale (tf/formatter "EEE, dd MMM yyyy HH:mm") java.util.Locale/ENGLISH) (header :date)))
   [:title] (html/content (header :title))
   [:head] (html/append (twitter-card-template post))
   [:head] (html/append (open-graph post))
