@@ -147,7 +147,7 @@ presentation of posts (front page sucks, etc.). But I'm planning to
 get those ironed out in the coming weeks.
 
 I also want to change the URL of the blog, from
-[blagg.tadkom.net](http://blagg.tadkom.net) to something on the
+blagg.tadkom.net to something on the
 [eikeland.se](http://eikeland.se)-domain. But do not want to risk
 changing everything at once.
 
