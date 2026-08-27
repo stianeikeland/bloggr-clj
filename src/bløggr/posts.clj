@@ -1,5 +1,6 @@
 (ns bløggr.posts
   (:require [bløggr.common :refer :all]
+    [bløggr.settings :refer [settings]]
     [stasis.core :as stasis]
     [clojure.edn :as edn]
     [clojure.string :as str]
@@ -8,8 +9,6 @@
 
 (def lead-length 500)
 (def twitter-card-length 190)
-
-(def settings (edn/read-string (slurp "settings.edn")))
 
 (defn- twitter-card-template
   "Create twitter cards in document head"

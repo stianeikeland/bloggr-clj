@@ -3,9 +3,9 @@
             [bløggr.index :refer [get-index]]
             [bløggr.posts :refer [get-posts post->path-map post-filename posts-by-date]]
             [bløggr.rss :refer [get-rss]]
+            [bløggr.settings :refer [settings]]
             [bløggr.sitemap :refer [get-sitemap]]
             [clj-time.core :as time]
-            [clojure.edn :as edn]
             [clojure.java.io :as io]
             [optimus.export]
             [optimus.optimizations :as optimizations]
@@ -14,14 +14,13 @@
             [stasis.core :as stasis]))
 
 (def export-dir "dist")
-(def site-settings (edn/read-string (slurp "settings.edn")))
 
 (defn get-pages []
   (stasis/merge-page-sources
     (let [posts (get-posts)
           path-mapped-posts (reduce merge (map post->path-map posts))
-          rss (get-rss site-settings posts)
-          sitemap (get-sitemap site-settings
+          rss (get-rss settings posts)
+          sitemap (get-sitemap settings
                                (into {"/" (time/now)}
                                      (map (juxt post-filename #(get-in % [:header :date]))
                                           posts)))
@@ -35,6 +34,7 @@
        :sitemap {"/sitemap.xml" sitemap}})))
 
 (defn get-pages-reload []
+  (require 'bløggr.settings :reload)
   (require 'bløggr.posts :reload)
   (require 'bløggr.index :reload)
   (get-pages))
