@@ -14,24 +14,24 @@ I've received two, and have just ordered a third, and have quite a few projects 
 [Ebay link](http://www.ebay.com/sch/i.html?_trksid=p5197.m570.l1313&_nkw=wr703n&_sacat=0) (be sure to buy the blue version!)
 
 <figure>
-	<img src="http://s3.tadkom.net/wr703n/K7IM9473.jpg" alt="">
+	<img src="/images/2012-09-01-wr-703n-external-antenna-mod-diy/K7IM9473.jpg" alt="">
 </figure>
 
 The routers have a tiny internal PCB-antenna, so on one of them I've added an external SMA connector. There are several ways of doing this, one is to solder the new antenna connector to the top of the existing PCB-antenna. A chinese website (google translate..) suggested desoldering a capacitor "upstream" and connect to the pads it used. I tried this, but will try both to see which works the best later.
 
 <figure>
-	<img src="http://s3.tadkom.net/wr703n/pcb-1.jpg" alt="">
+	<img src="/images/2012-09-01-wr-703n-external-antenna-mod-diy/pcb-1.jpg" alt="">
 </figure>
 
 Buy a SMA connector on Ebay with pigtail. Pry the blue cover off the router. Extract the PCB. Locate C114 on the backside. Desolder it (easiest is to place the soldering iron parallel to the capacitor so that you're heating both pads). Solder the antenna core to the pad closest to the flash memory IC. Solder the antenna shield to the other pad (see image above). Cut the existing PCB antenna track.
 
 <figure>
-	<img src="http://s3.tadkom.net/wr703n/K7IM9470.jpg" alt="">
+	<img src="/images/2012-09-01-wr-703n-external-antenna-mod-diy/K7IM9470.jpg" alt="">
 </figure>
 
 Use a 6mm drill bit to make a suitable hole for the antenna connector (make sure there is room for the PCB under the connector).
 
 <figure>
-	<img src="http://s3.tadkom.net/wr703n/K7IM9478.jpg" alt="">
+	<img src="/images/2012-09-01-wr-703n-external-antenna-mod-diy/K7IM9478.jpg" alt="">
 </figure>
 
