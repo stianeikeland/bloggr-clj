@@ -79,7 +79,7 @@
 (defn parse-post
   "Parse a blog post into header map and body string. Convert string date to DateTime"
   [post]
-  (let [x (str/split post #"\n------\n")]
+  (let [x (str/split post #"\n------\n" 2)]
        {:body (second x)
         :header (let [header (edn/read-string (first x))]
                      (assoc header :date (parse-datestring (header :date))))}))
