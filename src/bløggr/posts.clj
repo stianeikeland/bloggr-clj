@@ -9,6 +9,8 @@
 (def lead-length 500)
 (def twitter-card-length 190)
 
+(def settings (edn/read-string (slurp "settings.edn")))
+
 (defn- twitter-card-template
   "Create twitter cards in document head"
   [{header :header description :twitter-lead}]
@@ -18,7 +20,7 @@
               :title (:title header)
               :description description
               :creator "@stianeikeland"
-              :image:src (when img (str "https://blog.eikeland.se" img))}
+              :image:src (when img (str (:base-url settings) img))}
         twitter-card (for [[k v] card]
                        [:meta {:name (str "twitter:" (name k)) :content v}])]
     (apply html/html twitter-card)))
@@ -32,7 +34,7 @@
        "/"))
 
 (defn post-absolute-url [post]
-  (str "https://blog.eikeland.se" (post-relative-url post)))
+  (str (:base-url settings) (post-relative-url post)))
 
 (defn- open-graph
   [{header :header description :twitter-lead :as post}]
@@ -40,9 +42,9 @@
         graph-data {:title (:title header)
                     :type "article"
                     :locale "en_US"
-                    :site_name "eikeland.se"
+                    :site_name (.getHost (java.net.URI. (:base-url settings)))
                     :description description
-                    :image (when img (str "https://blog.eikeland.se" img))
+                    :image (when img (str (:base-url settings) img))
                     :url (post-absolute-url post)
                     :video (:video header)}
         graph (for [[k v] graph-data]
