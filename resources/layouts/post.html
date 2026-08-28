@@ -1,56 +1,39 @@
 <!doctype html>
 <html lang="en">
-<head>
-</head>
+  <head> </head>
 
-<body class="post">
+  <body>
+    <div class="reading-progress" aria-hidden="true"></div>
 
-<div id="navigation" />
+    <header id="navigation"></header>
 
-<div id="feature-image">
-  <div class="image-wrap">
-    <img src="img src" alt="Feature image">
-  </div>
-</div>
+    <figure class="hero" id="feature-image">
+      <img src="img src" alt="Feature image" />
+    </figure>
 
-<div id="main" role="main">
-  <div class="article-author-side" id="author-bio">
-    Insert author bio here
-  </div>
-  <article>
-    <div class="headline-wrap">
-      <h1 id="article-title"></h1>
-    </div><!--/ .headline-wrap -->
-    <div class="article-wrap">
-      <div id="article-content"></div>
-      <hr />
-      <footer role="contentinfo">
-        <div class="article-author-bottom" id="author-bio">
-          Insert author bio here
-        </div>
-        <p class="byline"><strong id="article-title"></strong> was published on <time id="post-timestamp">time</time> by <a href="/about" title="About Stian Eikeland">Stian Eikeland</a>.</p>
-      </footer>
-    </div><!-- /.article-wrap -->
-    <div id="comments-anchor"/>
-  </article>
-</div><!-- /#main -->
+    <main id="main">
+      <aside class="author-bio author-side">Insert author bio here</aside>
 
-<div class="footer-wrap">
-  <!--<div class="related-articles">
-  <h4>You might also enjoy <small class="pull-right">(<a href="{{ site.url }}/posts/">View all posts</a>)</small></h4>
-    <ul>
-    {% for post in site.related_posts limit:3 %}
-      <li><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-    {% endfor %}
-    </ul>
-    <hr />
-  </div>--><!-- /.related-articles -->
-  <footer id="footer-content">
-    Insert footer here
-  </footer>
-</div><!-- /.footer-wrap -->
+      <article>
+        <h1 class="article-title"></h1>
+        <ul class="article-tags"></ul>
 
-<div id="scripts"/>
+        <div class="article-content"></div>
 
-</body>
+        <footer class="article-footer">
+          <div class="author-bio author-bottom">Insert author bio here</div>
+          <p class="byline">
+            <strong class="byline-title"></strong> was published on <time id="post-timestamp" datetime="">time</time> by
+            <a class="byline-author" href="">author</a>.
+          </p>
+        </footer>
+
+        <div id="comments-anchor"></div>
+      </article>
+    </main>
+
+    <footer class="site-footer" id="footer-content">Insert footer here</footer>
+
+    <div id="scripts"></div>
+  </body>
 </html>

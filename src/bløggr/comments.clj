@@ -28,7 +28,7 @@
 
 (defn- render-comment [{:keys [name created body children]}]
   (str "<li><span class=\"comment-author\">" (esc name) "</span>"
-    " <time>" (esc created) "</time>"
+    " <time datetime=\"" (esc (str/replace created " " "T")) "\">" (esc created) "</time>"
     "<div class=\"comment-body\">" body "</div>"
     (when (seq children)
       (str "<ol>" (apply str (map render-comment children)) "</ol>"))
@@ -40,6 +40,6 @@
   (let [comments (get (comments-by-url) url)
         n (count-tree comments)]
     (when (pos? n)
-      (format "<section id=\"comments\"><h3>%s</h3><ol>%s</ol></section>"
+      (format "<section id=\"comments\"><h2>%s</h2><ol>%s</ol></section>"
               (if (= 1 n) "1 comment" (str n " comments"))
               (apply str (map render-comment comments))))))

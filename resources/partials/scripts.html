@@ -1,24 +1,33 @@
 <script src="/js/nav.js"></script>
 <script>
   (function () {
-    var vids = document.querySelectorAll('article iframe[src*="vimeo.com"],article iframe[src*="youtube.com"],article iframe[src*="youtube-nocookie.com"]');
+    var vids = document.querySelectorAll(
+      'article iframe[src*="vimeo.com"],article iframe[src*="youtube.com"],article iframe[src*="youtube-nocookie.com"]',
+    );
     for (var i = 0; i < vids.length; i++) {
-      vids[i].style.aspectRatio = vids[i].getAttribute('width') + ' / ' + vids[i].getAttribute('height');
+      vids[i].style.width = "100%";
+      vids[i].style.height = "auto";
+      vids[i].style.aspectRatio = vids[i].getAttribute("width") + " / " + vids[i].getAttribute("height");
     }
   })();
 </script>
 <script src="/js/parvus/parvus.min.js"></script>
 <script>
   (function () {
-    var links = document.querySelectorAll('a[href$=".jpg"],a[href$=".jpeg"],a[href$=".JPG"],a[href$=".png"],a[href$=".gif"]');
+    var links = document.querySelectorAll(
+      'a[href$=".jpg"],a[href$=".jpeg"],a[href$=".JPG"],a[href$=".png"],a[href$=".gif"]',
+    );
     for (var i = 0; i < links.length; i++) {
       var a = links[i];
-      a.classList.add('lightbox');
-      a.setAttribute('data-group', 'page');
-      var img = a.querySelector('img');
-      if (img && img.alt) { a.setAttribute('data-caption', img.alt); }
+      a.classList.add("lightbox");
+      a.setAttribute("data-group", "page");
+      var img = a.querySelector("img");
+      if (img && img.alt) {
+        a.setAttribute("data-caption", img.alt);
+      }
     }
-    if (links.length) { new Parvus(); }
+    if (links.length) {
+      new Parvus();
+    }
   })();
 </script>
-

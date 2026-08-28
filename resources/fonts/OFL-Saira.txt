@@ -1,9 +1,8 @@
-﻿Copyright (c) 2010, ParaType Ltd. (http://www.paratype.com/public),
-with Reserved Font Names "PT Sans" and "ParaType".
+Copyright 2016 The Saira Project Authors (https://github.com/omnibus-type/saira)
 
-This Font Software is licensed under the SIL Open Font License, Version 1.1 
-This license is copied below, and is also available with a FAQ at: 
-http://scripts.sil.org/OFL
+This Font Software is licensed under the SIL Open Font License, Version 1.1.
+This license is copied below, and is also available with a FAQ at:
+https://openfontlicense.org
 
 -----------------------------------------------------------
 SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
@@ -12,34 +11,27 @@ SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
 PREAMBLE
 The goals of the Open Font License (OFL) are to stimulate worldwide
 development of collaborative font projects, to support the font creation
-efforts of academic and linguistic communities, and to provide a free and
-open framework in which fonts may be shared and improved in partnership
-with others.
-
-The OFL allows the licensed fonts to be used, studied, modified and
-redistributed freely as long as they are not sold by themselves. The
-fonts, including any derivative works, can be bundled, embedded, 
-redistributed and/or sold with any software provided that any reserved
-names are not used by derivative works. The fonts and derivatives,
-however, cannot be released under any other type of license. The
-requirement for fonts to remain under this license does not apply
-to any document created using the fonts or their derivatives.
+efforts of academic and linguistic communities, and to provide a large and
+free world class library of fonts for their users. The OFL allows the
+licensed fonts to be used, studied, modified and redistributed freely
+as long as they are not sold by themselves. The fonts, including any
+derivative works, can be bundled, embedded, redistributed and/or sold
+with any software, provided that the fonts and derivative works are not
+sold by themselves. The fonts and derivative works shall not be subject
+to any restriction or obligation under this license.
 
 DEFINITIONS
 "Font Software" refers to the set of files released by the Copyright
-Holder(s) under this license and clearly marked as such. This may
-include source files, build scripts and documentation.
+Holder(s) under this license and clearly marked as such. This may include
+source files, build scripts and documentation.
 
 "Reserved Font Name" refers to any names specified as such after the
 copyright statement(s).
 
-"Original Version" refers to the collection of Font Software components as
-distributed by the Copyright Holder(s).
-
 "Modified Version" refers to any derivative made by adding to, deleting,
 or substituting -- in part or in whole -- any of the components of the
-Original Version, by changing formats or by porting the Font Software to a
-new environment.
+Original Version, by changing formats or by porting the Font Software to
+a new environment.
 
 "Author" refers to any designer, engineer, programmer, technical
 writer or other person who contributed to the Font Software.
@@ -62,8 +54,8 @@ binary files as long as those fields can be easily viewed by the user.
 
 3) No Modified Version of the Font Software may use the Reserved Font
 Name(s) unless explicit written permission is granted by the corresponding
-Copyright Holder. This restriction only applies to the primary font name as
-presented to the users.
+Copyright Holder(s). This restriction only applies to the primary font
+name as presented to the users.
 
 4) The name(s) of the Copyright Holder(s) or the Author(s) of the Font
 Software shall not be used to promote, endorse or advertise any

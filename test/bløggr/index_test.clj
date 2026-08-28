@@ -20,11 +20,14 @@
     index => (contains "Post A lead")
     index => (contains "Post B lead")))
 
-(fact "index-post-template renders a post"
-  (let [post (apply str (index-post-template (first test-posts)))]
-    post => (contains "<span id=\"title\">Post A title</span>")
-    post => (contains "title=\"Post A title\"")
-    post => (contains "Post A lead")))
+(fact "index-post-template fills the link with title and url"
+  (apply str (index-post-template (first test-posts))) =>
+  (contains "<a class=\"link\" href=\"/the/post/url\">Post A title</a>")
+  (provided
+    (p/post-relative-url anything) => "/the/post/url"))
+
+(fact "index-post-template renders the lead"
+  (apply str (index-post-template (first test-posts))) => (contains "Post A lead"))
 
 (fact "index-post-template adds links to post"
   (apply str (index-post-template (first test-posts))) => (contains "href=\"/the/post/url\"")

@@ -28,6 +28,9 @@
 (defn- html-partial [filename]
   (html/html-content (cached-slurp filename)))
 
+(defn- html-partial-nodes [filename]
+  (html/html-snippet (cached-slurp filename)))
+
 (defn post-relative-url [post]
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
        (get-in post [:header :slug])
@@ -35,6 +38,9 @@
 
 (defn post-absolute-url [post]
   (str (:base-url settings) (post-relative-url post)))
+
+(defn- post-text [post]
+  (apply str (html/texts (html/html-snippet (post :body)))))
 
 (defn- open-graph
   [{header :header description :twitter-lead :as post}]
@@ -56,22 +62,37 @@
 
 (html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
   [:head] (html-partial "resources/partials/head.html")
-  [:div#scripts] (html-partial "resources/partials/scripts.html")
-  [:div#navigation] (html-partial "resources/partials/navigation.html")
-  [:div#comments-anchor] (html/html-content (or (comments/comments-html (post-relative-url post))
-                                                ""))
-  [:div#article-content] (html/html-content body)
-  [:#article-title] (html/content (header :title))
-  [:div#author-bio] (html-partial "resources/partials/author_bio.html")
+  [:div#scripts] (html/substitute (html-partial-nodes "resources/partials/scripts.html"))
+  [:header#navigation] (html/substitute (html-partial-nodes "resources/partials/navigation.html"))
+  [:div#comments-anchor] (html/substitute (html/html-snippet (or (comments/comments-html (post-relative-url post))
+                                                                 "")))
+  [:.article-content] (html/prepend (html/html-snippet body))
+  [:.article-title] (html/content (header :title))
+  [[:meta (html/attr= :name "description")]] (html/set-attr :content (post :twitter-lead))
+  [:.author-bio] (html-partial "resources/partials/author_bio.html")
+  [:a.bio-link] (html/set-attr :href (:author-url settings))
+  [:.bio-name :a] (html/content (:author settings))
+  [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
   [:footer#footer-content] (html-partial "resources/partials/footer.html")
+  [:.footer-author] (html/content (:author settings))
   [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
   [:time#post-timestamp] (html/content (tf/unparse (tf/with-locale (tf/formatter "EEE, dd MMM yyyy HH:mm") java.util.Locale/ENGLISH) (header :date)))
+  [:.byline-title] (html/content (header :title))
+  [:.byline-author] (html/content (:author settings))
+  [:.byline-author] (html/set-attr :href (:author-url settings))
   [:title] (html/content (header :title))
   [:head] (html/append (twitter-card-template post))
   [:head] (html/append (open-graph post))
-  [:div#feature-image] (if (nil? (header :image))
-                         nil
-                         #(assoc-in % [:content 1 :content 1 :attrs :src] (header :image))))
+  [:.article-tags] (if-let [tags (seq (:tags header))]
+                     (html/html-content (->> tags
+                                             (map name)
+                                             sort
+                                             (map #(str "<li>#" % "</li>"))
+                                             (apply str)))
+                     nil)
+  [:figure#feature-image] (if-let [image (:image header)]
+                            #(html/at % [:img] (html/set-attr :src image :alt (header :title)))
+                            nil))
 
 (defn parse-post
   "Parse a blog post into header map and body string. Convert string date to DateTime"
@@ -104,9 +125,6 @@
         (if space
           (str (str/trimr (subs head 0 space)) "…")
           (str head "…"))))))
-
-(defn- post-text [post]
-  (apply str (html/texts (html/html-snippet (post :body)))))
 
 (defn post-lead [post len]
   (truncate-at-word (post-text post) len))

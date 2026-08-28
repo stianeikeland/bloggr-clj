@@ -40,9 +40,49 @@ body content")
                                       :header {:title "post title"
                                                :date blogdate}}))]
     content => (contains "this is the body")
-    content => (contains "<h1 id=\"article-title\">post title</h1>")
+    content => (contains "<h1 class=\"article-title\">post title</h1>")
     content => (contains "<time id=\"post-timestamp\" datetime=\"2007-08-28T01:59:36Z\">Tue, 28 Aug 2007 01:59</time>")))
 
+(fact "apply-post-layout overrides meta description and fills byline title"
+  (let [content (:body
+                  (apply-post-layout {:body "b"
+                                      :twitter-lead "a short lead"
+                                      :header {:title "post title"
+                                               :date blogdate}}))]
+    content => (contains "<meta name=\"description\" content=\"a short lead\" />")
+    content => (contains "<strong class=\"byline-title\">post title</strong>")))
+
+(fact "apply-post-layout renders sorted tags as chips"
+  (let [content (:body
+                  (apply-post-layout {:body "b"
+                                      :header {:title "post title"
+                                               :tags #{:zeta :alpha}
+                                               :date blogdate}}))]
+    content => (contains "<li>#alpha</li>")
+    content => (contains "<li>#zeta</li>")))
+
+(fact "apply-post-layout drops tags list when post has no tags"
+  (let [content (:body
+                  (apply-post-layout {:body "b"
+                                      :header {:title "post title"
+                                               :date blogdate}}))]
+    content =not=> (contains "article-tags")))
+
+
+(fact "apply-post-layout sets feature image src and alt from header"
+  (let [content (:body
+                  (apply-post-layout {:body "b"
+                                      :header {:title "post title"
+                                               :image "/images/x.jpg"
+                                               :date blogdate}}))]
+    content => (contains "<img src=\"/images/x.jpg\" alt=\"post title\" />")))
+
+(fact "apply-post-layout drops the feature image block when post has no image"
+  (let [content (:body
+                  (apply-post-layout {:body "b"
+                                      :header {:title "post title"
+                                               :date blogdate}}))]
+    content =not=> (contains "feature-image")))
 
 (fact "post-lead truncates at word boundary with ellipsis"
   (post-lead {:body "<p>lorum lorum ipsum <a href='index.html'>ipsum</a></p>"} 20) =>
