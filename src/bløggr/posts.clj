@@ -57,7 +57,6 @@
   [:head] (html-partial "resources/partials/head.html")
   [:div#scripts] (html-partial "resources/partials/scripts.html")
   [:div#navigation] (html-partial "resources/partials/navigation.html")
-  [:div#browser-upgrade] (html-partial "resources/partials/browser_upgrade.html")
   [:div#disqus] (html/html-content (-> (cached-slurp "resources/partials/disqus.html")
                                        (clojure.string/replace "#DISQUSID#"
                                                                (post-relative-url post))

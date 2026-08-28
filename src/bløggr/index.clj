@@ -19,7 +19,6 @@
   [:head] (html/html-content (cached-slurp "resources/partials/head.html"))
   [:div#scripts] (html/html-content (cached-slurp "resources/partials/scripts.html"))
   [:div#navigation] (html/html-content (cached-slurp "resources/partials/navigation.html"))
-  [:div#browser-upgrade] (html/html-content (cached-slurp "resources/partials/browser_upgrade.html"))
   [:div#author-bio] (html/html-content (cached-slurp "resources/partials/author_bio.html"))
   [:footer#footer-content] (html/html-content (cached-slurp "resources/partials/footer.html"))
   [:div#articles] (html/html-content (apply str (map #(apply str (index-post-template %)) posts))))
