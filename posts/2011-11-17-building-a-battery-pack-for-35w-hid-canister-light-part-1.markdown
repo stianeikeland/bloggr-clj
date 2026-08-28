@@ -17,7 +17,7 @@ Canister lights are high powered lights often used by divers, a very popular cho
 
 The original battery pack was basically 6 rectangular Li-Po 10 Ah cells, connected in 2 series with 3 cells each (and balance charger circuits + undervoltage/overvoltage protection). They were similar to these from [batteryspace.com](http://www.batteryspace.com/highpowerpolymerli-ioncell37v10ah9759156-5c37wh50arateunapproved.aspx) (which also sells exactly the same protection [circuit](http://www.batteryspace.com/pcmwithequilibriumfunctionandfuelgaugefor111vli-ionbatterypackat10alimit.aspx)). The original pack gave the light about 5.5 hours runtime, I thought about making a similar pack - but I rarely need that much runtime. Most of the dives I do are only 45-60 minutes long. Instead of going the dangerous Li-Po road (check out youtube, these things explode and burn if handled incorrectly)
 
-[youtube http://www.youtube.com/watch?v=zQheOtdCTjs]
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/zQheOtdCTjs" frameborder="0" allowfullscreen></iframe>
 
 .. and the batteries in the videos are usually much smaller than the large 20 Ah pack the canister originally had. I decided to go with the much safer NIMH (nickel-metal hydride) cell route. NIMH are much less energy dense per unit of weight, but much easier to handle and doesn't need elaborate protection circuits. Having a heavy canister is actually good for diving, it just replaces weights I would have to bring in my belt anyway. I looked around for different cells that could work for my canister, 4/3AF (1.2v 4500 mah) seemed interesting, but in the end I settled on Sub-C 1.2v 5000 mah cells from Tenergy (Propel).
 
