@@ -2131,3 +2131,12 @@ body {
     page-break-inside: avoid;
   }
 }
+
+/* Fluid video embeds (replaces fitVids): width is fluid, height follows
+   the ratio set from each iframe's width/height attributes by scripts.html */
+article iframe[src*="vimeo.com"],
+article iframe[src*="youtube.com"],
+article iframe[src*="youtube-nocookie.com"] {
+  width: 100%;
+  height: auto;
+}

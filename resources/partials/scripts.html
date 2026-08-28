@@ -1,6 +1,14 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/js/menu.min.js"></script>
+<script>
+  (function () {
+    var vids = document.querySelectorAll('article iframe[src*="vimeo.com"],article iframe[src*="youtube.com"],article iframe[src*="youtube-nocookie.com"]');
+    for (var i = 0; i < vids.length; i++) {
+      vids[i].style.aspectRatio = vids[i].getAttribute('width') + ' / ' + vids[i].getAttribute('height');
+    }
+  })();
+</script>
 <script src="/js/parvus/parvus.min.js"></script>
 <script>
   (function () {
