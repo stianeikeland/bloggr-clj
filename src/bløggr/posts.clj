@@ -141,4 +141,5 @@
                   highlight
                   enliveify
                   markdown
-                  parse-post))))
+                  parse-post))
+       (remove (comp :draft :header))))
