@@ -3,7 +3,7 @@
   if (!nav) return;
 
   nav.insertAdjacentHTML('afterbegin',
-    '<button type="button" id="menutoggle" class="navtoogle navicon-lines-button x" aria-expanded="false" aria-controls="site-nav"><span class="navicon-lines"></span>menu</button>');
+    '<button type="button" id="menutoggle" class="navtoogle lines-button x" aria-expanded="false" aria-controls="site-nav"><span class="lines"></span>menu</button>');
 
   var button = document.getElementById('menutoggle');
 
