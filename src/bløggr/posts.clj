@@ -1,11 +1,12 @@
 (ns bløggr.posts
-  (:require [bløggr.common :refer :all]
-    [bløggr.settings :refer [settings]]
-    [stasis.core :as stasis]
-    [clojure.edn :as edn]
-    [clojure.string :as str]
-    [clj-time.format :as tf]
-    [net.cgrand.enlive-html :as html]))
+  (:require [bløggr.comments :as comments]
+            [bløggr.common :refer :all]
+            [bløggr.settings :refer [settings]]
+            [stasis.core :as stasis]
+            [clojure.edn :as edn]
+            [clojure.string :as str]
+            [clj-time.format :as tf]
+            [net.cgrand.enlive-html :as html]))
 
 (def lead-length 500)
 (def twitter-card-length 190)
@@ -57,11 +58,8 @@
   [:head] (html-partial "resources/partials/head.html")
   [:div#scripts] (html-partial "resources/partials/scripts.html")
   [:div#navigation] (html-partial "resources/partials/navigation.html")
-  [:div#disqus] (html/html-content (-> (cached-slurp "resources/partials/disqus.html")
-                                       (clojure.string/replace "#DISQUSID#"
-                                                               (post-relative-url post))
-                                       (clojure.string/replace "#DISQUSURL#"
-                                                               (post-absolute-url post))))
+  [:div#comments-anchor] (html/html-content (or (comments/comments-html (post-relative-url post))
+                                                ""))
   [:div#article-content] (html/html-content body)
   [:#article-title] (html/content (header :title))
   [:div#author-bio] (html-partial "resources/partials/author_bio.html")

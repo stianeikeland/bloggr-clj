@@ -2170,3 +2170,38 @@ article iframe[src*="youtube-nocookie.com"] {
   font-display: swap;
   src: url("/fonts/pt-serif-v19-latin_latin-ext-700.woff2") format("woff2");
 }
+
+/* Static comment archive (converted from Disqus) */
+#comments {
+  margin-top: 3em;
+}
+#comments h3 {
+  margin-bottom: 1em;
+}
+#comments ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#comments ol ol {
+  margin-left: 1.5em;
+  padding-left: 1em;
+  border-left: 1px solid #e0e0e0;
+}
+#comments .comment-author {
+  font-weight: 700;
+}
+#comments time {
+  color: #999;
+  font-size: 0.85em;
+}
+#comments .comment-body {
+  margin: 0.25em 0 1.25em;
+}
+#comments .comment-body p {
+  margin: 0 0 0.5em;
+}
+#comments .comment-body pre,
+#comments .comment-body code {
+  font-size: 0.9em;
+}
