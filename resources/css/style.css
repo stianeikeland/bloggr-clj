@@ -2205,3 +2205,30 @@ article iframe[src*="youtube-nocookie.com"] {
 #comments .comment-body code {
   font-size: 0.9em;
 }
+
+/* Cap content column width on very wide screens:
+   center author sidebar + content as one block */
+@media only screen and (min-width: 86.375em) {
+  #main,
+  #index-wrap,
+  .footer-wrap {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 66em;
+    width: 100%;
+  }
+  #main article,
+  #index {
+    max-width: none;
+    width: 68%;
+  }
+  .article-author-side {
+    margin-left: 4.16666667%;
+    width: 22%;
+  }
+  .footer-wrap footer {
+    margin-left: 8.33333333%;
+    margin-right: 8.33333333%;
+    width: 83.33333333%;
+  }
+}
