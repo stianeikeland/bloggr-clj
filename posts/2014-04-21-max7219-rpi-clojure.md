@@ -1,5 +1,5 @@
 { :slug "max7219-rpi-clojure"
-  :title "Max7219 LED matrix + clojure + justin bieber == true"
+  :title "Max7219 LED matrix from clojure"
   :date "2014-04-21 23:00:00+01:00"
   :image "/images/max7219/header.jpg"
   :tags #{:clojure :raspberrypi :electronics}}
