@@ -11,9 +11,9 @@ There are a few behaviors in nature that seems really advanced, impressive and o
   * Alignment - try to match the average direction of your neighbours.
   * Cohesion - steer towards the center location of your neighbours.
 
-<iframe width="560" height="315" src="http://goo.gl/eY8KY" frameborder="0"> </iframe>
+<iframe width="100%" height="400" src="/js/flocking/index.html" frameborder="0" loading="lazy"></iframe>
 
-Implement the rules and depending on how you weight them you quickly get behavior that looks impressively organic. Was bored the other evening, and my coding fingers are itching since I've barely gotten to do any programming at work these last months - the meeting/planning vs programming ratio is through the roof. So I did a quick implementation for shits and giggles. Check it out here: [http://goo.gl/eY8KY](http://goo.gl/eY8KY) (or click the image above). I have no idea if it works with all browsers, but works with chrome at least.
+Implement the rules and depending on how you weight them you quickly get behavior that looks impressively organic. Was bored the other evening, and my coding fingers are itching since I've barely gotten to do any programming at work these last months - the meeting/planning vs programming ratio is through the roof. So I did a quick implementation for shits and giggles.
 
 There's also a decent TED talk on the subject:
 
