@@ -1,4 +1,18 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="/js/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="/js/menu.min.js"></script>
+<script src="/js/parvus/parvus.min.js"></script>
+<script>
+  (function () {
+    var links = document.querySelectorAll('a[href$=".jpg"],a[href$=".jpeg"],a[href$=".JPG"],a[href$=".png"],a[href$=".gif"]');
+    for (var i = 0; i < links.length; i++) {
+      var a = links[i];
+      a.classList.add('lightbox');
+      a.setAttribute('data-group', 'page');
+      var img = a.querySelector('img');
+      if (img && img.alt) { a.setAttribute('data-caption', img.alt); }
+    }
+    if (links.length) { new Parvus(); }
+  })();
+</script>
 
