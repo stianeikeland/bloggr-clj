@@ -1379,13 +1379,6 @@ body {
   top: 3px;
   line-height: 0;
 }
-.no-js .nav .navtoggle {
-  display: none;
-}
-.no-js .nav ul {
-  max-height: 30em;
-  overflow: hidden;
-}
 .js .nav ul {
   max-height: 0;
   overflow: hidden;
