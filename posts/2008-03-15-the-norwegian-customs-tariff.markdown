@@ -1,7 +1,8 @@
-{ :slug "the-norwegian-customs-tariff"
+{ :draft true
+  :slug "the-norwegian-customs-tariff"
   :title "The Norwegian Customs Tariff"
   :date "2008-03-15 22:45:20+00:00"
-  :tags #{:visualization}}
+  :tags #{}}
 
 ------
 
