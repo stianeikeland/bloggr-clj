@@ -1,5 +1,6 @@
 (ns bløggr.common
   (:require [bløggr.pygmentize :as pygmentize]
+            [bløggr.settings :refer [settings]]
             [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]
             [clojure.java.io :as io])
@@ -30,6 +31,29 @@
       (let [content (slurp filename)]
         (swap! slurp-cache assoc filename [lm content])
         content))))
+
+(defn partial-content [filename]
+  (html/html-content (cached-slurp filename)))
+
+(defn partial-nodes [filename]
+  (html/html-snippet (cached-slurp filename)))
+
+(defn page-scaffold
+  "Shared page chrome (head, scripts, nav, bio, footer) as an enlive transformation."
+  [title description]
+  (fn [node]
+    (html/at node
+      [:head] (partial-content "resources/partials/head.html")
+      [:title] (html/content title)
+      [[:meta (html/attr= :name "description")]] (html/set-attr :content description)
+      [:div#scripts] (html/substitute (partial-nodes "resources/partials/scripts.html"))
+      [:header#navigation] (html/substitute (partial-nodes "resources/partials/navigation.html"))
+      [:.author-bio] (partial-content "resources/partials/author_bio.html")
+      [:a.bio-link] (html/set-attr :href (:author-url settings))
+      [:.bio-name :a] (html/content (:author settings))
+      [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
+      [:footer#footer-content] (partial-content "resources/partials/footer.html")
+      [:.footer-author] (html/content (:author settings)))))
 
 (defn parse-datestring [date-str]
   (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))

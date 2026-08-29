@@ -25,12 +25,6 @@
                        [:meta {:name (str "twitter:" (name k)) :content v}])]
     (apply html/html twitter-card)))
 
-(defn- html-partial [filename]
-  (html/html-content (cached-slurp filename)))
-
-(defn- html-partial-nodes [filename]
-  (html/html-snippet (cached-slurp filename)))
-
 (defn post-relative-url [post]
   (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
        (get-in post [:header :slug])
@@ -61,26 +55,16 @@
 
 
 (html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
-  [:head] (html-partial "resources/partials/head.html")
-  [:div#scripts] (html/substitute (html-partial-nodes "resources/partials/scripts.html"))
-  [:header#navigation] (html/substitute (html-partial-nodes "resources/partials/navigation.html"))
+  [:html] (page-scaffold (header :title) (post :twitter-lead))
+  [:.article-title] (html/content (header :title))
   [:div#comments-anchor] (html/substitute (html/html-snippet (or (comments/comments-html (post-relative-url post))
                                                                  "")))
   [:.article-content] (html/prepend (html/html-snippet body))
-  [:.article-title] (html/content (header :title))
-  [[:meta (html/attr= :name "description")]] (html/set-attr :content (post :twitter-lead))
-  [:.author-bio] (html-partial "resources/partials/author_bio.html")
-  [:a.bio-link] (html/set-attr :href (:author-url settings))
-  [:.bio-name :a] (html/content (:author settings))
-  [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
-  [:footer#footer-content] (html-partial "resources/partials/footer.html")
-  [:.footer-author] (html/content (:author settings))
   [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
   [:time#post-timestamp] (html/content (tf/unparse (tf/with-locale (tf/formatter "EEE, dd MMM yyyy HH:mm") java.util.Locale/ENGLISH) (header :date)))
   [:.byline-title] (html/content (header :title))
   [:.byline-author] (html/content (:author settings))
   [:.byline-author] (html/set-attr :href (:author-url settings))
-  [:title] (html/content (header :title))
   [:head] (html/append (twitter-card-template post))
   [:head] (html/append (open-graph post))
   [:.article-tags] (if-let [tags (seq (:tags header))]

@@ -17,17 +17,7 @@
   [:p.lead] (html/content lead))
 
 (html/deftemplate index-template "layouts/index.html" [posts]
-  [:head] (html/html-content (cached-slurp "resources/partials/head.html"))
-  [:title] (html/content (:site-title settings))
-  [[:meta (html/attr= :name "description")]] (html/set-attr :content (:site-description settings))
-  [:div#scripts] (html/substitute (html/html-snippet (cached-slurp "resources/partials/scripts.html")))
-  [:header#navigation] (html/substitute (html/html-snippet (cached-slurp "resources/partials/navigation.html")))
-  [:.author-bio] (html/html-content (cached-slurp "resources/partials/author_bio.html"))
-  [:a.bio-link] (html/set-attr :href (:author-url settings))
-  [:.bio-name :a] (html/content (:author settings))
-  [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
-  [:footer#footer-content] (html/html-content (cached-slurp "resources/partials/footer.html"))
-  [:.footer-author] (html/content (:author settings))
+  [:html] (page-scaffold (:site-title settings) (:site-description settings))
   [:div#articles] (html/substitute (html/html-snippet (apply str (map #(apply str (index-post-template %)) posts)))))
 
 (defn get-index [posts]
