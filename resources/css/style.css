@@ -635,6 +635,33 @@
     p {
       margin: 0;
     }
+
+    .index-image {
+      float: inline-end;
+      margin: 0.25rem 0 0.5rem 1.25rem;
+
+      a {
+        display: block;
+      }
+
+      img {
+        width: 12rem;
+        border-radius: 0.3em;
+      }
+    }
+
+    @media (width < 48em) {
+      .index-image {
+        float: none;
+        margin: 0 0 0.75rem;
+
+        img {
+          width: 100%;
+          max-height: 12rem;
+          object-fit: cover;
+        }
+      }
+    }
   }
 
   #comments {

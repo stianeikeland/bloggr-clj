@@ -1,0 +1,24 @@
+#!/bin/bash
+set -euo pipefail
+
+# Generates 800px thumbnails of all images under resources/images into resources/images/thumbs
+
+cd "$(dirname "$0")/.."
+
+rm -rf resources/images/thumbs
+find resources/images -type f \( -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' \) -print0 |
+  while IFS= read -r -d '' src; do
+    read -r w h <<<"$(magick identify -format '%w %h' "$src")"
+    if [ "$w" -le 800 ] && [ "$h" -le 800 ]; then continue; fi
+    out="resources/images/thumbs/${src#resources/images/}"
+    mkdir -p "$(dirname "$out")"
+    case "$src" in
+      *.jpg|*.jpeg) magick "$src" -thumbnail "800x>" -quality 80 "$out" ;;
+      *)
+        magick "$src" -thumbnail "800x>" "$out"
+        if [ "$(magick "$src" -alpha extract -format '%[fx:int(255*minima)]' info:)" = 255 ]; then
+          magick "$out" -alpha off -colors 256 "$out"
+        fi
+        ;;
+    esac
+  done

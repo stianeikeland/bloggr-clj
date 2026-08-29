@@ -9,4 +9,5 @@ pom.xml.asc
 /.nrepl-port
 /dist
 /old
+/resources/images/thumbs/
 
