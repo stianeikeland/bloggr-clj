@@ -1,6 +1,7 @@
 { :slug "liquid-nitrogen-hop-ice-cream"
   :title "Liquid Nitrogen Hop Ice Cream"
   :date "2013-02-04 19:24:10+00:00"
+  :thumbnail "/images/2013-02-04-liquid-nitrogen-hop-ice-cream/hop-ice-cream.jpg"
   :tags #{:food :liquid-nitrogen}}
 
 ------

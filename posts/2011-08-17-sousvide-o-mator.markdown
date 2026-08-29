@@ -1,6 +1,7 @@
 { :slug "sousvide-o-mator"
   :title "SousVide-O-Mator"
   :date "2011-08-17 14:27:00+00:00"
+  :thumbnail "/images/2011-08-17-sousvide-o-mator/K7IM7131-2-2.jpg"
   :tags #{:electronics :food :sousvide :arduino}}
 
 ------

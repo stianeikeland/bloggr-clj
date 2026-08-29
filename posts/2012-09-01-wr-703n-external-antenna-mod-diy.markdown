@@ -1,6 +1,7 @@
 { :slug "wr-703n-external-antenna-mod-diy"
   :title "WR-703N External Antenna Mod (DIY)"
   :date "2012-09-01 11:54:06+00:00"
+  :thumbnail "/images/2012-09-01-wr-703n-external-antenna-mod-diy/K7IM9473.jpg"
   :tags #{:electronics}}
 
 ------

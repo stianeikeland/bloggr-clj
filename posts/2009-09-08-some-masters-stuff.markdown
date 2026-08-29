@@ -1,6 +1,7 @@
 { :slug "some-masters-stuff"
   :title "Some masters stuff"
   :date "2009-09-08 20:43:40+00:00"
+  :thumbnail "/images/2009-09-08-some-masters-stuff/brain.jpg"
   :tags #{:visualization}}
 
 ------

@@ -1,6 +1,7 @@
 { :slug "illustrative-volume-rendering"
   :title "Illustrative Volume Rendering"
   :date "2009-04-05 08:58:00+00:00"
+  :thumbnail "/images/2009-04-05-illustrative-volume-rendering/head2-crop.jpg"
   :tags #{:visualization}}
 
 ------

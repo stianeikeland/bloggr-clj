@@ -1,6 +1,7 @@
 { :slug "london-viz-stuff"
   :title "London + viz stuff.."
   :date "2009-04-18 03:27:00+00:00"
+  :thumbnail "/images/2009-04-18-london-viz-stuff/multimodal-300x251.png"
   :tags #{:visualization}}
 
 ------

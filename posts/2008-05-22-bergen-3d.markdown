@@ -1,6 +1,7 @@
 { :slug "bergen-3d"
   :title "Bergen-3d"
   :date "2008-05-22 05:44:00+00:00"
+  :thumbnail "/images/2008-05-22-bergen-3d/bergen-3d.jpg"
   :tags #{:visualization}}
 
 ------
