@@ -1,5 +1,6 @@
 (ns bløggr.common
-  (:require [bløggr.pygmentize :as pygmentize]
+  (:require [bløggr.assets :as assets]
+            [bløggr.pygmentize :as pygmentize]
             [bløggr.settings :refer [settings]]
             [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]
@@ -38,12 +39,19 @@
 (defn partial-nodes [filename]
   (html/html-snippet (cached-slurp filename)))
 
+(defn- fingerprint-css-link [node]
+  (let [href (get-in node [:attrs :href])]
+    (if-let [fingerprint (get (assets/css-fingerprints) href)]
+      (assoc-in node [:attrs :href] (str href "?v=" fingerprint))
+      node)))
+
 (defn page-scaffold
   "Shared page chrome (head, scripts, nav, bio, footer) as an enlive transformation."
   [title description]
   (fn [node]
     (html/at node
       [:head] (partial-content "resources/partials/head.html")
+      [:head :link] fingerprint-css-link
       [:title] (html/content title)
       [[:meta (html/attr= :name "description")]] (html/set-attr :content description)
       [:div#scripts] (html/substitute (partial-nodes "resources/partials/scripts.html"))

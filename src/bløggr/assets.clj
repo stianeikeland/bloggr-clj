@@ -2,11 +2,19 @@
   (:require [bløggr.pygmentize :as pygmentize]
             [stasis.core :as stasis]
             [clojure.string :as str]
-            [optimus.assets :as assets]))
+            [optimus.assets :as assets]
+            [optimus.digest :as digest]))
 
 (defn get-css []
   (merge (stasis/slurp-directory "resources/css/" #".*\.css")
          {"/pygments.css" (pygmentize/stylesheet)}))
+
+(defn css-fingerprints
+  "Map of css path -> sha-1 fingerprint of its content, used for cache-busting urls."
+  []
+  (->> (get-css)
+       (map (fn [[path content]] [path (digest/sha-1 content)]))
+       (into {})))
 
 (defn load-assets [path]
   (assets/load-assets path [#".*"]))
