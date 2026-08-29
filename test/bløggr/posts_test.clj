@@ -1,7 +1,7 @@
 (ns bløggr.posts-test
   (:use midje.sweet)
-  (:require [bløggr.posts :refer :all]
-            [clj-time.core :as t]))
+  (:require [bløggr.posts :refer :all])
+  (:import [java.time OffsetDateTime]))
 
 (def blog-post "
   {
@@ -16,8 +16,7 @@
 body content")
 
 
-(def blogdate (t/from-time-zone (t/date-time 2007 8 28 1 59 36)
-                                (t/time-zone-for-offset 0)))
+(def blogdate (OffsetDateTime/parse "2007-08-28T01:59:36+00:00"))
 
 (fact "post->path-map turns a post into title => body map"
   (post->path-map {:header {:slug "really-cool-post" :date blogdate} :body "post body"}) =>

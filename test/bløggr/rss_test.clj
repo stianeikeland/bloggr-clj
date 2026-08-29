@@ -1,7 +1,7 @@
 (ns bløggr.rss-test
   (:use midje.sweet)
-  (:require [bløggr.rss :refer :all]
-            [clj-time.core :as time]))
+  (:require [bløggr.rss :refer :all])
+  (:import [java.time OffsetDateTime]))
 
 (def settings
   {:site-title "abc"
@@ -12,7 +12,7 @@
 (def posts
   [{:header {:title "Post A title"
              :slug "post_a_title"
-             :date (time/date-time 2000 1 2 3 4 5 6)}
+             :date (OffsetDateTime/parse "2000-01-02T03:04:05Z")}
     :rss-content "Post A content"}])
 
 (fact "get-rss renders xml with site details"

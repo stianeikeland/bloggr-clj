@@ -1,18 +1,22 @@
 (ns bløggr.index-test
   (:use midje.sweet)
   (:require [bløggr.index :refer :all]
-            [bløggr.posts :as p]))
+            [bløggr.posts :as p])
+  (:import [java.time OffsetDateTime]))
+
+(def ^:private test-date (OffsetDateTime/parse "2000-01-02T03:04:05+00:00"))
 
 (def test-posts
   [{:lead "Post A lead"
-    :header {:title "Post A title"}}
+    :header {:title "Post A title" :date test-date}}
    {:lead "Post B lead"
-    :header {:title "Post B title"}}])
+    :header {:title "Post B title" :date test-date}}])
 
 (def test-post-with-image
   {:lead "Post C lead"
    :header {:title "Post C title"
-            :image "/images/post-c.jpg"}})
+            :image "/images/post-c.jpg"
+            :date test-date}})
 
 (fact "get-index returns rendered index page with partials added"
   (let [index (get-index [])]

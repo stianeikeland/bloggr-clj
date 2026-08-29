@@ -12,7 +12,6 @@
                  [enlive "1.1.6"]
                  [optimus "2026.05.27"]
                  [clj-rss "0.4.0"]
-                 [clj-time "0.15.2"]
                  [org.clojure/data.xml "0.0.8"]]
   :aliases {"export" ["run" "-m" "bløggr.core/export"]
             "dev" ["run" "-m" "dev"]}

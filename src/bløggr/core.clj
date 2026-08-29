@@ -5,13 +5,13 @@
             [bløggr.rss :refer [get-rss]]
             [bløggr.settings :refer [settings]]
             [bløggr.sitemap :refer [get-sitemap]]
-            [clj-time.core :as time]
             [clojure.java.io :as io]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :as strategies]
-            [stasis.core :as stasis]))
+            [stasis.core :as stasis])
+  (:import [java.time OffsetDateTime]))
 
 (def export-dir "dist")
 
@@ -21,7 +21,7 @@
           path-mapped-posts (reduce merge (map post->path-map posts))
           rss (get-rss settings posts)
           sitemap (get-sitemap settings
-                               (into {"/" (time/now)}
+                               (into {"/" (OffsetDateTime/now)}
                                      (map (juxt post-filename #(get-in % [:header :date]))
                                           posts)))
           index (->> posts

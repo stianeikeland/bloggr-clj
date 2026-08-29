@@ -2,14 +2,18 @@
   (:require [bløggr.comments :as comments]
             [bløggr.common :refer :all]
             [bløggr.settings :refer [settings]]
+            [bløggr.time :refer [parse-datestring utc-format]]
             [stasis.core :as stasis]
             [clojure.edn :as edn]
             [clojure.string :as str]
-            [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]))
 
 (def lead-length 500)
 (def twitter-card-length 190)
+
+(def ^:private post-date-path-format (utc-format "/yyyy/MM/dd/"))
+(def ^:private datetime-attr-format (utc-format "yyyy-MM-dd'T'HH:mm:ssXX"))
+(def ^:private byline-format (utc-format "EEE, dd MMM yyyy HH:mm" java.util.Locale/ENGLISH))
 
 (defn- twitter-card-template
   "Create twitter cards in document head"
@@ -26,7 +30,7 @@
     (apply html/html twitter-card)))
 
 (defn post-relative-url [post]
-  (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") (get-in post [:header :date]))
+  (str (.format post-date-path-format (get-in post [:header :date]))
        (get-in post [:header :slug])
        "/"))
 
@@ -60,8 +64,8 @@
   [:div#comments-anchor] (html/substitute (html/html-snippet (or (comments/comments-html (post-relative-url post))
                                                                  "")))
   [:.article-content] (html/prepend (html/html-snippet body))
-  [:time#post-timestamp] (html/set-attr :datetime (tf/unparse (tf/formatters :date-time-no-ms) (header :date)))
-  [:time#post-timestamp] (html/content (tf/unparse (tf/with-locale (tf/formatter "EEE, dd MMM yyyy HH:mm") java.util.Locale/ENGLISH) (header :date)))
+  [:time#post-timestamp] (html/set-attr :datetime (.format datetime-attr-format (header :date)))
+  [:time#post-timestamp] (html/content (.format byline-format (header :date)))
   [:.byline-title] (html/content (header :title))
   [:.byline-author] (html/content (:author settings))
   [:.byline-author] (html/set-attr :href (:author-url settings))
@@ -79,20 +83,15 @@
                             nil))
 
 (defn parse-post
-  "Parse a blog post into header map and body string. Convert string date to DateTime"
+  "Parse a blog post into header map and body string. Convert string date to OffsetDateTime"
   [post]
-  (let [x (str/split post #"\n------\n" 2)]
-       {:body (second x)
-        :header (let [header (edn/read-string (first x))]
-                     (assoc header :date (parse-datestring (header :date))))}))
-
-(defn filename [title date]
-  (str (tf/unparse (tf/formatter "/yyyy/MM/dd/") date)
-       title "/index.html"))
+  (let [[header body] (str/split post #"\n------\n" 2)
+        header (edn/read-string header)]
+    {:body body
+     :header (assoc header :date (parse-datestring (header :date)))}))
 
 (defn post-filename [post]
-  (filename (get-in post [:header :slug])
-            (get-in post [:header :date])))
+  (str (post-relative-url post) "index.html"))
 
 (defn- truncate-at-word
   "Truncate s to at most len chars, cutting at a word boundary and

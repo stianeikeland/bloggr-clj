@@ -2,7 +2,6 @@
   (:require [bløggr.assets :as assets]
             [bløggr.pygmentize :as pygmentize]
             [bløggr.settings :refer [settings]]
-            [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]
             [clojure.java.io :as io])
   (:import [com.vladsch.flexmark.parser Parser]
@@ -62,9 +61,6 @@
       [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
       [:footer#footer-content] (partial-content "resources/partials/footer.html")
       [:.footer-author] (html/content (:author settings)))))
-
-(defn parse-datestring [date-str]
-  (tf/parse (tf/formatter "yyyy-MM-dd HH:mm:ssZ") date-str))
 
 (defn update-body [f post]
   (assoc post :body (f (post :body))))

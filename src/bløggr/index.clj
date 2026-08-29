@@ -2,13 +2,13 @@
   (:require [bløggr.common :refer :all]
             [bløggr.posts :as p]
             [bløggr.settings :refer [settings]]
+            [bløggr.time :refer [utc-format]]
             [clojure.java.io :as io]
             [clojure.string :as str]
-            [clj-time.format :as tf]
             [net.cgrand.enlive-html :as html]))
 
-(defn format-post-date [date]
-  (-> "MMMM dd, yyyy." tf/formatter (tf/with-locale java.util.Locale/ENGLISH) (tf/unparse date)))
+(def ^:private display-format (utc-format "MMMM dd, yyyy." java.util.Locale/ENGLISH))
+(def ^:private datetime-attr-format (utc-format "yyyy-MM-dd"))
 
 (defn thumb-for
   "Thumbnail path for an /images/... URL, or the original when none exists."
@@ -30,8 +30,8 @@
   [{:keys [header lead] :as post}]
   [:a.link] (html/content (:title header))
   [:a.link] (html/set-attr :href (p/post-relative-url post))
-  [:time.date] (html/content (format-post-date (:date header)))
-  [:time.date] (html/set-attr :datetime (tf/unparse (tf/formatters :date) (:date header)))
+  [:time.date] (html/content (.format display-format (:date header)))
+  [:time.date] (html/set-attr :datetime (.format datetime-attr-format (:date header)))
   [:p.lead] (html/content lead)
   [:figure.index-image] (if-let [thumb (some->> (:thumbnail header (:image header)) thumb-for)]
                           (index-image thumb (:title header) (p/post-relative-url post))
