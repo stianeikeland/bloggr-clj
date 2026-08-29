@@ -19,7 +19,7 @@ Then I noticed the SR-link (in and out) ports on the back of the receiver. It's 
 
 Spent a while experimenting with this, by listening to the SR-output port while using the remote control. The signal is high (5v) as default, and pulled low on every IR pulse. Tried to replicate this using a microcontroller connected to SR Input on the receiver - wasted a lot of time beliving the signal should be 38 khz modulated - just like IR - but alas - no need for modulation - it won't actually work if you modulate. Finally got it working - awesome! Now I can control my receiver from a microcontroller.
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/KLEGKF6kHsc" frameborder="0"> </iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KLEGKF6kHsc" frameborder="0" allowfullscreen></iframe>
 
 My goal is to get this directly connected to a Raspberry PI (which is going to be the HUB of my home automation system). If I can I really want to skip the microcontroller - and do it directly from the rasp-pi. I ported my microcontroller code [to the PI](https://gist.github.com/3681791), but it seems that I can't get the timing accurate enough (running in userland).
 

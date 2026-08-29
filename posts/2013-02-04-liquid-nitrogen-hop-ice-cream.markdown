@@ -7,7 +7,7 @@
 
 Made hop ice cream with some friends this weekend, using [cascade hop](http://en.wikipedia.org/wiki/Cascade_hop). Left hop pellets in milk overnight, filtered out the remains, made ice cream batter the usual way, and then added liquid nitrogen while whisking vigorously.
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/BFja4dJV_S8" frameborder="0"> </iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/BFja4dJV_S8" frameborder="0" allowfullscreen></iframe>
 
 Ingredients:
 

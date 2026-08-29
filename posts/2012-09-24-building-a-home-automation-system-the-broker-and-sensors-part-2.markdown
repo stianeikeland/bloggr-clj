@@ -103,7 +103,7 @@ I've made a small program in C# running on my HTPC that registers a few global h
 }
 ~~~
 
-<iframe width="560" height="315" src="http://www.youtube.com/embed/Zu3gNf3N33s" frameborder="0"> </iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Zu3gNf3N33s" frameborder="0" allowfullscreen></iframe>
 
 Quick example above, sorry for the camera shake.
 
