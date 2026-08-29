@@ -48,6 +48,12 @@
   (provided
     (p/post-relative-url anything) => "/the/post/url"))
 
+(fact "index-post-template prefers :thumbnail over :image"
+  (apply str (index-post-template (assoc-in test-post-with-image [:header :thumbnail] "/images/post-c-front.jpg"))) =>
+  (contains "src=\"/images/post-c-front.jpg\"")
+  (provided
+    (p/post-relative-url anything) => "/the/post/url"))
+
 (fact "get-index resolves the thumbnail for posts with an image"
   (get-index [test-post-with-image]) => (contains "/images/thumbs/post-c.jpg")
   (provided

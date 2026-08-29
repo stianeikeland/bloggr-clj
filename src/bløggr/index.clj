@@ -33,7 +33,7 @@
   [:time.date] (html/content (format-post-date (:date header)))
   [:time.date] (html/set-attr :datetime (tf/unparse (tf/formatters :date) (:date header)))
   [:p.lead] (html/content lead)
-  [:figure.index-image] (if-let [thumb (some-> post :header :image thumb-for)]
+  [:figure.index-image] (if-let [thumb (some->> (:thumbnail header (:image header)) thumb-for)]
                           (index-image thumb (:title header) (p/post-relative-url post))
                           nil))
 

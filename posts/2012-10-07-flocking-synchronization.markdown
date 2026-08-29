@@ -1,6 +1,7 @@
 { :slug "flocking-synchronization"
   :title "Flocking / Synchronization"
   :date "2012-10-07 13:10:33+00:00"
+  :thumbnail "/images/2012-10-07-flocking-synchronization/flocking.png"
   :tags #{:flocking :boids}}
 
 ------
