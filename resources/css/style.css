@@ -62,10 +62,17 @@
 
   img,
   video,
-  svg {
+  svg,
+  canvas {
     display: block;
     max-width: 100%;
     height: auto;
+  }
+
+  iframe,
+  embed,
+  object {
+    max-width: 100%;
   }
 
   input,
@@ -89,6 +96,7 @@
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
+    overflow-wrap: break-word;
   }
 
   h1,
@@ -249,6 +257,12 @@
     text-shadow: 0 1px 3px rgb(0 0 0 / 65%);
   }
 
+  .site-header,
+  .site-footer,
+  #main {
+    width: 100%;
+  }
+
   #main {
     max-width: var(--wide);
     margin-inline: auto;
@@ -389,12 +403,15 @@
   }
 
   @media (width < 48em) {
+    .navigation-wrapper {
+      position: relative;
+    }
+
     .nav-toggle {
       display: inline-flex;
     }
 
     #site-nav {
-      flex: 1 1 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -412,6 +429,12 @@
     }
 
     .js #site-nav ul {
+      position: absolute;
+      inset-inline: 0;
+      top: 100%;
+      z-index: 10;
+      background: var(--cap);
+      padding: 0.25rem var(--gap) 0.75rem;
       max-height: 0;
       overflow: hidden;
       visibility: hidden;
