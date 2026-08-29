@@ -233,28 +233,6 @@
     img {
       width: 100%;
     }
-
-    /* scrim so the credit stays legible on bright skies */
-    &::after {
-      content: "";
-      position: absolute;
-      inset-inline: 0;
-      inset-block-end: 0;
-      block-size: 38%;
-      background: linear-gradient(rgb(0 0 0 / 0%), rgb(0 0 0 / 38%));
-      pointer-events: none;
-    }
-  }
-
-  .image-credit {
-    position: absolute;
-    inset-block-end: 0.6rem;
-    inset-inline-end: 0.8rem;
-    z-index: 1;
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-    color: #fff;
-    text-shadow: 0 1px 3px rgb(0 0 0 / 65%);
   }
 
   .site-header,
