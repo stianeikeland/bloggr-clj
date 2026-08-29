@@ -26,14 +26,14 @@ opener.</figcaption> </figure>
 I usually carry my iPhone, so my thinking was that it could work as a decent
 remote.
 
-# Requirements:
+## Requirements:
 
 - Connect to iPhone wirelessly somehow..
 - No wifi from house available (garage is in a wifi-shadow)
 - Connect to existing garage door opener expansion port.
 - Powered directly from garage door opener bus (24v max 50ma)
 
-# Connectivity
+## Connectivity
 
 Wifi is out of the question since it's hard to reach without running cables and
 putting up antennas on both locations (and no, I don't want to connect to a
@@ -43,7 +43,7 @@ A cellular connected microcontroller would probably work, but I wanted to avoid
 that. And then, there's Bluetooth. And more importantly - Bluetooth Low Energy
 (BLE).
 
-# Microcontroller
+## Microcontroller
 
 I looked around for a microcontroller with integrated bluetooth (and preferably
 an available cheap dev board with an external antenna). The nRF51822 sparked my
@@ -62,7 +62,7 @@ working prototype.
     <figcaption>Microcontroller board and the iOS app.</figcaption>
 </figure>
 
-# App
+## App
 
 I've never really done any serious iOS development. But I launched Xcode and
 managed to hobble together some lines of swift code that connects to a bonded
@@ -79,7 +79,7 @@ I also looked into CarPlay, would be pretty cool if you could open the garage
 from a car's interface, but sadly it seems that Apple have locked this down and
 requires you to register for some kind of special entitlement license. :(
 
-# Firmware
+## Firmware
 
 I might release the source code for the firmware, but there's a few things I
 want to iron out first. Overall this was probably the biggest learning
@@ -110,7 +110,7 @@ broadcast services, etc.
 And to be honest, what's easier if you want to break into a garage? A 2 minute
 job with a crowbar or hours of sig int and analysis?
 
-# Conclusion
+## Conclusion
 
 The opener has been running for a few months now, and it's been working great
 for the most part. Sometimes the app is a bit slow to connect, or even require

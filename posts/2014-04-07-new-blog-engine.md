@@ -14,7 +14,7 @@ been using a hosted wordpress.com blog for many years now, mostly out
 of convenience - but once the tools work against me I guess it's time
 to pack my bag and move on.
 
-### Static blog pages on S3 ###
+## Static blog pages on S3
 
 So I've jumped on the generated static page blog bandwagon, static
 pages hosted on Amazon S3 in this case. I've thought about doing this
@@ -36,7 +36,7 @@ There's still lots to do, but, release early and iterate I guess :)
 The code is over at Github if you're interested:
 [Bløggr-clj](https://github.com/stianeikeland/bloggr-clj).
 
-### Loading, serving and exporting ###
+## Loading, serving and exporting
 
 I'm using [Stasis](https://github.com/magnars/stasis) for loading
 assets (posts written in markdown) and exporting final pages. It also
@@ -56,7 +56,7 @@ it as files or serve it up using Ring.
     (stasis/export-pages "export/"))
 ~~~
 
-### Markdown ###
+## Markdown
 
 For markdown I'm using [Cegdown](https://github.com/Raynes/cegdown),
 which is simply a clojure wrapper for
@@ -82,7 +82,7 @@ metadata.
 2. more markdown
 ~~~
 
-### Syntax highlighting ###
+## Syntax highlighting
 
 For syntax highlighting I use
 [Clygments](https://github.com/bfontaine/clygments). Which is a
@@ -102,7 +102,7 @@ DONE
 END
 ~~~
 
-### Templating ###
+## Templating
 
 For templating I were stuck between
 [Hiccup](https://github.com/weavejester/hiccup) (love the name!),
@@ -126,7 +126,7 @@ Using enlive you can do things like creating templates, and do
 selecting based on css-like selectors. It's also pretty good for
 scraping as you probably can guess.
 
-### RSS ###
+## RSS
 
 RSS generation is done using
 [clj-rss](https://github.com/yogthos/clj-rss), a simple and small
@@ -138,7 +138,7 @@ library for spitting out some rss-style XML.
              {:title "Another post" :link "http://foo.no/2" :description "More content" :author "a@b.no"})
 ```
 
-### Conclusion ###
+## Conclusion
 
 I really like clojure these days, this blog generator has been
 so fun to code. There are still some things to do, like

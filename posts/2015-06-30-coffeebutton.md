@@ -30,7 +30,7 @@ connected to the coffee-maker - but since not everyone on the office floor is
 part of the light-roast-brew-slack-club we decided to go with an Internet
 connected button to avoid false alarms.
 
-#### Requirements:
+## Requirements:
 
 - Triggered via a big physical button.
 - Notify office floor via slack:
@@ -56,7 +56,7 @@ Let's get building!
 <figcaption>Building the wifi button.</figcaption>
 </figure>
 
-# Power
+## Power
 
 I want the project to be battery-powered (by a 18650 li-ion cell), sadly the
 ESP8266 is quite power hungry while connected to WiFi. We could have the module
@@ -127,7 +127,7 @@ I might add a MCP1702 or similar modern LDO later.
 
 [ams1117]: http://www.advanced-monolithic.com/pdf/ds1117.pdf
 
-# Spinning LED indicator
+## Spinning LED indicator
 
 My big red button from sparkfun comes with a single led, I want more, I want to
 add 3 so that I can display a spinning animation while the button is busy. I'm
@@ -177,7 +177,7 @@ spinticker.attach(SPININTERVAL, spinLEDs);
 [ticker]: https://github.com/esp8266/Arduino/blob/esp8266-sdk-1.0/hardware/esp8266com/esp8266/libraries/Ticker/Ticker.h
 [andyled]: http://www.stuffandymakes.com/blog/2011/01/08/hack-the-sparkfun-big-red-dome-button
 
-# Enclosure
+## Enclosure
 
 <figure>
 <a href="/images/2015-coffeebutton/enclosure2.jpg"><img src="/images/2015-coffeebutton/enclosure2.jpg"></a>
@@ -188,7 +188,7 @@ I didn't really have any suitable sized electronic boxes laying around, only an
 ugly junction box. I hate ugly beige boxes, so, let's at least give it some
 color. Spray painted red looks OKish I guess.
 
-# Code
+## Code
 
 Next up, let's add a bit of code to make it work properly, it's all available on
 github at [revolverhuset/mokkameister][mokkasrc] and
@@ -264,7 +264,7 @@ minutes, notify slack again. We do the waiting in an core.async go-thread.
 Mount the resource on a suitable route, and be sure to add the default ring
 api-middleware (so that params are parsed).
 
-# Conclusion
+## Conclusion
 
 Overall it's been a fun tiny side-project, I need to do more of these. Often I
 want to make something, order up the parts - but when they arrive one month
