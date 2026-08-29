@@ -1,8 +1,5 @@
 ;; Disqus comment archive, converted from the XML export.
 {
- "/2008/03/15/the-norwegian-customs-tariff/"
- [  {:name "Håvard Sørbø" :created "2008-03-18 17:44" :body "<p>Hahaha! Nice one</p>" :children []}
- ]
  "/2008/05/22/havard-bringer-of-entropy/"
  [  {:name "Håvard Sørbø" :created "2008-06-02 08:30" :body "<p>I'm random!Congrats on new layout, I like it!</p>" :children []}
   {:name "The Nam" :created "2008-06-15 05:45" :body "<p>Hahahaha!</p>" :children []}
