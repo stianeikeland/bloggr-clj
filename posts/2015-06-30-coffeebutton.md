@@ -2,7 +2,7 @@
 :title "Office coffee alarm WiFi-button for Slack (ESP8266)"
 :date "2015-07-20 14:00:00+0200"
 :image "/images/2015-coffeebutton/banner.jpg"
-:video "https://www.youtube.com/v/U0oF-PBfZIg"
+:video "https://www.youtube.com/watch?v=U0oF-PBfZIg"
 :tags #{:electronics :clojure}}
 
 ------
@@ -20,7 +20,7 @@ our Slack channel whenever someone put on a brew. It recently got upgraded with
 a WiFi-connected hardware button button, and now the system operates like this:
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U0oF-PBfZIg?VQ=HD720" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U0oF-PBfZIg" frameborder="0" allowfullscreen></iframe>
 <figcaption>Internet connected Coffee alarm button.</figcaption>
 </figure>
 
@@ -52,7 +52,7 @@ they can be added to everything - including your toaster.
 Let's get building!
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/5ThP1teWOPU?VQ=HD720" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5ThP1teWOPU" frameborder="0" allowfullscreen></iframe>
 <figcaption>Building the wifi button.</figcaption>
 </figure>
 

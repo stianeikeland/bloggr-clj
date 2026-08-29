@@ -2,13 +2,13 @@
 :title "Capacitive touch banana piano in Clojure / Overtone."
 :date "2015-04-24 14:00:00+0200"
 :image "/images/banana-piano2.jpg"
-:video "https://www.youtube.com/v/EOjGsdDoicw"
+:video "https://www.youtube.com/watch?v=EOjGsdDoicw"
 :tags #{:clojure :electronics}}
 
 ------
 
 <figure>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/EOjGsdDoicw?VQ=HD720" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/EOjGsdDoicw" frameborder="0" allowfullscreen></iframe>
 <figcaption>Making of a banana piano, with a bit of swedish jazz from my
 co-worker <a href="http://hsorbo.no">Håvard Sørbø<a></figcaption>
 </figure>

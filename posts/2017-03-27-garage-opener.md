@@ -19,7 +19,7 @@ it's annoying to have to go all the way to fetch the remote when you just want
 to grab something real quick from the garage..
 
 <figure> <iframe width="560" height="315"
-src="https://www.youtube.com/embed/1c1G_Ok_XsM?VQ=HD720" frameborder="0"
+src="https://www.youtube.com/embed/1c1G_Ok_XsM" frameborder="0"
 allowfullscreen></iframe> <figcaption>My Bluetooth LE garage
 opener.</figcaption> </figure>
 

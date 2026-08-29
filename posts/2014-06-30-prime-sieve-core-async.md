@@ -143,6 +143,6 @@ shuffling values along to the next guy.
 > "Also note that async channels are not intended for fine-grained computational parallelism, though you might see examples in that vein."
 
 This is just a fun example, and core.async isn't really intended for this, as
-quoted above by the original [announcement post](http://clojure.com/blog/2013/06/28/clojure-core-async-channels.html).
+quoted above by the original [announcement post](https://web.archive.org/web/20131205045452/http://clojure.com/blog/2013/06/28/clojure-core-async-channels.html).
 
 - Top picture is taken by [Ryan Prince](https://www.flickr.com/photos/ryanprince1974/6959568500) (cc by-nc-sa 2.0)

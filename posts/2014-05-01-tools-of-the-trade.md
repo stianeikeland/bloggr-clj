@@ -161,7 +161,7 @@ $ parallel -S A,B -j 2 --transfer --return {.}_small.jpg convert {} -resize 640x
 
 Install it on mac using homebrew: `brew install parallel`
 
-## [pv](https://code.google.com/p/pipeviewer/‎) - Pipe Viewer
+## [pv](https://www.ivarch.com/programs/pv.shtml) - Pipe Viewer
 
 ``` bash
 $ pv -cN read *.gz | gunzip | pv -cN unpack | gzip | pv -cN pack > /dev/null

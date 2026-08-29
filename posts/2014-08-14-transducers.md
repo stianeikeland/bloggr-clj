@@ -207,4 +207,4 @@ stream, observable, iterateable, whatever context. That's an useful abstraction 
 [lens]: http://www.reddit.com/r/haskell/comments/2cv6l4/clojures_transducers_are_perverse_lenses/
 [monoidal]: http://oleksandrmanzyuk.wordpress.com/2014/08/09/transducers-are-monoid-homomorphisms/
 [commit]: https://github.com/clojure/clojure/commit/2a09172e0c3285ccdf79d1dc4d399d190678b670
-[ct]: http://nb.urbandictionary.com/define.php?term=continuum%20transfunctioner
+[ct]: https://www.urbandictionary.com/define.php?term=continuum%20transfunctioner
