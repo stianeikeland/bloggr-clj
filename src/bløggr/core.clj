@@ -35,8 +35,12 @@
 
 (defn get-pages-reload []
   (require 'bløggr.settings :reload)
+  (require 'bløggr.common :reload)
   (require 'bløggr.posts :reload)
   (require 'bløggr.index :reload)
+  (require 'bløggr.comments :reload)
+  (require 'bløggr.rss :reload)
+  (require 'bløggr.sitemap :reload)
   (get-pages))
 
 (defn- sources-signature []
