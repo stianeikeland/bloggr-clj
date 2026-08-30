@@ -50,8 +50,10 @@
 
 (defn get-pages-cached []
   (let [sig (sources-signature)]
-    (or (get @page-cache sig)
-        (get (reset! page-cache {sig (get-pages-reload)}) sig))))
+    (or (@page-cache sig)
+        (let [pages (get-pages-reload)]
+          (reset! page-cache {sig pages})
+          pages))))
 
 (def ring (-> (stasis/serve-pages get-pages-cached)
               (optimus/wrap get-assets optimizations/none strategies/serve-live-assets)))
