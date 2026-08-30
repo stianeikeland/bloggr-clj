@@ -72,14 +72,9 @@
 (defn markdown [post]
   (update-body md->html post))
 
-(defn- node-text [n]
-  (if (string? n)
-    n
-    (apply str (map node-text (:content n)))))
-
 (defn- highlight-node [n]
   (if-let [lang (some-> n :content first :attrs :class)]
-    (if-let [out (pygmentize/highlight (node-text n) lang)]
+    (if-let [out (pygmentize/highlight (apply str (html/texts [n])) lang)]
       (vec (html/html-snippet out))
       n)
     n))
