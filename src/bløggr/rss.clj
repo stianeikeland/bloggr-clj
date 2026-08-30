@@ -1,6 +1,7 @@
 (ns bløggr.rss
   (:require [bløggr.posts :as p]
-            [clj-rss.core :as cljrss])
+            [clj-rss.core :as cljrss]
+            [clojure.string :as str])
   (:import [java.time Instant]))
 
 (defn- rss-header [settings]
@@ -10,9 +11,9 @@
    :lastBuildDate (Instant/now)})
 
 (defn- fix-relative-image-urls [baseurl content]
-  (clojure.string/replace content
-                          " src=\"/images/"
-                          (str " src=\"" baseurl "/images/")))
+  (str/replace content
+               " src=\"/images/"
+               (str " src=\"" baseurl "/images/")))
 
 (defn- rss-post [settings post]
   {:title (get-in post [:header :title])
