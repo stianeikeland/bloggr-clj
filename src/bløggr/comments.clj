@@ -1,20 +1,12 @@
 (ns bløggr.comments
-  (:require [bløggr.common :refer [cached-slurp]]
-            [clojure.edn :as edn]
+  (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str]))
 
 ;; Bodies are pre-sanitized by bin/disqus-to-edn.py (whitelist: p, br,
 ;; a[href], code, pre) and emitted as trusted HTML; names/dates are escaped here.
-(def parsed-cache (atom {:mtime 0 :data {}}))
-
 (defn- comments-by-url []
-  (let [mtime (.lastModified (io/file "resources/comments.edn"))]
-    (if (= mtime (:mtime @parsed-cache))
-      (:data @parsed-cache)
-      (let [data (edn/read-string (cached-slurp "resources/comments.edn"))]
-        (reset! parsed-cache {:mtime mtime :data data})
-        data))))
+  (edn/read-string (slurp (io/file "resources/comments.edn"))))
 
 (defn- esc [s]
   (-> s
