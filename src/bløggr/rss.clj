@@ -25,5 +25,5 @@
 (defn get-rss [settings posts]
   (let [header (rss-header settings)
         rss-posts (map (partial rss-post settings)
-                       (take 10 (p/posts-by-date posts)))]
+                       (take 10 posts))]
     (apply cljrss/channel-xml (cons header rss-posts))))

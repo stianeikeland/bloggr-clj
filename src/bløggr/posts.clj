@@ -142,4 +142,5 @@
                   render
                   highlight
                   enliveify
-                  markdown))))
+                  markdown))
+       posts-by-date))
