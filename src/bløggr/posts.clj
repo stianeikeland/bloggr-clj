@@ -26,7 +26,8 @@
               :creator "@stianeikeland"
               :image:src (when img (str (:base-url settings) img))}
         twitter-card (for [[k v] card]
-                       [:meta {:name (str "twitter:" (name k)) :content v}])]
+                       (when v
+                         [:meta {:name (str "twitter:" (name k)) :content v}]))]
     (apply html/html twitter-card)))
 
 (defn post-relative-url [post]
