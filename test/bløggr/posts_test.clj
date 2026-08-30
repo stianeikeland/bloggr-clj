@@ -1,6 +1,7 @@
 (ns bløggr.posts-test
   (:use midje.sweet)
-  (:require [bløggr.posts :refer :all])
+  (:require [bløggr.posts :refer :all]
+            [net.cgrand.enlive-html :as html])
   (:import [java.time OffsetDateTime]))
 
 (def blog-post "
@@ -84,19 +85,19 @@ body content")
     content =not=> (contains "feature-image")))
 
 (fact "post-lead truncates at word boundary with ellipsis"
-  (post-lead {:body "<p>lorum lorum ipsum <a href='index.html'>ipsum</a></p>"} 20) =>
+  (post-lead {:body (html/html-snippet "<p>lorum lorum ipsum <a href='index.html'>ipsum</a></p>")} 20) =>
   "lorum lorum ipsum…")
 
 (fact "post-lead leaves short text unchanged without ellipsis"
-  (post-lead {:body "<p>short text</p>"} 20) =>
+  (post-lead {:body (html/html-snippet "<p>short text</p>")} 20) =>
   "short text")
 
 (fact "post-lead hard-cuts when there is no word boundary"
-  (post-lead {:body "<p>abcdefghijklmnopqrstuvwxyz</p>"} 20) =>
+  (post-lead {:body (html/html-snippet "<p>abcdefghijklmnopqrstuvwxyz</p>")} 20) =>
   "abcdefghijklmnopqrs…")
 
 (fact "post-lead does not split surrogate pairs"
-  (post-lead {:body "<p>😆😆😆😆😆😆😆😆😆😆😆</p>"} 20) =>
+  (post-lead {:body (html/html-snippet "<p>😆😆😆😆😆😆😆😆😆😆😆</p>")} 20) =>
   "😆😆😆😆😆😆😆😆😆…")
 
 (fact "posts-by-date sorts posts by date"

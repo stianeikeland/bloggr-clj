@@ -48,7 +48,7 @@
   (str (:base-url settings) (post-relative-url post)))
 
 (defn- post-text [post]
-  (apply str (html/texts (html/html-snippet (post :body)))))
+  (apply str (html/texts (post :body))))
 
 (defn- open-graph
   [{header :header description :twitter-lead :as post}]
@@ -62,7 +62,6 @@
        :image (when img (str (:base-url settings) img))
        :url (post-absolute-url post)
        :video (:video header)})))
-
 
 (html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
   [:html] (page-scaffold (header :title) (post :twitter-lead))
@@ -119,7 +118,7 @@
   (truncate-at-word (post-text post) len))
 
 (defn- add-leads [post]
-  (let [text (apply str (html/texts (post :body)))]
+  (let [text (post-text post)]
     (assoc post
            :lead (truncate-at-word text lead-length)
            :twitter-lead (truncate-at-word text twitter-card-length))))
