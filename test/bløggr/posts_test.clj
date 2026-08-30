@@ -46,7 +46,7 @@ body content")
 (fact "apply-post-layout overrides meta description and fills byline title"
   (let [content (:page
                   (apply-post-layout {:body "b"
-                                      :twitter-lead "a short lead"
+                                      :description "a short lead"
                                       :header {:title "post title"
                                                :date blogdate}}))]
     content => (contains "<meta name=\"description\" content=\"a short lead\" />")

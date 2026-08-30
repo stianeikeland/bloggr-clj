@@ -9,35 +9,11 @@
             [net.cgrand.enlive-html :as html]))
 
 (def ^:private lead-length 500)
-(def ^:private twitter-card-length 190)
+(def ^:private description-length 190)
 
 (def ^:private post-date-path-format (utc-format "/yyyy/MM/dd/"))
 (def ^:private datetime-attr-format (utc-format "yyyy-MM-dd'T'HH:mm:ssXX"))
 (def ^:private byline-format (utc-format "EEE, dd MMM yyyy HH:mm" java.util.Locale/ENGLISH))
-
-(defn- meta-tag [attr k v]
-  [:meta {attr k :content v}])
-
-(defn- meta-tags
-  "Build <meta> elements from a {key -> content} map, skipping nil values.
-  attr is the attribute holding the full key (:name or :property)."
-  [prefix attr m]
-  (apply html/html
-         (for [[k v] m
-               :when v]
-           (meta-tag attr (str prefix (name k)) v))))
-
-(defn- twitter-card-template
-  "Create twitter cards in document head"
-  [{header :header description :twitter-lead}]
-  (let [img (:image header)]
-    (meta-tags "twitter:" :name
-      {:card (if img "summary_large_image" "summary")
-       :site "@stianeikeland"
-       :title (:title header)
-       :description description
-       :creator "@stianeikeland"
-       :image:src (when img (str (:base-url settings) img))})))
 
 (defn post-relative-url [post]
   (str (.format post-date-path-format (get-in post [:header :date]))
@@ -51,20 +27,23 @@
   (apply str (html/texts (post :body))))
 
 (defn- open-graph
-  [{header :header description :twitter-lead :as post}]
+  "Open-graph <meta property=\"og:...\"> tags, skipping nil values."
+  [{header :header description :description :as post}]
   (let [img (:image header)]
-    (meta-tags "og:" :property
-      {:title (:title header)
-       :type "article"
-       :locale "en_US"
-       :site_name (.getHost (java.net.URI. (:base-url settings)))
-       :description description
-       :image (when img (str (:base-url settings) img))
-       :url (post-absolute-url post)
-       :video (:video header)})))
+    (apply html/html
+      (for [[k v] {:title (:title header)
+                   :type "article"
+                   :locale "en_US"
+                   :site_name (.getHost (java.net.URI. (:base-url settings)))
+                   :description description
+                   :image (when img (str (:base-url settings) img))
+                   :url (post-absolute-url post)
+                   :video (:video header)}
+            :when v]
+        [:meta {:property (str "og:" (name k)) :content v}]))))
 
 (html/deftemplate post-template "layouts/post.html" [{:keys [header body] :as post}]
-  [:html] (page-scaffold (header :title) (post :twitter-lead))
+  [:html] (page-scaffold (header :title) (post :description))
   [:.article-title] (html/content (header :title))
   [:div#comments-anchor] (html/substitute (html/html-snippet (or (comments/comments-html (post-relative-url post))
                                                                  "")))
@@ -74,7 +53,6 @@
   [:.byline-title] (html/content (header :title))
   [:.byline-author] (html/content (:author settings))
   [:.byline-author] (html/set-attr :href (:author-url settings))
-  [:head] (html/append (twitter-card-template post))
   [:head] (html/append (open-graph post))
   [:.article-tags] (if-let [tags (seq (:tags header))]
                      (html/html-content (->> tags
@@ -121,7 +99,7 @@
   (let [text (post-text post)]
     (assoc post
            :lead (truncate-at-word text lead-length)
-           :twitter-lead (truncate-at-word text twitter-card-length))))
+           :description (truncate-at-word text description-length))))
 
 (defn post->path-map [post]
   {(post-filename post) (post :page)})
