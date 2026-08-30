@@ -119,7 +119,7 @@
   (truncate-at-word (post-text post) len))
 
 (defn- add-leads [post]
-  (let [text (post-text post)]
+  (let [text (apply str (html/texts (post :body)))]
     (assoc post
            :lead (truncate-at-word text lead-length)
            :twitter-lead (truncate-at-word text twitter-card-length))))
@@ -139,8 +139,8 @@
        (map parse-post)
        (remove (comp :draft :header))
        (map (comp apply-post-layout
-                  add-leads
                   render
+                  add-leads
                   highlight
                   enliveify
                   markdown))
