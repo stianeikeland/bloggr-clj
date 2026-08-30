@@ -3,9 +3,7 @@
             [clojure.java.io :as io]
             [clojure.string :as str]))
 
-;; Bodies are pre-sanitized by bin/disqus-to-edn.py (whitelist: p, br,
-;; a[href], code, pre) and emitted as trusted HTML; names/dates are escaped here.
-(defn- comments-by-url []
+(def ^:private comments-by-url
   (edn/read-string (slurp (io/file "resources/comments.edn"))))
 
 (defn- esc [s]
@@ -29,7 +27,7 @@
 (defn comments-html
   "Static comment section for a post url (/yyyy/mm/dd/slug/), or nil."
   [url]
-  (let [comments (get (comments-by-url) url)
+  (let [comments (get comments-by-url url)
         n (count-tree comments)]
     (when (pos? n)
       (format "<section id=\"comments\"><h2>%s</h2><ol>%s</ol></section>"
