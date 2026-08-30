@@ -10,14 +10,17 @@
            [com.vladsch.flexmark.ext.autolink AutolinkExtension]
            [com.vladsch.flexmark.ext.tables TablesExtension]))
 
+(def ^:private md-options
+  (doto (MutableDataSet.)
+    (.set Parser/EXTENSIONS [(AutolinkExtension/create)
+                             (TablesExtension/create)])
+    (.set HtmlRenderer/FENCED_CODE_LANGUAGE_CLASS_PREFIX "")))
+
+(def ^:private md-parser (.build (Parser/builder md-options)))
+(def ^:private md-renderer (.build (HtmlRenderer/builder md-options)))
+
 (defn- md->html [text]
-  (let [options (doto (MutableDataSet.)
-                  (.set Parser/EXTENSIONS [(AutolinkExtension/create)
-                                           (TablesExtension/create)])
-                  (.set HtmlRenderer/FENCED_CODE_LANGUAGE_CLASS_PREFIX ""))
-        parser (.build (Parser/builder options))
-        renderer (.build (HtmlRenderer/builder options))]
-    (.render renderer (.parse parser text))))
+  (.render md-renderer (.parse md-parser text)))
 
 (def ^:private slurp-cache (atom {}))
 
