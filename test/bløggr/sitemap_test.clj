@@ -6,7 +6,7 @@
 (fact "get-sitemap emits loc with publish-date lastmod per entry"
   (let [settings {:base-url "https://example.com"}
         sitemap (get-sitemap settings
-                             {"/2007/08/28/my-post/index.html" (OffsetDateTime/parse "2007-08-28T01:59:36+00:00")
+                             {"/2007/08/28/my-post/" (OffsetDateTime/parse "2007-08-28T01:59:36+00:00")
                               "/" (OffsetDateTime/parse "2026-08-25T12:00:00+00:00")})]
     sitemap => (contains "<loc>https://example.com/2007/08/28/my-post/</loc>")
     sitemap => (contains "<lastmod>2007-08-28</lastmod>")

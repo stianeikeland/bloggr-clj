@@ -1,7 +1,7 @@
 (ns bløggr.core
   (:require [bløggr.assets :refer [get-assets get-css]]
             [bløggr.index :refer [get-index]]
-            [bløggr.posts :refer [get-posts post->path-map post-filename]]
+            [bløggr.posts :refer [get-posts post->path-map post-relative-url]]
             [bløggr.rss :refer [get-rss]]
             [bløggr.settings :refer [settings]]
             [bløggr.sitemap :refer [get-sitemap]]
@@ -22,7 +22,7 @@
           rss (get-rss settings posts)
           sitemap (get-sitemap settings
                                (into {"/" (OffsetDateTime/now)}
-                                     (map (juxt post-filename #(get-in % [:header :date]))
+                                     (map (juxt post-relative-url #(get-in % [:header :date]))
                                           posts)))
           index (get-index posts)]
       {:posts path-mapped-posts

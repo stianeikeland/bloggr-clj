@@ -8,13 +8,10 @@
 
 (def ^:private lastmod-format (utc-format "yyyy-MM-dd"))
 
-(defn- trim-index-html [path]
-  (clojure.string/replace path #"/index.html$" "/"))
-
 (defn- url [{base :base-url} [path date]]
   (xml/element
     :url {}
-    (xml/element :loc {} (trim-index-html (str base path)))
+    (xml/element :loc {} (str base path))
     (xml/element :lastmod {} (.format lastmod-format date))))
 
 (defn get-sitemap
