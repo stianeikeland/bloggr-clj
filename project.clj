@@ -7,7 +7,6 @@
                  [org.slf4j/slf4j-simple "2.0.17"]
                  [stasis "2023.11.21"]
                  [ring "1.15.5"]
-                 [ring/ring-codec "1.3.0"]
                  [com.vladsch.flexmark/flexmark-all "0.64.8"]
                  [enlive "1.1.6"]
                  [optimus "2026.05.27"]
