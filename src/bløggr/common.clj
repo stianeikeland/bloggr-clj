@@ -41,29 +41,30 @@
 (defn- partial-nodes [filename]
   (html/html-snippet (cached-slurp filename)))
 
-(defn- fingerprint-css-link [node]
+(defn- fingerprint-css-link [fingerprints node]
   (let [href (get-in node [:attrs :href])]
-    (if-let [fingerprint (get (assets/css-fingerprints) href)]
+    (if-let [fingerprint (get fingerprints href)]
       (assoc-in node [:attrs :href] (str href "?v=" fingerprint))
       node)))
 
 (defn page-scaffold
   "Shared page chrome (head, scripts, nav, bio, footer) as an enlive transformation."
   [title description]
-  (fn [node]
-    (html/at node
-      [:head] (partial-content "resources/partials/head.html")
-      [:head :link] fingerprint-css-link
-      [:title] (html/content title)
-      [[:meta (html/attr= :name "description")]] (html/set-attr :content description)
-      [:div#scripts] (html/substitute (partial-nodes "resources/partials/scripts.html"))
-      [:header#navigation] (html/substitute (partial-nodes "resources/partials/navigation.html"))
-      [:.author-bio] (partial-content "resources/partials/author_bio.html")
-      [:a.bio-link] (html/set-attr :href (:author-url settings))
-      [:.bio-name :a] (html/content (:author settings))
-      [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
-      [:footer#footer-content] (partial-content "resources/partials/footer.html")
-      [:.footer-author] (html/content (:author settings)))))
+  (let [fingerprints (assets/css-fingerprints)]
+    (fn [node]
+      (html/at node
+        [:head] (partial-content "resources/partials/head.html")
+        [:head :link] (partial fingerprint-css-link fingerprints)
+        [:title] (html/content title)
+        [[:meta (html/attr= :name "description")]] (html/set-attr :content description)
+        [:div#scripts] (html/substitute (partial-nodes "resources/partials/scripts.html"))
+        [:header#navigation] (html/substitute (partial-nodes "resources/partials/navigation.html"))
+        [:.author-bio] (partial-content "resources/partials/author_bio.html")
+        [:a.bio-link] (html/set-attr :href (:author-url settings))
+        [:.bio-name :a] (html/content (:author settings))
+        [:img.bio-photo] (html/set-attr :alt (str (:author settings) " bio photo"))
+        [:footer#footer-content] (partial-content "resources/partials/footer.html")
+        [:.footer-author] (html/content (:author settings))))))
 
 (defn- update-body [f post]
   (assoc post :body (f (post :body))))
