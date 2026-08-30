@@ -1,5 +1,5 @@
 (ns bløggr.index
-  (:require [bløggr.common :refer :all]
+  (:require [bløggr.common :refer [page-scaffold]]
             [bløggr.posts :as p]
             [bløggr.settings :refer [settings]]
             [bløggr.time :refer [utc-format]]

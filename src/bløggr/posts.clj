@@ -1,6 +1,6 @@
 (ns bløggr.posts
   (:require [bløggr.comments :as comments]
-            [bløggr.common :refer :all]
+            [bløggr.common :refer [enliveify highlight markdown page-scaffold render]]
             [bløggr.settings :refer [settings]]
             [bløggr.time :refer [parse-datestring utc-format]]
             [stasis.core :as stasis]
