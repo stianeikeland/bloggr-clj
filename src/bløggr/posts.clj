@@ -134,12 +134,12 @@
 (defn get-posts []
   (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
        (vals)
+       (map parse-post)
+       (remove (comp :draft :header))
        (map (comp apply-post-layout
                   rss-content
                   add-leads
                   render
                   highlight
                   enliveify
-                  markdown
-                  parse-post))
-       (remove (comp :draft :header))))
+                  markdown))))
