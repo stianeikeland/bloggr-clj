@@ -1,7 +1,6 @@
 (ns bløggr.assets
   (:require [bløggr.pygmentize :as pygmentize]
             [stasis.core :as stasis]
-            [clojure.string :as str]
             [optimus.assets :as assets]
             [optimus.digest :as digest]))
 
