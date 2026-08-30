@@ -10,7 +10,7 @@
            [com.vladsch.flexmark.ext.autolink AutolinkExtension]
            [com.vladsch.flexmark.ext.tables TablesExtension]))
 
-(defn md->html [text]
+(defn- md->html [text]
   (let [options (doto (MutableDataSet.)
                   (.set Parser/EXTENSIONS [(AutolinkExtension/create)
                                            (TablesExtension/create)])
@@ -21,7 +21,7 @@
 
 (def ^:private slurp-cache (atom {}))
 
-(defn cached-slurp
+(defn- cached-slurp
   "Slurp a file, re-reading it only when its modification time changes."
   [filename]
   (let [lm (.lastModified (io/file filename))
@@ -32,10 +32,10 @@
         (swap! slurp-cache assoc filename [lm content])
         content))))
 
-(defn partial-content [filename]
+(defn- partial-content [filename]
   (html/html-content (cached-slurp filename)))
 
-(defn partial-nodes [filename]
+(defn- partial-nodes [filename]
   (html/html-snippet (cached-slurp filename)))
 
 (defn- fingerprint-css-link [node]
@@ -62,7 +62,7 @@
       [:footer#footer-content] (partial-content "resources/partials/footer.html")
       [:.footer-author] (html/content (:author settings)))))
 
-(defn update-body [f post]
+(defn- update-body [f post]
   (assoc post :body (f (post :body))))
 
 (defn markdown [post]

@@ -8,8 +8,8 @@
             [clojure.string :as str]
             [net.cgrand.enlive-html :as html]))
 
-(def lead-length 500)
-(def twitter-card-length 190)
+(def ^:private lead-length 500)
+(def ^:private twitter-card-length 190)
 
 (def ^:private post-date-path-format (utc-format "/yyyy/MM/dd/"))
 (def ^:private datetime-attr-format (utc-format "yyyy-MM-dd'T'HH:mm:ssXX"))
@@ -44,7 +44,7 @@
        (get-in post [:header :slug])
        "/"))
 
-(defn post-absolute-url [post]
+(defn- post-absolute-url [post]
   (str (:base-url settings) (post-relative-url post)))
 
 (defn- post-text [post]
@@ -96,7 +96,7 @@
     {:body body
      :header (assoc header :date (parse-datestring (header :date)))}))
 
-(defn post-filename [post]
+(defn- post-filename [post]
   (str (post-relative-url post) "index.html"))
 
 (defn- truncate-at-word

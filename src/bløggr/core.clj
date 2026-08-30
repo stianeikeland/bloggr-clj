@@ -13,9 +13,9 @@
             [stasis.core :as stasis])
   (:import [java.time OffsetDateTime]))
 
-(def export-dir "dist")
+(def ^:private export-dir "dist")
 
-(defn get-pages []
+(defn- get-pages []
   (stasis/merge-page-sources
     (let [posts (get-posts)
           path-mapped-posts (reduce merge (map post->path-map posts))
@@ -31,7 +31,7 @@
        :index {"/index.html" index}
        :sitemap {"/sitemap.xml" sitemap}})))
 
-(defn get-pages-reload []
+(defn- get-pages-reload []
   (require 'bløggr.settings :reload)
   (require 'bløggr.common :reload)
   (require 'bløggr.posts :reload)
@@ -46,9 +46,9 @@
                    (map #(.lastModified ^java.io.File %)))
              max 0 ["posts/" "resources/" "src/" "settings.edn"]))
 
-(def page-cache (atom {}))
+(def ^:private page-cache (atom {}))
 
-(defn get-pages-cached []
+(defn- get-pages-cached []
   (let [sig (sources-signature)]
     (or (@page-cache sig)
         (let [pages (get-pages-reload)]
