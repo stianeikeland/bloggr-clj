@@ -13,7 +13,7 @@
   [{:header {:title "Post A title"
              :slug "post_a_title"
              :date (OffsetDateTime/parse "2000-01-02T03:04:05Z")}
-    :rss-content "Post A content"}])
+    :body "Post A content"}])
 
 (fact "get-rss renders xml with site details"
   (let [rss (get-rss settings [])]
@@ -29,5 +29,5 @@
     rss => (contains "<link>http://url.com/2000/01/02/post_a_title/</link>")))
 
 (fact "get-rss should change relative image paths to absolute paths"
-  (get-rss settings [(assoc (first posts) :rss-content "<img src=\"/images/blah.jpg\">")]) =>
+  (get-rss settings [(assoc (first posts) :body "<img src=\"/images/blah.jpg\">")]) =>
   (contains "http://url.com/images/blah.jpg"))

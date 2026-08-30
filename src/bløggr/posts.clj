@@ -118,9 +118,6 @@
 (defn post-lead [post len]
   (truncate-at-word (post-text post) len))
 
-(defn rss-content [post]
-  (assoc post :rss-content (post :body)))
-
 (defn- add-leads [post]
   (let [text (post-text post)]
     (assoc post
@@ -128,10 +125,10 @@
            :twitter-lead (truncate-at-word text twitter-card-length))))
 
 (defn post->path-map [post]
-  {(post-filename post) (post :body)})
+  {(post-filename post) (post :page)})
 
 (defn apply-post-layout [post]
-  (assoc post :body (apply str (post-template post))))
+  (assoc post :page (apply str (post-template post))))
 
 (defn posts-by-date [posts]
   (sort #(compare (-> %2 :header :date) (-> %1 :header :date)) posts))
@@ -142,7 +139,6 @@
        (map parse-post)
        (remove (comp :draft :header))
        (map (comp apply-post-layout
-                  rss-content
                   add-leads
                   render
                   highlight

@@ -17,7 +17,7 @@
 
 (defn- rss-post [settings post]
   {:title (get-in post [:header :title])
-   :description (fix-relative-image-urls (settings :base-url) (post :rss-content))
+   :description (fix-relative-image-urls (settings :base-url) (post :body))
    :link (str (settings :base-url) (p/post-relative-url post))
    :pubDate (.toInstant (get-in post [:header :date]))
    :guid [{:isPermaLink false} (p/post-relative-url post)]})

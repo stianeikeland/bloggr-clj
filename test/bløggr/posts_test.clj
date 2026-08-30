@@ -18,8 +18,8 @@ body content")
 
 (def blogdate (OffsetDateTime/parse "2007-08-28T01:59:36+00:00"))
 
-(fact "post->path-map turns a post into title => body map"
-  (post->path-map {:header {:slug "really-cool-post" :date blogdate} :body "post body"}) =>
+(fact "post->path-map turns a post into path => page map"
+  (post->path-map {:header {:slug "really-cool-post" :date blogdate} :page "post body"}) =>
   {"/2007/08/28/really-cool-post/index.html" "post body"})
 
 (fact "parse-post extracts header from blog post"
@@ -34,7 +34,7 @@ body content")
 
 
 (fact "apply-post-layout should apply post template to post"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "this is the body"
                                       :header {:title "post title"
                                                :date blogdate}}))]
@@ -43,7 +43,7 @@ body content")
     content => (contains "<time id=\"post-timestamp\" datetime=\"2007-08-28T01:59:36Z\">Tue, 28 Aug 2007 01:59</time>")))
 
 (fact "apply-post-layout overrides meta description and fills byline title"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "b"
                                       :twitter-lead "a short lead"
                                       :header {:title "post title"
@@ -52,7 +52,7 @@ body content")
     content => (contains "<strong class=\"byline-title\">post title</strong>")))
 
 (fact "apply-post-layout renders sorted tags as chips"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "b"
                                       :header {:title "post title"
                                                :tags #{:zeta :alpha}
@@ -61,7 +61,7 @@ body content")
     content => (contains "<li>#zeta</li>")))
 
 (fact "apply-post-layout drops tags list when post has no tags"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "b"
                                       :header {:title "post title"
                                                :date blogdate}}))]
@@ -69,7 +69,7 @@ body content")
 
 
 (fact "apply-post-layout sets feature image src and alt from header"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "b"
                                       :header {:title "post title"
                                                :image "/images/x.jpg"
@@ -77,7 +77,7 @@ body content")
     content => (contains "<img src=\"/images/x.jpg\" alt=\"post title\" />")))
 
 (fact "apply-post-layout drops the feature image block when post has no image"
-  (let [content (:body
+  (let [content (:page
                   (apply-post-layout {:body "b"
                                       :header {:title "post title"
                                                :date blogdate}}))]
