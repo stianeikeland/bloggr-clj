@@ -1,5 +1,6 @@
 (ns bløggr.core
   (:require [bløggr.assets :refer [get-assets get-css]]
+            [bløggr.errors :refer [get-not-found]]
             [bløggr.index :refer [get-index]]
             [bløggr.posts :refer [get-posts post->path-map post-relative-url]]
             [bløggr.rss :refer [get-rss]]
@@ -24,16 +25,19 @@
                                (into {"/" (OffsetDateTime/now)}
                                      (map (juxt post-relative-url #(get-in % [:header :date]))
                                           posts)))
-          index (get-index posts)]
+          index (get-index posts)
+          not-found (get-not-found)]
       {:posts path-mapped-posts
        :css (get-css)
        :rss {"/rss.xml" rss}
        :index {"/index.html" index}
-       :sitemap {"/sitemap.xml" sitemap}})))
+       :sitemap {"/sitemap.xml" sitemap}
+       :errors {"/404.html" not-found}})))
 
 (defn- get-pages-reload []
   (require 'bløggr.settings :reload)
   (require 'bløggr.common :reload)
+  (require 'bløggr.errors :reload)
   (require 'bløggr.posts :reload)
   (require 'bløggr.index :reload)
   (require 'bløggr.comments :reload)
@@ -55,7 +59,17 @@
           (reset! page-cache {sig pages})
           pages))))
 
+(defn- wrap-not-found [handler]
+  (fn [request]
+    (let [response (handler request)]
+      (if (= 404 (:status response))
+        {:status 404
+         :headers {"Content-Type" "text/html; charset=utf-8"}
+         :body (get (get-pages-cached) "/404.html")}
+        response))))
+
 (def ring (-> (stasis/serve-pages get-pages-cached)
+              wrap-not-found
               (optimus/wrap get-assets optimizations/none strategies/serve-live-assets)))
 
 (defn export []

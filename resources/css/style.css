@@ -263,6 +263,10 @@
       & > #index {
         grid-column: 2;
       }
+
+      & > #not-found {
+        grid-column: 1 / -1;
+      }
     }
   }
 
@@ -662,6 +666,43 @@
           object-fit: cover;
         }
       }
+    }
+  }
+
+  #not-found {
+    display: grid;
+    place-content: center;
+    place-items: center;
+    gap: 1.75rem;
+    min-block-size: 100%;
+
+    @media (width < 48em) {
+      padding-block-start: 4rem;
+    }
+
+    h1,
+    p {
+      margin-block: 0;
+    }
+
+    .error-code {
+      font-family: "Saira Stencil One", var(--sans);
+      font-size: clamp(4.5rem, 2rem + 12vw, 9rem);
+      line-height: 0.75;
+    }
+
+    .error-message {
+      font-family: var(--mono);
+      font-size: clamp(0.8rem, 0.62rem + 0.75vw, 1rem);
+      color: var(--ink-faint);
+      white-space: nowrap;
+    }
+
+    .error-home {
+      padding: 0.5em 1.5em;
+      border: 2px solid var(--ink-strong);
+      border-radius: 2px;
+      font-weight: 600;
     }
   }
 
