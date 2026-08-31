@@ -24,14 +24,36 @@ body content")
   {"/2007/08/28/really-cool-post/index.html" "post body"})
 
 (fact "parse-post extracts header from blog post"
-  (:header (parse-post blog-post)) => {:image "2013-07-25-openwrt-on-hama-mpr-a1-v2-2/4.jpg"
-                                       :slug "openwrt-on-hama-mpr-a1-v2-2"
-                                       :tags #{:hacking :mpr-a1 :openwrt :router}
-                                       :date blogdate
-                                       :title "OpenWRT on Hama MPR-A1 (v2.2)"})
+  (:header (parse-post "posts/test.md" blog-post)) => {:image "2013-07-25-openwrt-on-hama-mpr-a1-v2-2/4.jpg"
+                                                       :slug "openwrt-on-hama-mpr-a1-v2-2"
+                                                       :tags #{:hacking :mpr-a1 :openwrt :router}
+                                                       :date blogdate
+                                                       :title "OpenWRT on Hama MPR-A1 (v2.2)"})
 
 (fact "parse-post extracts body from blog post"
-  (:body (parse-post blog-post)) => "body content")
+  (:body (parse-post "posts/test.md" blog-post)) => "body content")
+
+(def broken-post "
+  {
+  :title \"No slug here\"
+  :date \"2007-08-28 01:59:36+00:00\"
+  }
+
+------
+body content")
+
+(fact "parse-post throws with the post path when a required header key is missing"
+  (parse-post "posts/broken.md" broken-post) =>
+  (throws #"posts/broken\.md: missing required header key\(s\) \[:slug\]"))
+
+(fact "parse-post throws for a blank required header key"
+  (parse-post "posts/broken.md"
+              (clojure.string/replace blog-post #"\"openwrt-on-hama-mpr-a1-v2-2\"" "\"\"")) =>
+  (throws #"missing required header key\(s\) \[:slug\]"))
+
+(fact "parse-post fails the build on an invalid EDN header"
+  (parse-post "posts/broken.md" "{unterminated\n------\nbody") =>
+  (throws #"EOF while reading"))
 
 
 (fact "apply-post-layout should apply post template to post"

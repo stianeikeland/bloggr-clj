@@ -66,11 +66,18 @@
                             #(html/at % [:img] (html/set-attr :src image :alt (header :title)))
                             nil))
 
+(def ^:private required-header-keys [:slug :title :date])
+
 (defn parse-post
-  "Parse a blog post into header map and body string. Convert string date to OffsetDateTime"
-  [post]
-  (let [[header body] (str/split post #"\n------\n" 2)
-        header (edn/read-string header)]
+  "Parse a blog post (path + raw content) into header map and body string, fail on missing/blank required fields."
+  [path content]
+  (let [[raw-header body] (str/split content #"\n------\n" 2)
+        header (edn/read-string raw-header)
+        blank? #(str/blank? (str (get header %)))
+        missing (filter blank? required-header-keys)]
+    (when (seq missing)
+      (throw (ex-info (str path ": missing required header key(s) " (vec missing))
+                      {:path path :missing missing})))
     {:body body
      :header (assoc header :date (parse-datestring (header :date)))}))
 
@@ -113,8 +120,7 @@
 
 (defn get-posts []
   (->> (stasis/slurp-directory "posts/" #".*\.(md|markdown)$")
-       (vals)
-       (map parse-post)
+       (map #(apply parse-post %))
        (remove (comp :draft :header))
        (map (comp apply-post-layout
                   render
