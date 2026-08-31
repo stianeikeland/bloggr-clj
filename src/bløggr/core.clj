@@ -16,6 +16,9 @@
 
 (def ^:private export-dir "dist")
 
+(defn- get-robots []
+  (str "User-agent: *\nAllow: /\n\nSitemap: " (:base-url settings) "/sitemap.xml\n"))
+
 (defn- get-pages []
   (stasis/merge-page-sources
     (let [posts (get-posts)
@@ -32,6 +35,7 @@
        :rss {"/rss.xml" rss}
        :index {"/index.html" index}
        :sitemap {"/sitemap.xml" sitemap}
+       :robots {"/robots.txt" (get-robots)}
        :errors {"/404.html" not-found}})))
 
 (defn- get-pages-reload []
