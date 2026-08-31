@@ -564,8 +564,6 @@
     }
   }
 
-  /* pygments palette is light, so the card stays light */
-
   .highlight {
     background: #f2f2ec;
     border: 1px solid var(--line);
@@ -575,6 +573,16 @@
       margin: 0;
       color: #2c2d31;
       line-height: 1.8;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .highlight {
+      background: var(--dim);
+
+      pre {
+        color: var(--ink);
+      }
     }
   }
 

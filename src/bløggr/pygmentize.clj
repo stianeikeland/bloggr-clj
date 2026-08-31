@@ -5,6 +5,9 @@
 (def ^:private cache (atom {}))
 (def ^:private style-cache (atom nil))
 
+(def ^:private light-style "default")
+(def ^:private dark-style "one-dark")
+
 (defn- run [& args]
   (try
     (apply shell/sh "pygmentize" args)
@@ -13,19 +16,27 @@
                       {:cmd "pygmentize"}
                       e)))))
 
+(defn- token-css
+  "Token-coloring rules from the given pygmentize style, .highlight-scoped."
+  [style]
+  (let [{:keys [out exit]} (run "-S" style "-f" "html" "-a" ".highlight")]
+    (if (zero? exit)
+      (->> (str/split-lines out)
+           (filter #(str/starts-with? % ".highlight ."))
+           (str/join "\n"))
+      "")))
+
 (defn stylesheet
-  "Token-coloring rules from the installed pygmentize, .highlight-scoped."
+  "Token-coloring rules from the installed pygmentize, .highlight-scoped:
+   light palette, then the dark palette under prefers-color-scheme: dark."
   []
-  (if-let [cached @style-cache]
-    cached
-    (let [{:keys [out exit]} (run "-S" "default" "-f" "html" "-a" ".highlight")
-          css (if (zero? exit)
-                (->> (str/split-lines out)
-                     (filter #(str/starts-with? % ".highlight ."))
-                     (str/join "\n"))
-                "")]
-      (reset! style-cache css)
-      css)))
+  (or @style-cache
+      (let [css (str (token-css light-style)
+                     "\n\n@media (prefers-color-scheme: dark) {\n"
+                     (token-css dark-style)
+                     "\n}\n")]
+        (reset! style-cache css)
+        css)))
 
 (defn highlight
   "Returns highlighted HTML, nil for an unknown lexer."
