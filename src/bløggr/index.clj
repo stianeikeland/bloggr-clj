@@ -1,5 +1,5 @@
 (ns bløggr.index
-  (:require [bløggr.common :refer [page-scaffold]]
+  (:require [bløggr.common :refer [canonical-link page-scaffold]]
             [bløggr.posts :as p]
             [bløggr.settings :refer [settings]]
             [bløggr.time :refer [utc-format]]
@@ -39,6 +39,7 @@
 
 (html/deftemplate index-template "layouts/index.html" [posts]
   [:html] (page-scaffold (:site-title settings) (:site-description settings))
+  [:head] (html/append (canonical-link "/"))
   [:div#articles] (html/substitute (html/html-snippet (apply str (map #(apply str (index-post-template %)) posts)))))
 
 (defn get-index [posts]

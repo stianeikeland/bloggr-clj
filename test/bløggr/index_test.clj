@@ -27,6 +27,10 @@
     index => (contains "Post A lead")
     index => (contains "Post B lead")))
 
+(fact "get-index includes a canonical link for the front page"
+  (get-index []) =>
+  (contains "<link rel=\"canonical\" href=\"https://blog.eike.land/\" />"))
+
 (fact "index-post-template fills the link with title and url"
   (apply str (index-post-template (first test-posts))) =>
   (contains "<a class=\"link\" href=\"/2000/01/02/post-a/\">Post A title</a>"))

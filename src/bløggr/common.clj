@@ -47,6 +47,11 @@
       (assoc-in node [:attrs :href] (str href "?v=" fingerprint))
       node)))
 
+(defn canonical-link
+  "Canonical <link> node pointing at a site-relative path."
+  [path]
+  (html/html [:link {:rel "canonical" :href (str (:base-url settings) path)}]))
+
 (defn page-scaffold
   "Shared page chrome (head, scripts, nav, bio, footer) as an enlive transformation."
   [title description]

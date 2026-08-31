@@ -1,6 +1,6 @@
 (ns bløggr.posts
   (:require [bløggr.comments :as comments]
-            [bløggr.common :refer [enliveify highlight markdown page-scaffold render]]
+            [bløggr.common :refer [canonical-link enliveify highlight markdown page-scaffold render]]
             [bløggr.settings :refer [settings]]
             [bløggr.time :refer [parse-datestring utc-format]]
             [stasis.core :as stasis]
@@ -53,7 +53,8 @@
   [:.byline-title] (html/content (header :title))
   [:.byline-author] (html/content (:author settings))
   [:.byline-author] (html/set-attr :href (:author-url settings))
-  [:head] (html/append (open-graph post))
+  [:head] (html/append (concat (canonical-link (post-relative-url post))
+                               (open-graph post)))
   [:.article-tags] (if-let [tags (seq (:tags header))]
                      (html/html-content (->> tags
                                              (map name)

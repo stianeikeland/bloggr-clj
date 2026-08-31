@@ -52,6 +52,14 @@ body content")
     content => (contains "<meta name=\"description\" content=\"a short lead\" />")
     content => (contains "<strong class=\"byline-title\">post title</strong>")))
 
+(fact "apply-post-layout adds a canonical link for the post url"
+  (let [content (:page
+                  (apply-post-layout {:body "b"
+                                      :header {:title "post title"
+                                               :slug "post-title"
+                                               :date blogdate}}))]
+    content => (contains "<link rel=\"canonical\" href=\"https://blog.eike.land/2007/08/28/post-title/\" />")))
+
 (fact "apply-post-layout renders sorted tags as chips"
   (let [content (:page
                   (apply-post-layout {:body "b"
